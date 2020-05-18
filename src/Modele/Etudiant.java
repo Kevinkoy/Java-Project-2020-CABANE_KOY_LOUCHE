@@ -9,7 +9,7 @@ public class Etudiant extends Utilisateur
 {
     // Attributs
     private int numero;
-    private int id_groupe;
+    private Groupe groupe;
     
     // Constructor default
     public Etudiant()
@@ -20,11 +20,11 @@ public class Etudiant extends Utilisateur
     }
     
     // Constructor surchargé
-    public Etudiant(int numero, int id_groupe)
+    public Etudiant(int numero, Groupe groupe)
     {
         super();
         this.numero = numero;
-        this.id_groupe = id_groupe;
+        this.groupe = groupe;
     }
     
     
@@ -34,7 +34,7 @@ public class Etudiant extends Utilisateur
         @Override
         public String toString()
         {
-        return "numero: " + numero + ", id_groupe: " + id_groupe ;
+        return "numero: " + numero + ", id_groupe: " + groupe ;
         }
     
         //Getters
@@ -42,15 +42,15 @@ public class Etudiant extends Utilisateur
         {
             return this.numero;
         }
-        public int getId_groupe()
+        public Groupe getId_groupe()
         {
-            return this.id_groupe;
+            return this.groupe;
         }
         
         // Setters
         public void setId_groupe(int id_groupe)
         {
-            this.id_groupe = id_groupe;
+            this.groupe = groupe;
         }
         
         public void setNumero(int numero)
