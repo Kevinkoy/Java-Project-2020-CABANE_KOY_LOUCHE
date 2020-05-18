@@ -25,7 +25,6 @@ public class Tester
         duree = new Time(1,30,0);
         date =  new MaDate(21, 5, 1999);
         maSeance = new Seance(4,date, time, duree, 2, 56, 2);
-        System.out.print("blabla");
         
         /// Display
         System.out.print(maSeance.toString());
