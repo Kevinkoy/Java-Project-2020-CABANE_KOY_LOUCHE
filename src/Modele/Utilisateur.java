@@ -7,6 +7,8 @@ package Modele;
  */
 public class Utilisateur 
 {
+    //ezaeiazeizaje
+ 
     ///ATTRIBUTS
     protected int id;
     protected String email;
