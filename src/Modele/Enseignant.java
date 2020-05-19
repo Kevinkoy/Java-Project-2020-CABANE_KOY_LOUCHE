@@ -7,8 +7,8 @@ package Modele;
 public class Enseignant
 {
     /// Attributs
-    private int id_utilisateur;
-    private int id_cours;
+    private Utilisateur utilisateur;
+    private Cours cours;
     
     /// Constructor default
     public Enseignant()
@@ -16,40 +16,40 @@ public class Enseignant
     }
     
     /// Constructor surcharge
-    public Enseignant(int id_utilisateur, int id_cours)
+    public Enseignant(Utilisateur utilisateur, Cours cours)
     {
-        this.id_utilisateur = id_utilisateur;
-        this.id_cours = id_cours;
+        this.utilisateur = utilisateur;
+        this.cours = cours;
     }
     
     //**************** CONSTRUCTOR UTILE?
-    public Enseignant(Utilisateur utilisateur, Cours cours)
+    /*public Enseignant(Utilisateur utilisateur, Cours cours)
     {
         this.id_utilisateur = utilisateur.getId();
         this.id_cours = cours.getId();
-    }
+    }*/
      
     /// Methodes 
         // Getters
-            public int GetId_utilisateur()
+            public Utilisateur GetUtilisateur()
             {
-                return this.id_utilisateur;
+                return this.utilisateur;
             }
             
-            public int GetId_cours()
+            public Cours GetCours()
             {
-                return this.id_cours;
+                return this.cours;
             }
             
         // Setters
-        public void setId_cours(int id_cours)
+        public void setId_cours(Cours cours)
         {
-            this.id_cours = id_cours;
+            this.cours = cours;
         }
         
-        public void setId_utilisateur(int id_utilisateur)
+        public void setUtilisateur(Utilisateur utilisateur)
         {
-            this.id_utilisateur = id_utilisateur;
+            this.utilisateur = utilisateur;
         }
         
         

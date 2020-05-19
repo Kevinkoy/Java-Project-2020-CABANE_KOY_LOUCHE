@@ -9,7 +9,7 @@ public class Groupe
     /// ATTRIBUTS
     private int id;
     protected String nom;
-    protected int id_promotion;
+    protected Promotion promotion;
     
     /// Constructor default
     public Groupe()
@@ -18,11 +18,11 @@ public class Groupe
     }
     
     /// Constructor surcharge
-    public Groupe(int id, String nom, int id_promotion)
+    public Groupe(int id, String nom, Promotion promotion)
     {
         this.id= id;
         this.nom=nom;
-        this.id_promotion=id_promotion;
+        this.promotion=promotion;
     }
     
     /// Methodes
@@ -30,7 +30,7 @@ public class Groupe
         @Override
         public String toString()
         {
-            return "id: " + this.id + ",nom: " + this.nom + ", id_promotion: " + this.id_promotion ;
+            return "id: " + this.id + ",nom: " + this.nom + ", id_promotion: " + this.promotion ;
         }
         
         // Getters
@@ -44,9 +44,9 @@ public class Groupe
         return this.nom;
         }
         
-        public int getId_promotion()
+        public Promotion getPromotion()
         {
-        return this.id_promotion;
+        return this.promotion;
         }
         
         // Setters
@@ -55,9 +55,9 @@ public class Groupe
             this.id = id;
         }
         
-        public void setId_promotion(int id_promotion)
+        public void setPromotion(Promotion promotion)
         {
-            this.id_promotion = id_promotion;
+            this.promotion = promotion;
         }
         
         public void setNom(String nom)

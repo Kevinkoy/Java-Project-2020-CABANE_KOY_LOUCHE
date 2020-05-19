@@ -7,8 +7,8 @@ package Modele;
 public class Seance_salles
 {
     /// Attributs
-    private int id_seance;
-    private int id_salle;
+    private Seance seance;
+    private Salle salle;
     
     /// Constructor default
     public Seance_salles()
@@ -16,39 +16,39 @@ public class Seance_salles
     }
     
     /// Constructor surcharge
-    public Seance_salles(int id_seance, int id_salle)
+    public Seance_salles(Seance seance, Salle id_salle)
     {
-        this.id_seance = id_seance;
-        this.id_salle = id_salle;
+        this.seance = seance;
+        this.salle = salle;
     }
     
     //**************** CONSTRUCTOR UTILE?
-    public Seance_salles(Seance seance, Salle salle)
+    /*public Seance_salles(Seance seance, Salle salle)
     {
         this.id_seance = seance.getId();
         this.id_salle = salle.getId();
-    }
+    }*/
      
     /// Methodes 
         // Getters
-            public int GetId_seance()
+            public Seance GetSeance()
             {
-                return this.id_seance;
+                return this.seance;
             }
             
-            public int GetId_salle()
+            public Salle Getsalle()
             {
-                return this.id_salle;
+                return this.salle;
             }
             
         // Setters
-        public void setId_salle(int id_salle)
+        public void setId_salle(Salle id_salle)
         {
-            this.id_salle = id_salle;
+            this.salle = salle;
         }
         
-        public void setId_seance(int id_seance)
+        public void setSeance(Seance seance)
         {
-            this.id_seance = id_seance;
+            this.seance = seance;
         }
 }

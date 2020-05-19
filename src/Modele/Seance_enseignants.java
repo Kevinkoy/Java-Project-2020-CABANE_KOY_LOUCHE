@@ -7,8 +7,8 @@ package Modele;
 public class Seance_enseignants
 {
     /// Attributs
-    private int id_seance;
-    private int id_enseignant;
+    private Seance seance;
+    private Enseignant enseignant;
     
     /// Constructor default
     public Seance_enseignants()
@@ -16,39 +16,39 @@ public class Seance_enseignants
     }
     
     /// Constructor surcharge
-    public Seance_enseignants(int id_seance, int id_enseignant)
+    public Seance_enseignants(Seance seance, Enseignant enseignant)
     {
-        this.id_seance = id_seance;
-        this.id_enseignant = id_enseignant;
+        this.seance = seance;
+        this.enseignant = enseignant;
     }
     
     //**************** CONSTRUCTOR UTILE?
-    public Seance_enseignants(Seance seance, Utilisateur utilisateur)
+    /*public Seance_enseignants(Seance seance, Utilisateur utilisateur)
     {
         this.id_seance = seance.getId();
         this.id_enseignant = utilisateur.getId();
-    }
+    }*/
      
     /// Methodes 
         // Getters
-            public int GetId_seance()
+            public Seance GetSeance()
             {
-                return this.id_seance;
+                return this.seance;
             }
             
-            public int GetId_enseignant()
+            public Enseignant GetEnseignant()
             {
-                return this.id_enseignant;
+                return this.enseignant;
             }
             
         // Setters
-        public void setId_enseignant(int id_enseignant)
+        public void setEnseignant(Enseignant enseignant)
         {
-            this.id_enseignant = id_enseignant;
+            this.enseignant = enseignant;
         }
         
-        public void setId_seance(int id_seance)
+        public void setSeance(Seance seance)
         {
-            this.id_seance = id_seance;
+            this.seance = seance;
         }
 }
