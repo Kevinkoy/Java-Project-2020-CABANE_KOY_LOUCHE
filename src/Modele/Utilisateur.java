@@ -24,6 +24,7 @@ public class Utilisateur
     // Constructor surchargé
     public Utilisateur(int id, String email, String passwd, String nom, String prenom, int droit)
     {
+        //SELECT LAST_INSERT_ID(); 
         this.id = id;
         this.email = email;
         this.passwd = passwd;

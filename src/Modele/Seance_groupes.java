@@ -7,8 +7,8 @@ package Modele;
 public class Seance_groupes
 {
     /// Attributs
-    private int id_seance;
-    private int id_groupe;
+    private Seance seance;
+    private Groupe groupe;
     
     /// Constructor default
     public Seance_groupes()
@@ -16,39 +16,39 @@ public class Seance_groupes
     }
     
     /// Constructor surcharge
-    public Seance_groupes(int id_seance, int id_groupe)
+    public Seance_groupes(Seance seance, Groupe groupe)
     {
-        this.id_seance = id_seance;
-        this.id_groupe = id_groupe;
+        this.seance = seance;
+        this.groupe = groupe;
     }
     
     //**************** CONSTRUCTOR UTILE?
-    public Seance_groupes(Seance seance, Groupe groupe)
+    /*public Seance_groupes(Seance seance, Groupe groupe)
     {
         this.id_seance = seance.getId();
         this.id_groupe = groupe.getId();
-    }
+    }*/
      
     /// Methodes 
         // Getters
-            public int GetId_seance()
+            public Seance GetSeance()
             {
-                return this.id_seance;
+                return this.seance;
             }
             
-            public int GetId_groupe()
+            public Groupe GetProupe()
             {
-                return this.id_groupe;
+                return this.groupe;
             }
             
         // Setters
-        public void setId_groupe(int id_groupe)
+        public void setId_groupe(Groupe groupe)
         {
-            this.id_groupe = id_groupe;
+            this.groupe = groupe;
         }
         
-        public void setId_seance(int id_seance)
+        public void setId_seance(Seance seance)
         {
-            this.id_seance = id_seance;
+            this.seance = seance;
         }
 }
