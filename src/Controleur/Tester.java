@@ -21,8 +21,8 @@ public class Tester {
         int annee = 2020;
         MaDate date = new Modele.MaDate(jour, mois, annee);
 
-        Time heure_debut = new Time(0, 0, 0);
-        Time heure_fin = new Time(1, 30, 0);
+        Time heure_debut = new Time(13, 45, 0);
+        Time heure_fin = new Time(15, 15, 0); // ATTENTION JAI MODIFIER Heure_fin = heure_debut + 1H30 dans Seance par default
         int etat = 0; // 0 default en cours de validation | 1 valide
 
         int id_cours = 1;
@@ -35,7 +35,7 @@ public class Tester {
 
         Seance maSeance = new Modele.Seance(id_seance, date, heure_debut, heure_fin, etat, cours, type_cours);
 
-        /// Display
+        /// DISPLAY
         System.out.print(maSeance.toString());
         System.out.print("\n");
 

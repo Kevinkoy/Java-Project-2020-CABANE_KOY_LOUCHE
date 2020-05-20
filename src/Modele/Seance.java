@@ -44,10 +44,10 @@ public class Seance {
         cal.setTime(date);
         this.semaine = cal.get(Calendar.WEEK_OF_YEAR);
         this.date = new MaDate(date);
-        this.heure_debut = new Time(0, 0, 0);
         this.heure_debut = heure_debut;
-        this.heure_fin = new Time(heure_debut.getHours() + heure_fin.getHours(), heure_debut.getMinutes() + heure_fin.getMinutes(), 0);
-
+        // heure_fin est définit par debut + duree de 1h30 de cours PAR DEFAULT
+        this.heure_fin = new Time(heure_debut.getHours() + 1 , heure_debut.getMinutes() + 30, 0);
+        //this.heure_fin = heure_fin;
         this.etat = etat;
         this.cours = cours;
         this.type_cours = type_cours;
