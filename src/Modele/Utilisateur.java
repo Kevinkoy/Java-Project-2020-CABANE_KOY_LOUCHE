@@ -31,7 +31,7 @@ public class Utilisateur
         this.prenom = prenom;
         this.droit = droit;
     }
-    
+  
     public Utilisateur(Utilisateur utilisateur)
     {
         this.id = utilisateur.id;
@@ -44,6 +44,7 @@ public class Utilisateur
     
     // Methodes
         // toString (retourner le contenue d'objet sous forme de chaine
+    @Override
         public String toString()
         {
         return "id: " + id + ", email: " + email + ", passwd: " + passwd  + ", nom: " + nom + ", prenom: " + prenom  + ", droit: " + droit ;

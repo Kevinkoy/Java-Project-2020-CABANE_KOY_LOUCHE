@@ -19,7 +19,7 @@ public class Tester
         Time time;
         Time duree;
         MaDate date;
-        
+ 
         // Intialisation
         time = new Time(0,0,0);
         duree = new Time(1,30,0);
@@ -28,7 +28,7 @@ public class Tester
         
         /// Display
         System.out.print(maSeance.toString());
-           
+
     }
     
 }
