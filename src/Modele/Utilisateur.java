@@ -17,16 +17,12 @@ public class Utilisateur
     protected String prenom;
     protected int droit;
     
-    /// Constructor default
-
     /**
      * Constructeur par defaut
      */
     public Utilisateur()
     {   }
     
-    // Constructor surchargé
-
     /**
      * Constructeur surchargé
      * @param id
@@ -61,15 +57,16 @@ public class Utilisateur
     }
 
     
-    // Methodes
-        // toString (retourner le contenue d'objet sous forme de chaine
+// Methodes ////////////////////////////////////////////////////////////////////
+    
+// toString : retourner le contenue d'objet sous forme de chaine
     @Override
         public String toString()
         {
         return "id: " + id + ", email: " + email + ", passwd: " + passwd  + ", nom: " + nom + ", prenom: " + prenom  + ", droit: " + droit ;
         }
-        // Getters
 
+// Getters /////////////////////////////////////////////////////////////////////
     /**
      *
      * @return id
@@ -125,8 +122,8 @@ public class Utilisateur
         }
         
         
-        // Setters
-
+// Setters /////////////////////////////////////////////////////////////////////
+    
     /**
      *
      * @param id

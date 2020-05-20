@@ -11,13 +11,19 @@ public class Etudiant extends Utilisateur
     private int numero;
     private Groupe groupe;
     
-    // Constructor default
+    /**
+     * Constructor default
+     */
     public Etudiant()
     {
 
     }
     
-    // Constructor surchargé
+    /**
+     * Constructor surchargé
+     * @param numero
+     * @param groupe
+     */
     public Etudiant(int numero, Groupe groupe)
     {
         super();
@@ -27,7 +33,7 @@ public class Etudiant extends Utilisateur
     
     
     // Methodes
-    
+ 
         // toString
         @Override
         public String toString()
