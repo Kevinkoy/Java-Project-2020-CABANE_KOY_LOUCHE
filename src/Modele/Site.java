@@ -19,10 +19,8 @@ public class Site
         
     }
     
-    // Constructor surchargé
-
     /**
-     * Constructor surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param nom
      */
