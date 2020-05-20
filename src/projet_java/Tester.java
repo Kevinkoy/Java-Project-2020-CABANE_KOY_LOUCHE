@@ -39,6 +39,7 @@ public class Tester {
 
         /// Display
         System.out.print(maSeance.toString());
+        System.out.print("\n");
 
     }
 }
