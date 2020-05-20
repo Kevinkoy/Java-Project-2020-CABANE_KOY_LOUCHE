@@ -12,14 +12,14 @@ public class Enseignant
     
 
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Enseignant()
     {
     }
     
     /**
-     * Constructor surcharge
+     * CONSTRUCTEUR SURCHARGE
      * @param utilisateur
      * @param cours
      */

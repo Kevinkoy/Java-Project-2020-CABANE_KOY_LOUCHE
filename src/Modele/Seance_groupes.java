@@ -12,7 +12,7 @@ public class Seance_groupes
     
 
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance_groupes()
     {
@@ -20,7 +20,7 @@ public class Seance_groupes
     
 
     /**
-     * Constructor surcharge
+     * CONSTRUCTEUR SURCHARGE
      * @param seance
      * @param groupe
      */

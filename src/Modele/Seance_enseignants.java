@@ -12,14 +12,14 @@ public class Seance_enseignants
     
 
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance_enseignants()
     {
     }
     
     /**
-     * Constructor surcharge
+     * CONSTRUCTEUR SURCHARGE
      * @param seance
      * @param enseignant
      */

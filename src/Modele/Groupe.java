@@ -12,7 +12,7 @@ public class Groupe
     private Promotion promotion;
     
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Groupe()
     {
@@ -21,7 +21,7 @@ public class Groupe
     
 
     /**
-     * Constructor surcharge
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param nom
      * @param promotion

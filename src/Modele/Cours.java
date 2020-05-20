@@ -12,7 +12,7 @@ public class Cours
     
 
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Cours()
     {
@@ -20,7 +20,7 @@ public class Cours
     }
     
     /**
-     * Constructor surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param nom
      */

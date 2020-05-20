@@ -11,14 +11,14 @@ public class Seance_salles
     private Salle salle;
     
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance_salles()
     {   }
     
     
     /**
-     * Constructor surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param seance
      * @param salle
      */

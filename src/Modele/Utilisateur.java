@@ -18,13 +18,13 @@ public class Utilisateur
     protected int droit;
     
     /**
-     * Constructeur par defaut
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Utilisateur()
     {   }
     
     /**
-     * Constructeur surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param email
      * @param passwd
@@ -43,7 +43,7 @@ public class Utilisateur
     }
   
     /**
-     * Constructeur surchargé
+     * CONSTRUCTEUR SURCHARGE 
      * @param utilisateur
      */
     public Utilisateur(Utilisateur utilisateur)

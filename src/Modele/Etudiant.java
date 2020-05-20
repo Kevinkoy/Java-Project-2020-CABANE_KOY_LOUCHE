@@ -12,7 +12,7 @@ public class Etudiant extends Utilisateur
     private Groupe groupe;
     
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Etudiant()
     {
@@ -20,7 +20,7 @@ public class Etudiant extends Utilisateur
     }
     
     /**
-     * Constructor surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param numero
      * @param groupe
      */

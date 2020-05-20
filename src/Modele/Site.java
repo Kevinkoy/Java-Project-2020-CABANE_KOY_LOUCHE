@@ -10,10 +10,9 @@ public class Site
     protected int id;
     protected String nom;
     
-    /// Constructor default
 
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Site()
     {

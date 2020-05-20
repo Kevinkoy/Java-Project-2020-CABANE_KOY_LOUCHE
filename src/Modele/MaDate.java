@@ -9,13 +9,13 @@ public class MaDate extends java.util.Date
     /// Attributs (Heritage)
     
     /**
-     *Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public MaDate()
     {   }
   
     /**
-     * Constructor surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param jour
      * @param mois
      * @param annee
@@ -28,7 +28,7 @@ public class MaDate extends java.util.Date
     }
     
     /**
-     * Constructor surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param date Objet de class MaDate
      */
     public MaDate(MaDate date)

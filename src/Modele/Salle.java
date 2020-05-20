@@ -14,7 +14,7 @@ public class Salle
     
     
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Salle()
     {
@@ -22,7 +22,7 @@ public class Salle
     }
     
     /**
-     * Constructor surcharge
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param nom
      * @param capacite

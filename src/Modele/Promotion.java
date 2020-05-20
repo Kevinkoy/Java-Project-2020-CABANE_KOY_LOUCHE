@@ -18,7 +18,7 @@ public class Promotion
 
 
     /**
-     * Constructeur par défaut
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Promotion()
     {
@@ -26,7 +26,7 @@ public class Promotion
     }
     
     /**
-     * Constructeur surchargé
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param nom
      */

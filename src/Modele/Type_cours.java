@@ -10,20 +10,16 @@ public class Type_cours
     private int id;
     private String nom;
     
-    /// Constructor default
-
     /**
-     *  Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Type_cours()
     {
         
     }
     
-    // Constructor surchargé
-
     /**
-     *
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param nom
      */

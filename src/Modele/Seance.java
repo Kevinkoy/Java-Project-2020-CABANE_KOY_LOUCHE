@@ -20,7 +20,7 @@ public class Seance
     private int id_type;
               
     /**
-     * Constructor default
+     * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance()
     {
@@ -28,7 +28,7 @@ public class Seance
     }
     
     /**
-     * Constructor surcharge
+     * CONSTRUCTEUR SURCHARGE
      * @param id
      * @param date
      * @param heure_debut
@@ -56,7 +56,7 @@ public class Seance
     }
     
     /**
-     * Constructor surchargé 
+     * CONSTRUCTEUR SURCHARGE
      * @param seance objet de class Seance
      */
     public Seance(Seance seance)
