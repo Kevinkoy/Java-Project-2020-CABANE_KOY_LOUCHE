@@ -27,8 +27,8 @@ public class Seance_groupes {
         this.groupe = groupe;
     }
 
-    /// Methodes 
-    // Getters
+    ///METHODES
+    // GETTERS
     public Seance getSeance() {
         return this.seance;
     }
@@ -37,12 +37,13 @@ public class Seance_groupes {
         return this.groupe;
     }
 
-    // Setters
+    // SETTERS
+    public void setSeance(Seance seance) {
+        this.seance = seance;
+    }
+
     public void setGroupe(Groupe groupe) {
         this.groupe = groupe;
     }
 
-    public void setSeance(Seance seance) {
-        this.seance = seance;
-    }
 }

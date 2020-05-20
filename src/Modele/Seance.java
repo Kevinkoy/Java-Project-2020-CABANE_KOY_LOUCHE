@@ -16,8 +16,8 @@ public class Seance {
     private Time heure_debut;
     private Time heure_fin;
     private int etat;
-    private int id_cours;
-    private int id_type;
+    private Cours cours;
+    private Type_cours type_cours;
 
     /**
      * CONSTRUCTEUR PAR DEFAUT
@@ -27,17 +27,16 @@ public class Seance {
     }
 
     /**
-     * CONSTRUCTEUR SURCHARGE
      *
      * @param id
      * @param date
      * @param heure_debut
      * @param heure_fin
      * @param etat
-     * @param id_cours
-     * @param id_type
+     * @param cours
+     * @param type_cours
      */
-    public Seance(int id, MaDate date, Time heure_debut, Time heure_fin, int etat, int id_cours, int id_type) {
+    public Seance(int id, MaDate date, Time heure_debut, Time heure_fin, int etat, Cours cours, Type_cours type_cours) {
         // MODIFICATION POSSIBLE
         this.id = id;
         //this.semaine = (int) Math.ceil(((date.getMois()-1)*30.41 + date.getJour())/7);
@@ -50,8 +49,8 @@ public class Seance {
         this.heure_fin = new Time(heure_debut.getHours() + heure_fin.getHours(), heure_debut.getMinutes() + heure_fin.getMinutes(), 0);
 
         this.etat = etat;
-        this.id_cours = id_cours;
-        this.id_type = id_type;
+        this.cours = cours;
+        this.type_cours = type_cours;
     }
 
     /**
@@ -66,19 +65,19 @@ public class Seance {
         this.heure_debut = seance.heure_debut;
         this.heure_fin = seance.heure_fin;
         this.etat = seance.etat;
-        this.id_cours = seance.id_cours;
-        this.id_type = seance.id_type;
+        this.cours = seance.cours;
+        this.type_cours = seance.type_cours;
     }
 
-    /// Methodes 
+    /// METHODES 
     //ToString
     @Override
     public String toString() {
         return "id: " + id + ", semaine: " + semaine + ", date: " + date + ", heure de debut: " + heure_debut + ", heure de fin: "
-                + heure_fin + ", etat: " + etat + ", id cours: " + id_cours + ", id type: " + id_type;
+                + heure_fin + ", etat: " + etat + ", id cours: " + cours + ", id type: " + type_cours;
     }
 
-    // Getters
+    // GETTERS
     public int getId() {
         return this.id;
     }
@@ -103,15 +102,15 @@ public class Seance {
         return this.etat;
     }
 
-    public int getId_cours() {
-        return this.id_cours;
+    public Cours getCours() {
+        return this.cours;
     }
 
-    public int getId_type() {
-        return this.id_type;
+    public Type_cours getType_cours() {
+        return this.type_cours;
     }
 
-    // Setters
+    // SETTERS
     public void setId(int id) {
         this.id = id;
     }
@@ -136,12 +135,12 @@ public class Seance {
         this.etat = etat;
     }
 
-    public void setId_cours(int id_cours) {
-        this.id_cours = id_cours;
+    public void setCours(Cours cours) {
+        this.cours = cours;
     }
 
-    public void setId_type(int id_type) {
-        this.id_type = id_type;
+    public void setType_cours(Type_cours type_cours) {
+        this.type_cours = type_cours;
     }
 
 }

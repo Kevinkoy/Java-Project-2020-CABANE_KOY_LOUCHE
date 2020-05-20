@@ -4,35 +4,25 @@ package Modele;
  *
  * @author KévinKOY
  */
-public class Enseignant {//extends Utilisateur{
+public class Enseignant extends Utilisateur {
 
     /// Attributs
-    private Utilisateur utilisateur;
     private Cours cours;
 
     /**
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Enseignant() {
+        super();
+        this.droit = 3; // 3 enseignant
     }
 
-    /**
-     * CONSTRUCTEUR SURCHARGE
-     *
-     * @param utilisateur
-     * @param cours
-     */
-    public Enseignant(Utilisateur utilisateur, Cours cours) {
-        this.utilisateur = utilisateur;
+    public Enseignant(int id, String email, String passwd, String nom, String prenom, Cours cours) {
+        super(id, email, passwd, nom, prenom, 3);
         this.cours = cours;
     }
 
-    /// Methodes 
-    // Getters
-    public Utilisateur getUtilisateur() {
-        return this.utilisateur;
-    }
-
+    /// METHODES
     public Cours getCours() {
         return this.cours;
     }
@@ -41,9 +31,4 @@ public class Enseignant {//extends Utilisateur{
     public void setCours(Cours cours) {
         this.cours = cours;
     }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-    }
-
 }

@@ -24,6 +24,12 @@ public class Utilisateur {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Utilisateur() {
+        id = 0;
+        email = "";
+        passwd = "";
+        nom = "";
+        prenom = "";
+        
     }
 
     /**

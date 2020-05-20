@@ -27,14 +27,14 @@ public class Type_cours {
         this.nom = nom;
     }
 
-    // Methodes
+    // METHODES
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
         return "id: " + id + ", nom: " + nom;
     }
-    // Getters
 
+    // GETTERS
     public int getId() {
         return this.id;
     }
@@ -43,7 +43,7 @@ public class Type_cours {
         return this.nom;
     }
 
-    // Setters
+    // SETTERS
     public void setId(int id) {
         this.id = id;
     }

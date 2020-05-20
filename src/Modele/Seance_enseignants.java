@@ -27,8 +27,8 @@ public class Seance_enseignants {
         this.enseignant = enseignant;
     }
 
-    /// Methodes 
-    // Getters
+    /// METHODES
+    // GETTERS
     public Seance getSeance() {
         return this.seance;
     }
@@ -37,7 +37,7 @@ public class Seance_enseignants {
         return this.enseignant;
     }
 
-    // Setters
+    // SETTERS
     public void setEnseignant(Enseignant enseignant) {
         this.enseignant = enseignant;
     }
