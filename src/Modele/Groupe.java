@@ -4,75 +4,64 @@ package Modele;
  *
  * @author KévinKOY
  */
-public class Groupe 
-{
+public class Groupe {
+
     /// ATTRIBUTS
     private int id;
     private String nom;
     private Promotion promotion;
-    
+
     /**
      * CONSTRUCTEUR PAR DEFAUT
      */
-    public Groupe()
-    {
-        
+    public Groupe() {
+
     }
-    
 
     /**
      * CONSTRUCTEUR SURCHARGE
+     *
      * @param id
      * @param nom
      * @param promotion
      */
-    public Groupe(int id, String nom, Promotion promotion)
-    {
-        this.id= id;
-        this.nom=nom;
-        this.promotion=promotion;
+    public Groupe(int id, String nom, Promotion promotion) {
+        this.id = id;
+        this.nom = nom;
+        this.promotion = promotion;
     }
-    
+
     /// Methodes
-       //ToString
-        @Override
-        public String toString()
-        {
-            return "id: " + this.id + ",nom: " + this.nom + ", id_promotion: " + this.promotion ;
-        }
-        
-        // Getters
-        public int getId()
-        {
+    //ToString
+    @Override
+    public String toString() {
+        return "id: " + this.id + ",nom: " + this.nom + ", id_promotion: " + this.promotion;
+    }
+
+    // Getters
+    public int getId() {
         return this.id;
-        }
-        
-        public String getNom()
-        {
+    }
+
+    public String getNom() {
         return this.nom;
-        }
-        
-        public Promotion getPromotion()
-        {
+    }
+
+    public Promotion getPromotion() {
         return this.promotion;
-        }
-        
-        // Setters
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-        
-        public void setPromotion(Promotion promotion)
-        {
-            this.promotion = promotion;
-        }
-        
-        public void setNom(String nom)
-        {
-            this.nom = nom;
-        }
-        
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
 }
-

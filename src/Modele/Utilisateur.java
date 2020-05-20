@@ -3,12 +3,10 @@ package Modele;
 /**
  *
  * @author KévinKOY
- * 
+ *
  */
-public class Utilisateur 
-{
+public class Utilisateur {
 
- 
     ///ATTRIBUTS
     protected int id;
     protected String email;
@@ -16,15 +14,16 @@ public class Utilisateur
     protected String nom;
     protected String prenom;
     protected int droit;
-    
+
     /**
      * CONSTRUCTEUR PAR DEFAUT
      */
-    public Utilisateur()
-    {   }
-    
+    public Utilisateur() {
+    }
+
     /**
      * CONSTRUCTEUR SURCHARGE
+     *
      * @param id
      * @param email
      * @param passwd
@@ -32,8 +31,7 @@ public class Utilisateur
      * @param prenom
      * @param droit
      */
-    public Utilisateur(int id, String email, String passwd, String nom, String prenom, int droit)
-    {
+    public Utilisateur(int id, String email, String passwd, String nom, String prenom, int droit) {
         this.id = id;
         this.email = email;
         this.passwd = passwd;
@@ -41,13 +39,13 @@ public class Utilisateur
         this.prenom = prenom;
         this.droit = droit;
     }
-  
+
     /**
-     * CONSTRUCTEUR SURCHARGE 
+     * CONSTRUCTEUR SURCHARGE
+     *
      * @param utilisateur
      */
-    public Utilisateur(Utilisateur utilisateur)
-    {
+    public Utilisateur(Utilisateur utilisateur) {
         this.id = utilisateur.id;
         this.email = utilisateur.email;
         this.passwd = utilisateur.passwd;
@@ -56,125 +54,108 @@ public class Utilisateur
         this.droit = utilisateur.droit;
     }
 
-    
 // Methodes ////////////////////////////////////////////////////////////////////
-    
 // toString : retourner le contenue d'objet sous forme de chaine
     @Override
-        public String toString()
-        {
-        return "id: " + id + ", email: " + email + ", passwd: " + passwd  + ", nom: " + nom + ", prenom: " + prenom  + ", droit: " + droit ;
-        }
+    public String toString() {
+        return "id: " + id + ", email: " + email + ", passwd: " + passwd + ", nom: " + nom + ", prenom: " + prenom + ", droit: " + droit;
+    }
 
 // Getters /////////////////////////////////////////////////////////////////////
     /**
      *
      * @return id
      */
-        public int getId()
-        {
-            return this.id;
-        }
-        
+    public int getId() {
+        return this.id;
+    }
+
     /**
      *
      * @return email
      */
-    public String getEmail()
-        {
-            return this.email;
-        }
-        
+    public String getEmail() {
+        return this.email;
+    }
+
     /**
      *
      * @return passwd
      */
-    public String getPasswd()
-        {
-            return this.passwd;
-        }
+    public String getPasswd() {
+        return this.passwd;
+    }
 
     /**
      *
      * @return nom
      */
-    public String getNom()
-        {
-            return this.nom;
-        }
-        
+    public String getNom() {
+        return this.nom;
+    }
+
     /**
      *
      * @return prenom
      */
-    public String getPrenom()
-        {
-            return this.prenom;
-        }          
-    
+    public String getPrenom() {
+        return this.prenom;
+    }
+
     /**
      *
      * @return droit
      */
-    public int getDroit()
-        {
-            return this.droit;
-        }
-        
-        
+    public int getDroit() {
+        return this.droit;
+    }
+
 // Setters /////////////////////////////////////////////////////////////////////
-    
     /**
      *
      * @param id
      */
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-        
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      *
      * @param email
      */
-    public void setEmail(String email)
-        {
-            this.email = email;
-        }
-        
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     /**
      *
      * @param passwd
      */
-    public void setPasswd(String passwd)
-        {
-            this.passwd = passwd;
-        }
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
 
     /**
      *
      * @param nom
      */
-    public void setNom(String nom)
-        {
-            this.nom = nom;
-        }
-        
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     /**
      *
      * @param prenom
      */
-    public void setPrenom(String prenom)
-        {
-            this.prenom = prenom;
-        }          
-    
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
     /**
      *
      * @param droit
      */
-    public void setDroit(int droit)
-        {
-            this.droit = droit;
-        }
+    public void setDroit(int droit) {
+        this.droit = droit;
+    }
 }

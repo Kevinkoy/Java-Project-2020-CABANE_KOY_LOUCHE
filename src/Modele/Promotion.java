@@ -9,53 +9,46 @@ package Modele;
  *
  * @author KévinKOY
  */
-public class Promotion 
-{
+public class Promotion {
+
     /// ATTRIBUTS
     private int id;
     private String nom;
-    
-
 
     /**
      * CONSTRUCTEUR PAR DEFAUT
      */
-    public Promotion()
-    {
-        
+    public Promotion() {
+
     }
-    
+
     /**
      * CONSTRUCTEUR SURCHARGE
+     *
      * @param id
      * @param nom
      */
-    public Promotion(int id, String nom)
-    {
-        this.id= id;
-        this.nom=nom;
+    public Promotion(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
     }
-    
-    /// METHODES
-        // Getters
-        public int getId()
-        {
-        return this.id;
-        }
-    
-        public String getNom()
-        {
-        return this.nom;
-        }   
 
-        // Setters
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-        
-        public void setNom(String nom)
-        {
-            this.nom = nom;
-        }
+    /// METHODES
+    // Getters
+    public int getId() {
+        return this.id;
+    }
+
+    public String getNom() {
+        return this.nom;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }
