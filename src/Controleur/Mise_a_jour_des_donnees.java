@@ -6,16 +6,13 @@ package Controleur;
  */
 //Le module de Mise à jour des données : 
 //toute opération de modification, ajout ou suppression dans l’emploi du temps
-public class Mise_a_jour_des_donnees 
-{
+public class Mise_a_jour_des_donnees {
     /// Attributs
-    
+
     /// Constructor Default
-    
     /// Constructor Surcharge
-    
     /// Methods
-        // ToString
-        // Getters
-        // Setters   
+    // ToString
+    // Getters
+    // Setters   
 }
