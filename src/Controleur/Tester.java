@@ -1,11 +1,9 @@
-package projet_java;
+package Controleur;
 
 import Modele.*;
 import Modele.MaDate;
+import java.sql.Time;
 
-//import java.util.*;
-import java.sql.*;
-// TEST
 
 /**
  *
