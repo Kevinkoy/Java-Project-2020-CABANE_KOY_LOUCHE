@@ -92,7 +92,7 @@ public class Panneau extends javax.swing.JPanel
             // Afficher une IMAGE +EXCEPTIONS
             try 
             {
-            Image img = ImageIO.read(new File("Cenote.jpg"));
+            Image img = ImageIO.read(new File("image/Cenote.jpg"));
             
             //Pour une image non adapté
             //g.drawImage(img, 0, 0, this);

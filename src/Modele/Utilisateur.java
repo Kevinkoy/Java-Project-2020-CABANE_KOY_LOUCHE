@@ -1,5 +1,7 @@
 package Modele;
 
+import java.sql.Connection;
+
 /**
  *
  * @author KévinKOY
@@ -13,6 +15,9 @@ public class Utilisateur {
     protected String passwd;
     protected String nom;
     protected String prenom;
+    /**
+     * 1 administrateur |2 référent pédagogique |3 enseignant | 4 étudiant
+     */
     protected int droit;
 
     /**

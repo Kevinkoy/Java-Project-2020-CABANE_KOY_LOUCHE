@@ -11,20 +11,25 @@ public class Etudiant extends Utilisateur {
     private Groupe groupe;
 
     /**
-     * CONSTRUCTEUR PAR DEFAUT
+     *
      */
     public Etudiant() {
-
+        super();
+        this.droit = 4; // 4 étudiant
     }
 
     /**
-     * CONSTRUCTEUR SURCHARGE
      *
+     * @param id
+     * @param email
+     * @param passwd
+     * @param nom
+     * @param prenom
      * @param numero
      * @param groupe
      */
-    public Etudiant(int numero, Groupe groupe) {
-        super();
+    public Etudiant(int id, String email, String passwd, String nom, String prenom, int numero, Groupe groupe) {
+        super(id, email, passwd, nom, prenom, 4);
         this.numero = numero;
         this.groupe = groupe;
     }
@@ -53,6 +58,4 @@ public class Etudiant extends Utilisateur {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
-// commit Sylvain Lundi 18 15H
 }

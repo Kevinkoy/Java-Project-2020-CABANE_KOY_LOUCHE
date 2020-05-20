@@ -4,7 +4,7 @@ package Modele;
  *
  * @author KévinKOY
  */
-public class Enseignant {
+public class Enseignant {//extends Utilisateur{
 
     /// Attributs
     private Utilisateur utilisateur;
