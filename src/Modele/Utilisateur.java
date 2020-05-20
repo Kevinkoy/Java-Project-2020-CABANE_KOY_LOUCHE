@@ -22,6 +22,16 @@ public class Utilisateur
     {   }
     
     // Constructor surchargé
+
+    /**
+     *
+     * @param id
+     * @param email
+     * @param passwd
+     * @param nom
+     * @param prenom
+     * @param droit
+     */
     public Utilisateur(int id, String email, String passwd, String nom, String prenom, int droit)
     {
         this.id = id;
@@ -32,6 +42,10 @@ public class Utilisateur
         this.droit = droit;
     }
   
+    /**
+     *
+     * @param utilisateur
+     */
     public Utilisateur(Utilisateur utilisateur)
     {
         this.id = utilisateur.id;
@@ -40,6 +54,10 @@ public class Utilisateur
         this.nom = utilisateur.nom;
         this.prenom = utilisateur.prenom;
         this.droit = utilisateur.droit;
+    }
+
+    public Utilisateur(int i, int i0, int i1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     // Methodes
