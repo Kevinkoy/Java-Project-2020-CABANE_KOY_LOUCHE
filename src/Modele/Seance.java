@@ -46,7 +46,7 @@ public class Seance {
         this.date = new MaDate(date);
         this.heure_debut = heure_debut;
         // heure_fin est définit par debut + duree de 1h30 de cours PAR DEFAULT
-        this.heure_fin = new Time(heure_debut.getHours() + 1 , heure_debut.getMinutes() + 30, 0);
+        this.heure_fin = new Time(heure_debut.getHours() + 1, heure_debut.getMinutes() + 30, 0);
         //this.heure_fin = heure_fin;
         this.etat = etat;
         this.cours = cours;

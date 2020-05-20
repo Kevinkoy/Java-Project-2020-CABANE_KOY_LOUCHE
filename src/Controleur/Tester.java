@@ -4,7 +4,6 @@ import Modele.*;
 import Modele.MaDate;
 import java.sql.Time;
 
-
 /**
  *
  * @author KévinKOY, AliceCABANE, SylvainLOUCHE, Student at ECE PARIS, PROJET

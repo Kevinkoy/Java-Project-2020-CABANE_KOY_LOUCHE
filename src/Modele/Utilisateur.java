@@ -29,7 +29,7 @@ public class Utilisateur {
         passwd = "";
         nom = "";
         prenom = "";
-        
+
     }
 
     /**
