@@ -10,12 +10,19 @@ public class Seance_enseignants
     private Seance seance;
     private Enseignant enseignant;
     
-    /// Constructor default
+
+    /**
+     * Constructor default
+     */
     public Seance_enseignants()
     {
     }
     
-    /// Constructor surcharge
+    /**
+     * Constructor surcharge
+     * @param seance
+     * @param enseignant
+     */
     public Seance_enseignants(Seance seance, Enseignant enseignant)
     {
         this.seance = seance;

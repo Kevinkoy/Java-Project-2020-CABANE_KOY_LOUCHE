@@ -15,13 +15,21 @@ public class Promotion
     private int id;
     private String nom;
     
-    /// CONSTRUCTOR DEFAULT
+
+
+    /**
+     * Constructeur par défaut
+     */
     public Promotion()
     {
         
     }
     
-    /// CONSTRUCTOR SURCHARGE
+    /**
+     * Constructeur surchargé
+     * @param id
+     * @param nom
+     */
     public Promotion(int id, String nom)
     {
         this.id= id;

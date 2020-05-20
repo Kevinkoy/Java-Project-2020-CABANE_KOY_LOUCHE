@@ -6,15 +6,20 @@ package Modele;
  */
 public class MaDate extends java.util.Date
 {
-    /// Attributs
-    // heritage 
+    /// Attributs (Heritage)
     
-    /// Constructor default
+    /**
+     *Constructor default
+     */
     public MaDate()
-    { 
-    }
-    /// Constructor surcharge
+    {   }
   
+    /**
+     * Constructor surchargé
+     * @param jour
+     * @param mois
+     * @param annee
+     */
     public MaDate(int jour, int mois, int annee)
     {
         this.setYear(annee);
@@ -22,6 +27,10 @@ public class MaDate extends java.util.Date
         this.setDate(jour);
     }
     
+    /**
+     * Constructor surchargé
+     * @param date Objet de class MaDate
+     */
     public MaDate(MaDate date)
     {
         this.setYear(date.getYear());

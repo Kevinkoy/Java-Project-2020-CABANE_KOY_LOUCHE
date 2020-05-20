@@ -10,13 +10,20 @@ public class Cours
     private int id;
     private String nom;
     
-    /// Constructor default
+
+    /**
+     * Constructor default
+     */
     public Cours()
     {
         
     }
     
-    // Constructor surchargé
+    /**
+     * Constructor surchargé
+     * @param id
+     * @param nom
+     */
     public Cours(int id, String nom)
     {
         this.id = id;

@@ -10,12 +10,19 @@ public class Enseignant
     private Utilisateur utilisateur;
     private Cours cours;
     
-    /// Constructor default
+
+    /**
+     * Constructor default
+     */
     public Enseignant()
     {
     }
     
-    /// Constructor surcharge
+    /**
+     * Constructor surcharge
+     * @param utilisateur
+     * @param cours
+     */
     public Enseignant(Utilisateur utilisateur, Cours cours)
     {
         this.utilisateur = utilisateur;

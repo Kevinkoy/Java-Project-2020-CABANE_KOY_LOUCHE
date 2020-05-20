@@ -11,12 +11,22 @@ public class Site
     protected String nom;
     
     /// Constructor default
+
+    /**
+     * Constructor default
+     */
     public Site()
     {
         
     }
     
     // Constructor surchargé
+
+    /**
+     * Constructor surchargé
+     * @param id
+     * @param nom
+     */
     public Site(int id, String nom)
     {
         this.id = id;

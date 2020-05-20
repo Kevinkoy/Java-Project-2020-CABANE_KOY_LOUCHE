@@ -11,12 +11,22 @@ public class Type_cours
     private String nom;
     
     /// Constructor default
+
+    /**
+     *  Constructor default
+     */
     public Type_cours()
     {
         
     }
     
     // Constructor surchargé
+
+    /**
+     *
+     * @param id
+     * @param nom
+     */
     public Type_cours(int id, String nom)
     {
         this.id = id;

@@ -12,13 +12,22 @@ public class Salle
     private int capacite;
     private Site site;
     
-    /// Constructor default
+    
+    /**
+     * Constructor default
+     */
     public Salle()
     {
         
     }
     
-    /// Constructor surcharge
+    /**
+     * Constructor surcharge
+     * @param id
+     * @param nom
+     * @param capacite
+     * @param site
+     */
     public Salle(int id, String nom, int capacite, Site site)
     {
        this.id = id;

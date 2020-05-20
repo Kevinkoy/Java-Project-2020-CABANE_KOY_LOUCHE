@@ -10,12 +10,20 @@ public class Seance_groupes
     private Seance seance;
     private Groupe groupe;
     
-    /// Constructor default
+
+    /**
+     * Constructor default
+     */
     public Seance_groupes()
     {
     }
     
-    /// Constructor surcharge
+
+    /**
+     * Constructor surcharge
+     * @param seance
+     * @param groupe
+     */
     public Seance_groupes(Seance seance, Groupe groupe)
     {
         this.seance = seance;

@@ -10,12 +10,18 @@ public class Seance_salles
     private Seance seance;
     private Salle salle;
     
-    /// Constructor default
+    /**
+     * Constructor default
+     */
     public Seance_salles()
-    {
-    }
+    {   }
     
-    /// Constructor surcharge
+    
+    /**
+     * Constructor surchargé
+     * @param seance
+     * @param salle
+     */
     public Seance_salles(Seance seance, Salle salle)
     {
         this.seance = seance;

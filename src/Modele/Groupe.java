@@ -11,13 +11,21 @@ public class Groupe
     private String nom;
     private Promotion promotion;
     
-    /// Constructor default
+    /**
+     * Constructor default
+     */
     public Groupe()
     {
         
     }
     
-    /// Constructor surcharge
+
+    /**
+     * Constructor surcharge
+     * @param id
+     * @param nom
+     * @param promotion
+     */
     public Groupe(int id, String nom, Promotion promotion)
     {
         this.id= id;
