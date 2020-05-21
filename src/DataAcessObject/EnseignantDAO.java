@@ -1,5 +1,7 @@
 package DataAcessObject;
 
+import Modele.Cours;
+import Modele.Enseignant;
 import Modele.Utilisateur;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,49 +11,51 @@ import java.sql.SQLException;
  *
  * @author KévinKOY
  */
-public class UtilisateurDAO extends DAO<Utilisateur> {
+public class EnseignantDAO extends DAO<Enseignant> {
 
-    public UtilisateurDAO(Connection connection) {
+    public EnseignantDAO(Connection connection) {
         super(connection);
     }
 
     @Override
-    public boolean create(Utilisateur obj) {
+    public boolean create(Enseignant obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Utilisateur obj) {
+    public boolean delete(Enseignant obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Utilisateur obj) {
+    public boolean update(Enseignant obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Utilisateur find(int id) {
-
-        Utilisateur utilisateur = new Utilisateur();
+    public Enseignant find(int id) {
+        ///************************* A CHANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr
+        Enseignant enseignant = new Enseignant();
 
         try {
             ResultSet result = this.connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Utilisateur WHERE ID = " + id);
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Enseignant WHERE ID = " + id);
             if (result.first()) {
-                utilisateur = new Utilisateur(
+                enseignant = new Enseignant(
                         id,
                         result.getString("Email"),
                         result.getString("Passwd"),
                         result.getString("Nom"),
                         result.getString("Prenom"),
-                        result.getInt("Droit"));
+                        new Modele.Cours()
+                        //result.getInt("ID_Cours")
+                );
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+            e.printStackTrace();
         }
-        return utilisateur;
+        return enseignant;
     }
 
 }

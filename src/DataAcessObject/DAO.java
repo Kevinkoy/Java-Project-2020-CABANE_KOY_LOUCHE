@@ -19,11 +19,11 @@ import java.sql.Connection;
  */
 public abstract class DAO<T> {
 
-    protected Connection connect = null;
+    protected Connection connection = null;
 
     public DAO(Connection connection) {
 
-        this.connect = connection;
+        this.connection = connection;
     }
 
     /**

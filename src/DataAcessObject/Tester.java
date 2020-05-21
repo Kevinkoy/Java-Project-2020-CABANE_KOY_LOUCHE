@@ -1,23 +1,22 @@
 package DataAcessObject;
 
 import Modele.Utilisateur;
-//import com.sdz.bean.Classe;
-//CTRL + SHIFT + O pour générer les imports
 
 public class Tester {
 
     public static void main(String[] args) {
         //Testons des élèves
-        DAO<Utilisateur> utilisateurDao = new UtilisateurDAO(SdzConnection.getInstance());
-        for (int i = 1; i < 2; i++) {
+        DAO<Utilisateur> utilisateurDao = new UtilisateurDAO(ConnectMySQL.getInstance());
+        for (int i = 1; i < 3; i++) {
             Utilisateur utilisateur = utilisateurDao.find(i);
-            System.out.println("UtilisateurN°" + utilisateur.getId()
+            /*System.out.println("UtilisateurN°" + utilisateur.getId()
                     + "  - " + utilisateur.getEmail() + " "
                     + utilisateur.getPasswd() + "  - "
                     + utilisateur.getNom() + "  - "
                     + utilisateur.getPrenom() + "  - "
                     + utilisateur.getDroit()
-            );
+            );*/
+            System.out.println("Utilisateur:"+ utilisateur.toString());
         }
     }
 }

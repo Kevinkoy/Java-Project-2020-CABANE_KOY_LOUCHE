@@ -31,6 +31,19 @@ public class Enseignant extends Utilisateur {
         this.cours = cours;
     }
 
+    // toString : retourner le contenue d'objet sous forme de chaine
+    @Override
+    public String toString() {
+        return "id: " + id
+                + ", email: " + email
+                + ", passwd: " + passwd
+                + ", nom: " + nom
+                + ", prenom: " + prenom
+                + ", droit: " + droit
+                + ", cours: " + this.cours.getNom()
+                ;
+    }
+
     // GETTERS
     public Cours getCours() {
         return this.cours;
