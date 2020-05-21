@@ -1,35 +1,35 @@
-package DAO;
+package DataAcessObject;
 
-import Modele.Utilisateur;
+import Modele.Etudiant;
 import java.sql.Connection;
 
 /**
  *
  * @author KévinKOY
  */
-public class UtilisateurDAO extends DAO<Utilisateur>{
+public class EtudiantDAO extends DAO<Etudiant> {
 
-    public UtilisateurDAO(Connection connection) {
+    public EtudiantDAO(Connection connection) {
         super(connection);
     }
 
     @Override
-    public boolean create(Utilisateur obj) {
+    public boolean create(Etudiant obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Utilisateur obj) {
+    public boolean delete(Etudiant obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Utilisateur obj) {
+    public boolean update(Etudiant obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Utilisateur find(int id) {
+    public Etudiant find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

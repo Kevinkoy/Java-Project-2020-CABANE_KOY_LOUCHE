@@ -1,13 +1,28 @@
-package DAO;
+package DataAcessObject;
 
 import java.sql.Connection;
 //import com.sdz.connection.SdzConnection;
 
+/**
+ * Pattern DAO: Ce pattern permet de faire le lien entre la couche d'accès aux
+ * données et la couche métier d'une application (vos classes). Il s'agit ni
+ * plus ni moins de faire en sorte qu'un type d'objet (objetDAO) se charge de
+ * récupérer les données dans la base et qu'un autre type d'objet (souvent des
+ * POJO: Plain Old Java Object)(=nos classes dans le package MODELE) soit
+ * utilisé pour manipuler ces données.
+ *
+ * ___ Les ObjetsDAO auront des methodes CREATE,INSERT,DELETE,SELECT
+ *
+ *
+ * @author KévinKOY
+ * @param <T>
+ */
 public abstract class DAO<T> {
 
     protected Connection connect = null;
 
     public DAO(Connection connection) {
+
         this.connect = connection;
     }
 

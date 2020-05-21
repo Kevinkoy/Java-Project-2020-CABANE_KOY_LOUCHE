@@ -35,7 +35,7 @@ public class Site {
         return "id: " + id + ", nom: " + nom;
     }
 
-    // Getters
+    // GETTERS
     public int getId() {
         return this.id;
     }
@@ -44,7 +44,7 @@ public class Site {
         return this.nom;
     }
 
-    // Setters
+    // SETTERS
     public void setId(int id) {
         this.id = id;
     }

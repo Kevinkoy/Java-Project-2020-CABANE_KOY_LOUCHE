@@ -16,7 +16,7 @@ public class Utilisateur {
     protected String nom;
     protected String prenom;
     /**
-     * 1 administrateur |2 référent pédagogique |3 enseignant | 4 étudiant
+     * 1 administrateur | 2 référent pédagogique | 3 enseignant | 4 étudiant
      */
     protected int droit;
 

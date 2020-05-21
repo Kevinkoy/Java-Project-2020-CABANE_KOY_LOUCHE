@@ -1,17 +1,29 @@
-package Controleur;
+package DataAcessObject;
 
-import Modele.*;
-import Modele.MaDate;
-import java.sql.Time;
+import Modele.Utilisateur;
+//import com.sdz.bean.Classe;
+//CTRL + SHIFT + O pour générer les imports
 
-/**
- *
- * @author KévinKOY, AliceCABANE, SylvainLOUCHE, Student at ECE PARIS, PROJET
- * JAVA 2020 ING3_TD4
- */
 public class Tester {
 
     public static void main(String[] args) {
+        //Testons des élèves
+        DAO<Utilisateur> utilisateurDao = new UtilisateurDAO(SdzConnection.getInstance());
+        for (int i = 1; i < 2; i++) {
+            Utilisateur utilisateur = utilisateurDao.find(i);
+            System.out.println("UtilisateurN°" + utilisateur.getId()
+                    + "  - " + utilisateur.getEmail() + " "
+                    + utilisateur.getPasswd() + "  - "
+                    + utilisateur.getNom() + "  - "
+                    + utilisateur.getPrenom() + "  - "
+                    + utilisateur.getDroit()
+            );
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/*
         // DECLARATION && INITIALISATION
         int id_seance = 1;
 
@@ -37,6 +49,4 @@ public class Tester {
         /// DISPLAY
         System.out.print(maSeance.toString());
         System.out.print("\n");
-
-    }
-}
+ */

@@ -17,17 +17,26 @@ public class Enseignant extends Utilisateur {
         this.droit = 3; // 3 enseignant
     }
 
+    /**
+     *
+     * @param id
+     * @param email
+     * @param passwd
+     * @param nom
+     * @param prenom
+     * @param cours
+     */
     public Enseignant(int id, String email, String passwd, String nom, String prenom, Cours cours) {
         super(id, email, passwd, nom, prenom, 3);
         this.cours = cours;
     }
 
-    /// METHODES
+    // GETTERS
     public Cours getCours() {
         return this.cours;
     }
 
-    // Setters
+    // SETTERS
     public void setCours(Cours cours) {
         this.cours = cours;
     }
