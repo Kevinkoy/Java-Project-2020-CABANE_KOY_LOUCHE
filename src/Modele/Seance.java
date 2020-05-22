@@ -73,7 +73,7 @@ public class Seance {
     //ToString
     @Override
     public String toString() {
-        return "id: " + id + ", semaine: " + semaine + ", date: " + date + ", heure de debut: " + heure_debut + ", heure de fin: "
+        return " id: " + id + ", semaine: " + semaine + ", date: " + date + ", heure de debut: " + heure_debut + ", heure de fin: "
                 + heure_fin + ", etat: " + etat + ", id cours: " + cours + ", id type: " + type_cours;
     }
 

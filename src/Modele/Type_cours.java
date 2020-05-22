@@ -31,7 +31,7 @@ public class Type_cours {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        return "id: " + id + ", nom: " + nom;
+        return " id: " + this.id + ", nom: " + this.nom;
     }
 
     // GETTERS

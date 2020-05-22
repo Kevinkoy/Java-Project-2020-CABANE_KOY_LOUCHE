@@ -31,11 +31,11 @@ public class Groupe {
         this.promotion = promotion;
     }
 
-    /// Methodes
-    //ToString
+    /// METHODES
+    // toString
     @Override
     public String toString() {
-        return "id: " + this.id + ",nom: " + this.nom + ", id_promotion: " + this.promotion;
+        return " id: " + this.id + ",nom: " + this.nom + ", promotion: " + this.promotion;
     }
 
     // Getters

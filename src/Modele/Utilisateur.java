@@ -67,7 +67,7 @@ public class Utilisateur {
 // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        return "id: " + id + ", email: " + email + ", passwd: " + passwd + ", nom: " + nom + ", prenom: " + prenom + ", droit: " + droit;
+        return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
     }
 
 // Getters /////////////////////////////////////////////////////////////////////

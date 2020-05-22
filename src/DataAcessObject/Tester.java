@@ -1,5 +1,6 @@
 package DataAcessObject;
 
+import Modele.Etudiant;
 import Modele.Utilisateur;
 
 public class Tester {
@@ -7,7 +8,7 @@ public class Tester {
     public static void main(String[] args) {
         //Testons des élèves
         DAO<Utilisateur> utilisateurDao = new UtilisateurDAO(ConnectMySQL.getInstance());
-        for (int i = 1; i < 3; i++) {
+        for (int i = 1; i < 10; i++) {
             Utilisateur utilisateur = utilisateurDao.find(i);
             /*System.out.println("UtilisateurN°" + utilisateur.getId()
                     + "  - " + utilisateur.getEmail() + " "
@@ -18,6 +19,8 @@ public class Tester {
             );*/
             System.out.println("Utilisateur:"+ utilisateur.toString());
         }
+        Etudiant etudiant = new Etudiant();
+        System.out.print(etudiant.toString());
     }
 }
 

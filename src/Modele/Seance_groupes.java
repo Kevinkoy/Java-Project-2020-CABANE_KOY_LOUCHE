@@ -27,7 +27,13 @@ public class Seance_groupes {
         this.groupe = groupe;
     }
 
-    ///METHODES
+    // METHODES
+    // toString : retourner le contenue d'objet sous forme de chaine
+    @Override
+    public String toString() {
+        return " seance: " + this.seance + ", enseignant: " + this.groupe;
+    }
+
     // GETTERS
     public Seance getSeance() {
         return this.seance;
