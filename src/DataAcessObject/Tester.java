@@ -12,16 +12,13 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
         DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
-        for (int i = 1; i < 11; i++) {
-            Utilisateur utilisateur = utilisateurdao.find(i);
-            if (utilisateur.getId() == 0) {
-                System.out.print("LOL");
-            } else {
-                System.out.println(utilisateur.toString());
-            }
-
+        Utilisateur kevin = new Modele.Utilisateur(99, "email", "passwd", "nom", "prenom", 0);
+        boolean create = utilisateurdao.create(kevin);
+        if(create)
+        {
+         System.out.println("créer");   
         }
-
+        
         /*
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setId(4);
