@@ -35,13 +35,12 @@ public class Enseignant extends Utilisateur {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        return "id: " + this.id
-                + ", email: " + this.email
-                + ", passwd: " + this.passwd
-                + ", nom: " + this.nom
-                + ", prenom: " + this.prenom
-                + ", droit: " + this.droit
-                + ", cours: " + this.cours;
+        if(this.id==0)
+        {
+            return "ENSEIGNANT INTROUVABLE";
+        }
+        else
+        return super.toString() + ", cours: " + this.cours;
     }
 
     // GETTERS

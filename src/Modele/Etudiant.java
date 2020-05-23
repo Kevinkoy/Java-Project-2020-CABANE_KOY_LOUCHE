@@ -39,19 +39,7 @@ public class Etudiant extends Utilisateur {
     @Override
     public String toString() {
         /// RETURN COMPLET : VALEURS CLASSE MERE + FILLE (UTILISATEUR + ETUDIANT)
-        if (this.droit == 4) {
-            return "id: " + this.id
-                    + ", email: " + this.email
-                    + ", passwd: " + this.passwd
-                    + ", nom: " + this.nom
-                    + ", prenom: " + this.prenom
-                    + ", droit: " + this.droit
-                    + " numero: " + this.numero
-                    + ", groupe: " + groupe;
-
-        } else {
-            return " numero: " + this.numero + ", groupe: " + this.groupe;
-        }
+        return super.toString() + " numero: " + this.numero + ", groupe: " + this.groupe;
     }
 
     //Getters

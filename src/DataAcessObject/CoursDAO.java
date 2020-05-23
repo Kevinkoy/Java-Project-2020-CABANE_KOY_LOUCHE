@@ -32,5 +32,8 @@ public class CoursDAO extends DAO<Cours>{
     public Cours find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
+   
     
 }
