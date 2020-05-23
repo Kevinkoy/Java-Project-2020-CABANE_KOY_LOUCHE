@@ -52,15 +52,17 @@ public class EnseignantDAO extends DAO<Enseignant> {
                         result.getString("utilisateur.Prenom"),
                         new Modele.Cours(result.getInt("enseignant.ID_Cours"), "vide")
                 );
-            } else {
+            } /// SINON PAS DE RESULTAT
+            else {
                 throw new IOException();
             }
 
         } catch (SQLException e) {
             //e.printStackTrace();
+            //System.out.print("Probleme de connection à la DataBase");
 
         } catch (IOException ex) {
-            // System.out.print("ENSEIGNANT INTROUVABLE");
+            //System.out.print(" Enseignant introuvable dans la base de donnée avec l'id:" +id);
             //Logger.getLogger(EnseignantDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 

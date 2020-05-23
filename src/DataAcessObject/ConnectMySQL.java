@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author OpenClassRoom 
+ * @author OpenClassRoom
  */
 public class ConnectMySQL {
 
@@ -17,8 +17,6 @@ public class ConnectMySQL {
     private static Connection connect;
     private static Statement st;
     private static ResultSet rst;
-    private static boolean accepted;
-    private String NomTable;
 
     /**
      * phpMyAdmin: URL de connection
@@ -39,7 +37,6 @@ public class ConnectMySQL {
     public ConnectMySQL() {
         ConnectMySQL.user = "";
         ConnectMySQL.passwd = "";
-        this.NomTable = "";
     }
 
     /**
@@ -47,12 +44,10 @@ public class ConnectMySQL {
      *
      * @param user String
      * @param password String
-     * @param NomTable String
      */
-    public ConnectMySQL(String user, String password, String NomTable) {
+    public ConnectMySQL(String user, String password) {
         ConnectMySQL.user = user;
         ConnectMySQL.passwd = password;
-        this.NomTable = NomTable;
     }
 
     /// METHODES ///////////////////////////////////////////////////////////////
@@ -95,15 +90,6 @@ public class ConnectMySQL {
     /**
      *
      *
-     * @return NomTable
-     */
-    public String getNomTable() {
-        return NomTable;
-    }
-
-    /**
-     *
-     *
      * @param user
      */
     public void setUser(String user) {
@@ -119,12 +105,4 @@ public class ConnectMySQL {
         ConnectMySQL.passwd = passwd;
     }
 
-    /**
-     *
-     *
-     * @param NomTable
-     */
-    public void setNomTable(String NomTable) {
-        this.NomTable = NomTable;
-    }
 }

@@ -37,7 +37,7 @@ public class Enseignant extends Utilisateur {
     public String toString() {
         if(this.id==0)
         {
-            return "ENSEIGNANT INTROUVABLE";
+            return "Enseignant introuvable";
         }
         else
         return super.toString() + ", cours: " + this.cours;
