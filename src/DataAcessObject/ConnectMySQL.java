@@ -38,23 +38,13 @@ public class ConnectMySQL {
 
     }
 
-    /**
-     * Constructeur surchargé
-     *
-     * @param user String
-     * @param password String
-     */
-    public ConnectMySQL(String user, String password) {
-        ConnectMySQL.user = user;
-        ConnectMySQL.passwd = password;
-    }
 
     /// METHODES ///////////////////////////////////////////////////////////////
     /**
      * Méthode qui va retourner notre instance et la créer si elle n'existe
      * pas...
      *
-     * @return
+     * @return - connect
      */
     public static Connection getInstance() {
         if (connect == null) {

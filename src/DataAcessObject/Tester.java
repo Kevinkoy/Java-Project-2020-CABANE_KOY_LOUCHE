@@ -3,30 +3,34 @@ package DataAcessObject;
 import Modele.Enseignant;
 import Modele.Etudiant;
 import Modele.Utilisateur;
+import java.sql.Connection;
 
 public class Tester {
 
     public static void main(String[] args) {
-        //Testons des élèves
-        DAO<Enseignant> enseignantdao = new EnseignantDAO(ConnectMySQL.getInstance());
+        // DECLARATION & INITIALISATION
+        Connection connection = ConnectMySQL.getInstance();
+        DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
         for (int i = 1; i < 11; i++) {
+            Utilisateur utilisateur = utilisateurdao.find(i);
+            if (utilisateur.getId() == 0) {
+                System.out.print("LOL");
+            } else {
+                System.out.println(utilisateur.toString());
+            }
 
-            Enseignant enseignant;
-            enseignant = enseignantdao.find(i);
-            /*System.out.println("UtilisateurN°" + utilisateur.getId()
-                    + "  - " + utilisateur.getEmail() + " "
-                    + utilisateur.getPasswd() + "  - "
-                    + utilisateur.getNom() + "  - "
-                    + utilisateur.getPrenom() + "  - "
-                    + utilisateur.getDroit()
-            );*/
-        
-        System.out.println("Utilisateur:" + enseignant.toString());
-
-        //Etudiant etudiant = new Etudiant();
-        //System.out.print("Etudiant:" + etudiant.toString());
         }
+
+        /*
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setId(4);
+        utilisateur.setEmail("etudiant@gmail.com");
+        utilisateur.setPasswd("mdpetu");
+        utilisateur.setNom("koy");
+        utilisateur.setPrenom("K2");
+        utilisateur.setDroit(4);
+        System.out.println(utilisateur.toString());*/
     }
 }
 
