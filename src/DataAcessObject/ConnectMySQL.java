@@ -35,8 +35,7 @@ public class ConnectMySQL {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public ConnectMySQL() {
-        ConnectMySQL.user = "";
-        ConnectMySQL.passwd = "";
+
     }
 
     /**
