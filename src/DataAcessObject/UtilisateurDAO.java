@@ -20,17 +20,16 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     @Override
     public boolean create(Utilisateur utilisateur) {
         try {
-            ///  ETAPE 1 - FIND - savoir si l'id existe déjà
-            Utilisateur create_id = this.find(utilisateur.getId());
+            ///  ETAPE 1 - VERIFICATION SI IL EXISTE DEJA
+            Utilisateur u_create_id = this.find(utilisateur.getId());
             /// ETAPE 1 bis - find - savoir si son email est déjà utilisée.
-            Utilisateur create_email = this.find(utilisateur.getEmail());
+            Utilisateur u_create_email = this.find(utilisateur.getEmail());
 
             // Il n'existe pas encore alors (ID et EMAIL dispo)
-            if (create_id.getId() == 0 && create_email.getId()==0) {
+            if (u_create_id.getId() == 0 && u_create_email.getId() == 0) {
                 /// ETAPE 2 : CREATE
                 // REQUETE SQL
-                // INSERT INTO `utilisateur`(`ID`, `Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])
-                String sql = "INSERT INTO `utilisateur`(`Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) VALUES('" + utilisateur.getEmail() + "','" + utilisateur.getPasswd() + "'  ,'" + utilisateur.getNom() + "','" + utilisateur.getPrenom() + "' ,'" + utilisateur.getDroit() + "'  )";
+                String sql = "INSERT INTO `utilisateur`(`ID`, `Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) VALUES(" + "NULL" + ",'" + utilisateur.getEmail() + "','" + utilisateur.getPasswd() + "'  ,'" + utilisateur.getNom() + "','" + utilisateur.getPrenom() + "' ,'" + utilisateur.getDroit() + "'  )";
                 // PrepareStatement
                 PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
 
@@ -39,7 +38,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
                 // SI RESULTAT
                 if (result == 1) {
-                    //System.out.println("INSERTION Sucess: " + utilisateur.toString());
+                    System.out.println("INSERTION Sucess: " + this.find(utilisateur.getEmail()));
                     return true;
                 }
                 // UTILISATEUR DEJA EXISTANT!
@@ -57,17 +56,18 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     @Override
     public boolean delete(Utilisateur utilisateur) {
         try {
-            ///  ETAPE 1 - FIND - savoir si il existe
-            // COPIER l'utilisateur_delete pour ensuite l'afficher (en cas de DELETE Succès)     
-            Utilisateur delete = this.find(utilisateur.getId());
+            ///  ETAPE 1 - VERIFICATION si il existe
+            // COPIE utilisateur pour afficher après qu'il soit deleted 
+            Utilisateur u_delete_id = this.find(utilisateur.getId()); // return user NULL si il existe pas
 
-            // Si return user NULL
-            if (delete.getId() == 0) {
-                System.out.print(delete.toString()); // AFFICHAGE "Utilisateur Introuvable"
+            // Si il existe pas...
+            if (u_delete_id.getId() == 0) {
+                System.out.print(u_delete_id.toString()); // AFFICHAGE "Utilisateur Introuvable"
                 return false; // return false et on quitte la fonction delete();
             }
 
-            /// ETAPE 2 : DELETE car elle existe dans la BDD après find
+            /// Il existe...
+            /// ETAPE 2 : DELETE 
             // REQUETE SQL
             String sql = "DELETE FROM utilisateur WHERE utilisateur.ID = " + utilisateur.getId();
 
@@ -79,23 +79,53 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
             // SI RESULTAT
             if (result == 1) {
-                System.out.println("DELETE Sucess: " + delete.toString());
+                System.out.println("DELETE Sucess: " + u_delete_id.toString());
                 return true;
                 // SINON AUCUN RESULTAT
             }
-            /*else {
-                System.out.println("AUCUN DELETE EFFECTUE!");
-            }*/
         } catch (SQLException e) {
-            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+            // System.out.println("Base de donnée introuvable");
+            e.printStackTrace();
         }
         return false;
 
     }
 
     @Override
-    public boolean update(Utilisateur obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(Utilisateur u) {
+        try {
+            ///  ETAPE 1 - FIND: Savoir si il existe par id
+            Utilisateur u_update_id = this.find(u.getId());
+            /// ETAPE 1 bis - FIND: Savoir si il existe par email
+            Utilisateur u_update_email = this.find(u.getEmail());
+
+            // Si il existe alors...
+            if (u_update_id.getId() != 0 && u_update_email.getId() != 0) {
+                /// ETAPE 2 : UPDATE
+
+                // REQUETE SQL
+                String sql = "UPDATE `utilisateur` SET `ID`= '" + u.getId() + "' ,`Email`= '" + u.getEmail() + "' ,`Passwd`= '" + u.getPasswd() + "' ,`Nom`= '" + u.getNom() + "' ,`Prenom`= '" + u.getPrenom() + "' ,`Droit`= '" + u.getDroit() + "' WHERE ID = '" + u.getId() + "'";
+                // PrepareStatement
+                PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+
+                // ResultSet (result)
+                int result = preparedstatement.executeUpdate(sql);
+
+                // SI RESULTAT
+                if (result == 1) {
+                    System.out.println("UPDATE Sucess: " + u.toString());
+                    return true;
+                }
+                // Sinon Utilisateur non existant
+            } else {
+                System.out.println("UPDATE Fail!");
+                return false;
+            }
+        } catch (SQLException e) {
+            // System.out.println("Impossible de se connecter!");        
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -105,7 +135,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
         Utilisateur utilisateur = new Utilisateur();
 
         // REQUETE
-        String sql = "SELECT * FROM Utilisateur WHERE ID = '" + id +"'";
+        String sql = "SELECT * FROM Utilisateur WHERE ID = '" + id + "'";
 
         try {
             // VERSION OPENCLASSROOM : resultset = connection.createStatement.execute(sql);
@@ -131,7 +161,8 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                         result.getInt("Droit"));
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+            System.out.println("Impossible de se connecter");
+            e.printStackTrace();
         }
         // SI AUCUN RESULTAT - return UTILISATEUR NULL
         return utilisateur;

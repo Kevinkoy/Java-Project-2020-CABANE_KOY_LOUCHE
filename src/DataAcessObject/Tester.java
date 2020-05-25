@@ -9,12 +9,15 @@ public class Tester {
 
     public static void main(String[] args) {
         // DECLARATION & INITIALISATION
+        // ON CREER LA CONNECTION SPECIFIQUE A NOTRE BDD
         Connection connection = ConnectMySQL.getInstance();
+        
+        // ON CREE UN UTILISATEURDAO AVEC PASSAGE DE LA CONNECTION 
         DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
         Utilisateur kevin;
-        kevin = new Utilisateur( 11, "email@edu.ece.fr" , "lemotdepasse", "nomkev", "prenomkevv", 0);
-        boolean create = utilisateurdao.delete(kevin);
+        kevin = new Utilisateur( 99, "email@edu.ece.fr" , "lemotdepasse", "nomkev", "prenomkevv", 0);
+        boolean create = utilisateurdao.create(kevin);
         if(create)
         {
          System.out.println(kevin.toString());   
