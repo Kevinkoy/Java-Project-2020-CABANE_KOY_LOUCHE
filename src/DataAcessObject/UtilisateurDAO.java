@@ -39,6 +39,8 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                 // SI RESULTAT
                 if (result == 1) {
                     System.out.println("INSERTION Sucess: " + this.find(utilisateur.getEmail()).toString()); // On le recherche par EMAIL car id auto-incremented, et on l'affiche (***)
+                    // On récupère ID Auto Incrementé => et on change son ID;
+                    utilisateur.setId(this.find(utilisateur.getEmail()).getId());
                     return true;
                 }
                 // UTILISATEUR DEJA EXISTANT!
@@ -96,10 +98,10 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             ///  ETAPE 1 - Verification si il existe... par id
             Utilisateur u_update_id = this.find(u.getId());
             /// ETAPE 1 bis - Verification si il existe... par email
-            Utilisateur u_update_email = this.find(u.getEmail());
+           // Utilisateur u_update_email = this.find(u.getEmail());
 
             // Si il existe alors...
-            if (u_update_id.getId() != 0 && u_update_email.getId() != 0) {
+            if (u_update_id.getId() != 0) {
                 /// ETAPE 2 : UPDATE
 
                 // REQUETE SQL

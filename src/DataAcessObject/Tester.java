@@ -17,12 +17,29 @@ public class Tester {
 
         // On crée un objet Utilisateur (pour manipuler)
         Utilisateur kevin = new Utilisateur();
-        kevin.setId(5);
-        kevin.setEmail("kevin.koy@edu.ece.fr");
-        kevin.setPasswd("looool");
-        kevin.setNom("Koy");
-        kevin.setPrenom("Kevin");
-        kevin.setDroit(4);
+        kevin.setId(24); // is AUTO INCREMENTED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        kevin.setEmail("tester@edu.ece.fr");
+        kevin.setPasswd("test_passwd");
+        kevin.setNom("test_nom");
+        kevin.setPrenom("test_prenom");
+        kevin.setDroit(0);
+
+        /// TEST DES FONCTIONS *******************************************************
+        // On va supprimer l'utilisateurdao kevin de la BDD
+        boolean deleted = utilisateurdao.delete(kevin);
+        if (deleted) {
+            //System.out.println("DELETED:" + kevin);
+        }
+
+        // **************************************************************************
+        // On va créer l'utilisateurdao kevin
+        boolean created = utilisateurdao.create(kevin);
+        if (created) {
+            // On le cherche par email car id auto increment, et on l'affiche
+            //System.out.println("CREATED:" + kevin.toString());
+        }
+
+        kevin.setPasswd("UPDATED_passwd");
 
         // On va update l'utilisateurdao par kevin
         boolean updated = utilisateurdao.update(kevin);
@@ -30,7 +47,7 @@ public class Tester {
         // Si updated...
         if (updated) {
             // On le chercher par id, et on l'affiche avec ses changements
-            System.out.println(utilisateurdao.find(kevin.getId()).toString());
+            //System.out.println("UPDATED:" + utilisateurdao.find(kevin.getId()).toString());
         }
 
     }
