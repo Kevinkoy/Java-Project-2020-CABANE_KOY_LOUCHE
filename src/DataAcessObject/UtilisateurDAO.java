@@ -20,14 +20,14 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     @Override
     public boolean create(Utilisateur utilisateur) {
         try {
-            ///  ETAPE 1 - VERIFICATION SI IL EXISTE DEJA
+            ///  ETAPE 1 - Vérification si il existe... par id
             Utilisateur u_create_id = this.find(utilisateur.getId());
-            /// ETAPE 1 bis - find - savoir si son email est déjà utilisée.
+            /// ETAPE 1 bis - Verification si son email est déjà utilisée.
             Utilisateur u_create_email = this.find(utilisateur.getEmail());
 
             // Il n'existe pas encore alors (ID et EMAIL dispo)
             if (u_create_id.getId() == 0 && u_create_email.getId() == 0) {
-                /// ETAPE 2 : CREATE
+                /// ETAPE 2 : CREATE (ID value NULL, Auto-incrémentation)
                 // REQUETE SQL
                 String sql = "INSERT INTO `utilisateur`(`ID`, `Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) VALUES(" + "NULL" + ",'" + utilisateur.getEmail() + "','" + utilisateur.getPasswd() + "'  ,'" + utilisateur.getNom() + "','" + utilisateur.getPrenom() + "' ,'" + utilisateur.getDroit() + "'  )";
                 // PrepareStatement
@@ -38,7 +38,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
                 // SI RESULTAT
                 if (result == 1) {
-                    System.out.println("INSERTION Sucess: " + this.find(utilisateur.getEmail()));
+                    System.out.println("INSERTION Sucess: " + this.find(utilisateur.getEmail()).toString()); // On le recherche par email car id générée, et on l'affiche
                     return true;
                 }
                 // UTILISATEUR DEJA EXISTANT!
@@ -56,11 +56,11 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     @Override
     public boolean delete(Utilisateur utilisateur) {
         try {
-            ///  ETAPE 1 - VERIFICATION si il existe
-            // COPIE utilisateur pour afficher après qu'il soit deleted 
+            ///  ETAPE 1 - VERIFICATION si il existe..
+            // COPIE utilisateur pour afficher si deleted 
             Utilisateur u_delete_id = this.find(utilisateur.getId()); // return user NULL si il existe pas
 
-            // Si il existe pas...
+            // Si il n'existe pas...
             if (u_delete_id.getId() == 0) {
                 System.out.print(u_delete_id.toString()); // AFFICHAGE "Utilisateur Introuvable"
                 return false; // return false et on quitte la fonction delete();
@@ -81,7 +81,6 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             if (result == 1) {
                 System.out.println("DELETE Sucess: " + u_delete_id.toString());
                 return true;
-                // SINON AUCUN RESULTAT
             }
         } catch (SQLException e) {
             // System.out.println("Base de donnée introuvable");
@@ -94,9 +93,9 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     @Override
     public boolean update(Utilisateur u) {
         try {
-            ///  ETAPE 1 - FIND: Savoir si il existe par id
+            ///  ETAPE 1 - Verification si il existe... par id
             Utilisateur u_update_id = this.find(u.getId());
-            /// ETAPE 1 bis - FIND: Savoir si il existe par email
+            /// ETAPE 1 bis - Verification si il existe... par email
             Utilisateur u_update_email = this.find(u.getEmail());
 
             // Si il existe alors...
@@ -113,16 +112,16 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
                 // SI RESULTAT
                 if (result == 1) {
-                    System.out.println("UPDATE Sucess: " + u.toString());
+                    System.out.println("UPDATE Sucess: " + this.find(u.getId()).toString()); // on le recherche par id, et on l'affiche
                     return true;
                 }
-                // Sinon Utilisateur non existant
+                // Sinon il existe pas...
             } else {
                 System.out.println("UPDATE Fail!");
                 return false;
             }
         } catch (SQLException e) {
-            // System.out.println("Impossible de se connecter!");        
+            //System.out.println("Impossible de se connecter!");        
             e.printStackTrace();
         }
         return false;
@@ -161,7 +160,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                         result.getInt("Droit"));
             }
         } catch (SQLException e) {
-            System.out.println("Impossible de se connecter");
+            //System.out.println("Impossible de se connecter");
             e.printStackTrace();
         }
         // SI AUCUN RESULTAT - return UTILISATEUR NULL
@@ -170,7 +169,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
     public Utilisateur find(String email) {
 
-        /// UTILISATEUR NULL PAR DEFAUT
+        /// UTILISATEUR NULL (PAR DEFAUT)
         Utilisateur utilisateur = new Utilisateur();
 
         // REQUETE
@@ -183,7 +182,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             // ResultSet
             ResultSet result = preparestatement.executeQuery(sql);
 
-            // SI RESULTAT
+            // SI RESULTAT...
             if (result.next()) {
                 /// COPIER UtilisateurDao trouvé
                 utilisateur = new Utilisateur(
@@ -195,9 +194,10 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                         result.getInt("Droit"));
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+            //System.out.println("Impossible de se connecter!");        
+            e.printStackTrace();
         }
-        // SI AUCUN RESULTAT - return UTILISATEUR NULL
+        // return soit NULL soit resultat....
         return utilisateur;
     }
 

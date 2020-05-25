@@ -16,11 +16,11 @@ public class Tester {
         DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
         Utilisateur kevin;
-        kevin = new Utilisateur( 99, "email@edu.ece.fr" , "lemotdepasse", "nomkev", "prenomkevv", 0);
-        boolean create = utilisateurdao.create(kevin);
-        if(create)
+        kevin = new Utilisateur( 5, "kevin.koy@edu.ece.fr" , "mdp", "Koy", "Kevin", 4);
+        boolean updated = utilisateurdao.update(kevin);
+        if(updated)
         {
-         System.out.println(kevin.toString());   
+         System.out.println(utilisateurdao.find(kevin.getId()).toString());   
         }
         
         /*
