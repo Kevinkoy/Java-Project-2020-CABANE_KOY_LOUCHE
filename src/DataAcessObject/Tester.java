@@ -24,7 +24,7 @@ public class Tester {
         kevin.setPrenom("Kevin");
         kevin.setDroit(4);
 
-        // On va update la base de donnée avec Kévin
+        // On va update l'utilisateurdao par kevin
         boolean updated = utilisateurdao.update(kevin);
 
         // Si updated...
