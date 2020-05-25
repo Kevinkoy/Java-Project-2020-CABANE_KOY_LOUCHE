@@ -60,7 +60,7 @@ public class CoursDAO extends DAO<Cours> {
 
             // Il existe!
             if (delete.getId() != 0) {
-                // ETAPE 2 : CREATE (INSERT INTO nomTable('ID') value (NULL) pour Auto-incrémentation)
+                // ETAPE 2 : DELETE (INSERT INTO nomTable('ID') value (NULL) pour Auto-incrémentation)
                 // REQUETE SQL
                 String sql = "INSERT INTO `utilisateur`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + cours.getNom() + "');";
                 // PrepareStatement
@@ -89,14 +89,43 @@ public class CoursDAO extends DAO<Cours> {
     }
 
     @Override
-    public boolean update(Cours obj
-    ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(Cours obj) {
+            try {
+            // ETAPE 1: VERIFICATION si il existe...
+            Cours update = this.find(obj);
+
+            // Il existe!
+            if (update.getId() != 0) {
+                // ETAPE 2 : UPDATE ID Value NULL pour Auto-Incrementations
+                // REQUETE SQL
+                String sql = "UPDATE `utilisateur`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + obj.getNom() + "');";
+                // PrepareStatement
+                PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+
+                // ResultSet (result)
+                int result = preparedstatement.executeUpdate(sql);
+
+                // SI RESULTAT
+                if (result == 1) {
+                    // On récupère ID Auto Incrementé => et on adapte son ID;
+                    obj.setId(this.find(obj).getId());
+                    System.out.println("INSERTION Success:" + obj.toString()); // ID mis à jour, on affiche ses infos
+                    return true;
+                }
+                // Il n'existe pas
+            } else {
+                System.out.println(update.toString()); // toString id=0 ("INTROUVABLE")
+                return false;
+            }
+        } catch (SQLException e) {
+            // System.out.println("Base de donnée introuvable");
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
-    public Cours find(int id
-    ) {
+    public Cours find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
