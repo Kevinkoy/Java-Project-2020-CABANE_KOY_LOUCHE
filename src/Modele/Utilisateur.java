@@ -67,12 +67,11 @@ public class Utilisateur {
 // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        if(this.id==0)
-        {
+        if (this.id == 0) {
             return "Utilisateur introuvable!";
+        } else {
+            return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
         }
-        else
-        return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
     }
 
 // Getters /////////////////////////////////////////////////////////////////////

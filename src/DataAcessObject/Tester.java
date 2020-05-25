@@ -36,7 +36,7 @@ public class Tester {
         boolean created = utilisateurdao.create(kevin);
         if (created) {
             // On le cherche par email car id auto increment, et on l'affiche
-            //System.out.println("CREATED:" + kevin.toString());
+            //System.out.println("CREATED:" + utilisateurdao.find;
         }
 
         kevin.setPasswd("UPDATED_passwd");

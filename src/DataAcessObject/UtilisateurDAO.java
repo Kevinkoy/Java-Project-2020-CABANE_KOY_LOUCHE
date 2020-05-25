@@ -89,7 +89,6 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             e.printStackTrace();
         }
         return false;
-
     }
 
     @Override
