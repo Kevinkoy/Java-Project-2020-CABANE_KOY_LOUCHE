@@ -8,30 +8,31 @@ import java.sql.Connection;
 public class Tester {
 
     public static void main(String[] args) {
-        // DECLARATION & INITIALISATION
-        // ON CREER LA CONNECTION SPECIFIQUE A NOTRE BDD
+        // Declaration et initialisation
+        // On crée une connection, specifique à notre base de donnée
         Connection connection = ConnectMySQL.getInstance();
-        
-        // ON CREE UN UTILISATEURDAO AVEC PASSAGE DE LA CONNECTION 
+
+        // On crée un utilisateurDataAcessObject, avec passage de la connection crée
         DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
-        Utilisateur kevin;
-        kevin = new Utilisateur( 5, "kevin.koy@edu.ece.fr" , "mdp", "Koy", "Kevin", 4);
+        // Utilisateur 
+        Utilisateur kevin = new Utilisateur();
+        kevin.setId(5);
+        kevin.setEmail("kevin.koy@edu.ece.fr");
+        kevin.setPasswd("mdp");
+        kevin.setNom("Koy");
+        kevin.setPrenom("Kevin");
+        kevin.setDroit(4);
+
+        // On va update la base de donnée avec Kévin
         boolean updated = utilisateurdao.update(kevin);
-        if(updated)
-        {
-         System.out.println(utilisateurdao.find(kevin.getId()).toString());   
+
+        // Si updated...
+        if (updated) {
+            // On le chercher par id, et on l'affiche avec ses changements
+            System.out.println(utilisateurdao.find(kevin.getId()).toString());
         }
-        
-        /*
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setId(4);
-        utilisateur.setEmail("etudiant@gmail.com");
-        utilisateur.setPasswd("mdpetu");
-        utilisateur.setNom("koy");
-        utilisateur.setPrenom("K2");
-        utilisateur.setDroit(4);
-        System.out.println(utilisateur.toString());*/
+
     }
 }
 

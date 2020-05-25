@@ -38,7 +38,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
                 // SI RESULTAT
                 if (result == 1) {
-                    System.out.println("INSERTION Sucess: " + this.find(utilisateur.getEmail()).toString()); // On le recherche par email car id générée, et on l'affiche
+                    System.out.println("INSERTION Sucess: " + this.find(utilisateur.getEmail()).toString()); // On le recherche par EMAIL car id auto-incremented, et on l'affiche
                     return true;
                 }
                 // UTILISATEUR DEJA EXISTANT!
@@ -79,7 +79,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
             // SI RESULTAT
             if (result == 1) {
-                System.out.println("DELETE Sucess: " + u_delete_id.toString());
+                System.out.println("DELETE Sucess: " + u_delete_id.toString()); // On affiche la copie du delete, car il n'existe plus
                 return true;
             }
         } catch (SQLException e) {
