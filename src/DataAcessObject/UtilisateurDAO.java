@@ -20,22 +20,17 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     @Override
     public boolean create(Utilisateur utilisateur) {
         try {
-            ///  ETAPE 1 - FIND - savoir si il existe + COPIE
-            Utilisateur create = this.find(utilisateur.getId());
+            ///  ETAPE 1 - FIND - savoir si l'id existe déjà
+            Utilisateur create_id = this.find(utilisateur.getId());
+            /// ETAPE 1 bis - find - savoir si son email est déjà utilisée.
+            Utilisateur create_email = this.find(utilisateur.getEmail());
 
-            // Il n'existe pas encore alors on peut créer 
-            if (create.getId() == 0) {
+            // Il n'existe pas encore alors (ID et EMAIL dispo)
+            if (create_id.getId() == 0 && create_email.getId()==0) {
                 /// ETAPE 2 : CREATE
                 // REQUETE SQL
                 // INSERT INTO `utilisateur`(`ID`, `Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])
-                String sql = "INSERT INTO `utilisateur`(`Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) "
-                        + "VALUES ("
-                        + utilisateur.getEmail() + ","
-                        + utilisateur.getPasswd() + ","
-                        + utilisateur.getNom() + ","
-                        + utilisateur.getPrenom() + ","
-                        + utilisateur.getDroit() + ")";
-
+                String sql = "INSERT INTO `utilisateur`(`Email`, `Passwd`, `Nom`, `Prenom`, `Droit`) VALUES('" + utilisateur.getEmail() + "','" + utilisateur.getPasswd() + "'  ,'" + utilisateur.getNom() + "','" + utilisateur.getPrenom() + "' ,'" + utilisateur.getDroit() + "'  )";
                 // PrepareStatement
                 PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
 
@@ -44,7 +39,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
                 // SI RESULTAT
                 if (result == 1) {
-                    System.out.println("INSERTION Sucess: " + utilisateur.toString());
+                    //System.out.println("INSERTION Sucess: " + utilisateur.toString());
                     return true;
                 }
                 // UTILISATEUR DEJA EXISTANT!
@@ -110,7 +105,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
         Utilisateur utilisateur = new Utilisateur();
 
         // REQUETE
-        String sql = "SELECT * FROM Utilisateur WHERE ID = " + id;
+        String sql = "SELECT * FROM Utilisateur WHERE ID = '" + id +"'";
 
         try {
             // VERSION OPENCLASSROOM : resultset = connection.createStatement.execute(sql);
@@ -128,8 +123,41 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             if (result.next()) {
                 /// COPIER UtilisateurDao trouvé
                 utilisateur = new Utilisateur(
-                        id,
+                        result.getInt("ID"), // id,
                         result.getString("Email"),
+                        result.getString("Passwd"),
+                        result.getString("Nom"),
+                        result.getString("Prenom"),
+                        result.getInt("Droit"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+        }
+        // SI AUCUN RESULTAT - return UTILISATEUR NULL
+        return utilisateur;
+    }
+
+    public Utilisateur find(String email) {
+
+        /// UTILISATEUR NULL PAR DEFAUT
+        Utilisateur utilisateur = new Utilisateur();
+
+        // REQUETE
+        String sql = "SELECT * FROM Utilisateur WHERE Email = '" + email + "'";
+
+        try {
+            // PrepareStatement
+            PreparedStatement preparestatement = this.connection.prepareStatement(sql);
+
+            // ResultSet
+            ResultSet result = preparestatement.executeQuery(sql);
+
+            // SI RESULTAT
+            if (result.next()) {
+                /// COPIER UtilisateurDao trouvé
+                utilisateur = new Utilisateur(
+                        result.getInt("ID"),
+                        result.getString("Email"), // email,
                         result.getString("Passwd"),
                         result.getString("Nom"),
                         result.getString("Prenom"),

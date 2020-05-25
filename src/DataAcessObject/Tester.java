@@ -12,11 +12,12 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
         DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
-        Utilisateur kevin = new Modele.Utilisateur(99, "email", "passwd", "nom", "prenom", 0);
-        boolean create = utilisateurdao.create(kevin);
+        Utilisateur kevin;
+        kevin = new Utilisateur( 11, "email@edu.ece.fr" , "lemotdepasse", "nomkev", "prenomkevv", 0);
+        boolean create = utilisateurdao.delete(kevin);
         if(create)
         {
-         System.out.println("créer");   
+         System.out.println(kevin.toString());   
         }
         
         /*
