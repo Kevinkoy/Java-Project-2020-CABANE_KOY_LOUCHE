@@ -12,10 +12,10 @@ public class Tester {
         // On crée une connection, specifique à notre base de donnée
         Connection connection = ConnectMySQL.getInstance();
 
-        // On crée un utilisateurDataAcessObject, avec passage de la connection crée
+        // On crée un objet utilisateurDataAcessObject (recuperer/stocker les donnees), avec passage de la connection crée
         DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
 
-        // Utilisateur 
+        // On crée un objet Utilisateur (pour manipuler)
         Utilisateur kevin = new Utilisateur();
         kevin.setId(5);
         kevin.setEmail("kevin.koy@edu.ece.fr");
