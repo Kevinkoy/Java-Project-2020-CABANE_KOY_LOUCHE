@@ -15,23 +15,12 @@ public class Tester {
         DAO<Cours> objetdao = new CoursDAO(connection);
 
         // On crée un objet pour manipuler 
-        Cours objet = new Cours();      
+        Cours objet = new Cours();
         // Configuration setter
         objet.setId(1);
         objet.setNom("Java");
-        
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
         //boolean create = objetdao.create(objet);
-        
-        Utilisateur user = new Utilisateur();
-        user.setId(1);
-        //user.setDroit(5);
-        System.out.println(user.toString());
-        
-        
-        
-        
-
 
     }
 }
