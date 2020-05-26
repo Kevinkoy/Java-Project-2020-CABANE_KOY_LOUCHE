@@ -22,7 +22,7 @@ public class SalleDAO extends DAO<Salle> {
     public boolean create(Salle obj) {
         try {
             // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
-            String sql = "INSERT INTO `site`(`ID`, `Nom`,`Capacite`,`ID_Site`) VALUES(" + "NULL" + ",'" + obj.getNom() + "','" + obj.getCapacite() + "','" + obj.getSite().getId() + "');";
+            String sql = "INSERT INTO `salle`(`ID`, `Nom`,`Capacite`,`ID_Site`) VALUES(" + "NULL" + ",'" + obj.getNom() + "','" + obj.getCapacite() + "','" + obj.getSite().getId() + "');";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
