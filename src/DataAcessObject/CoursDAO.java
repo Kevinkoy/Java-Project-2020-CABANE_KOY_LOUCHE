@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,12 +22,13 @@ public class CoursDAO extends DAO<Cours> {
 
     @Override
     public boolean create(Cours obj) {
-        try {
-            // ETAPE 1: VERIFICATION si il existe...
-            Cours find = this.find(obj);
+        // ETAPE 1: VERIFICATION si il existe...
+        Cours find = this.find(obj);
 
-            // Il n'existe pas!
-            if (find.getId() == 0) {
+        // Il n'existe pas!
+        if (find.getId() == 0) {
+            try {
+
                 // ETAPE 2 : CREATE (ID value NULL pour Auto-incrémentation)
                 // REQUETE SQL
                 String sql = "INSERT INTO `cours`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + obj.getNom() + "');";
@@ -42,19 +44,18 @@ public class CoursDAO extends DAO<Cours> {
                     obj.setId(this.find(obj).getId());
                     System.out.println("INSERTION Success:" + obj.toString()); // ID mis à jour, on affiche ses infos
                     return true;
+                } else {
+                    throw new java.sql.SQLIntegrityConstraintViolationException();
                 }
-                // déjà existant...
-            } else {
-                System.out.println(find.toString()); // toString id=0 ("INTROUVABLE")
-                return false;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+                //e.printStackTrace();
+                //System.out.println("Impossible de se connecter!");
             }
-        } catch (SQLException e) {
-            System.out.println("Duplicata");
-            e.printStackTrace();
-            // System.out.println("Base de donnée introuvable");
-        }
-        return false;
 
+        } // déjà existant...
+        System.out.println(find.toString()); // toString id=0 ("INTROUVABLE")
+        return false;
     }
 
     @Override
@@ -85,7 +86,7 @@ public class CoursDAO extends DAO<Cours> {
                 return false;
             }
         } catch (SQLException e) {
-            // System.out.println("Base de donnée introuvable");
+            //System.out.println("Impossible de se connecter!");
             e.printStackTrace();
         }
         return false;
@@ -119,7 +120,7 @@ public class CoursDAO extends DAO<Cours> {
                 return false;
             }
         } catch (SQLException e) {
-            // System.out.println("Base de donnée introuvable");
+            //System.out.println("Impossible de se connecter!");
             e.printStackTrace();
         }
         return false;
