@@ -12,10 +12,10 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        //DAO<Salle> objetdao = new SalleDAO(connection);
+        DAO<Salle> objetdao = new SalleDAO(connection);
         
         // ObjetDao Unitaire
-        SalleDAO objetdao = new SalleDAO(connection);
+        //SalleDAO objetdao = new SalleDAO(connection);
 
         // On crée un objet pour manipuler 
         Salle objet = new Salle();
@@ -31,7 +31,7 @@ public class Tester {
         System.out.println(executed);
         
         // FIND
-        Salle find = objetdao.find(objet);
+        Salle find = objetdao.find(1);
         System.out.println(find.toString());
         
         
