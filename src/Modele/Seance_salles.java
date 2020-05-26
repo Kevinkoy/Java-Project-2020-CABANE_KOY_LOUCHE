@@ -31,7 +31,7 @@ public class Seance_salles {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        return " seance: " + this.seance + ", enseignant: " + this.salle;
+        return " seance: " + this.seance + ", salle: " + this.salle;
     }
 
     // Getters

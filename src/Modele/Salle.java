@@ -39,6 +39,9 @@ public class Salle {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
+        if (this.id == 0) {
+            return "Salle introuvable";
+        }
         return " id: " + this.id
                 + ", nom: " + this.nom
                 + " capacite: " + this.capacite

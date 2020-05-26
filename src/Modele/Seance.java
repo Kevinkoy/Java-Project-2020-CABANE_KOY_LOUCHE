@@ -73,6 +73,9 @@ public class Seance {
     //ToString
     @Override
     public String toString() {
+        if (this.id == 0) {
+            return "Seance introuvable";
+        }
         return " id: " + id + ", semaine: " + semaine + ", date: " + date + ", heure de debut: " + heure_debut + ", heure de fin: "
                 + heure_fin + ", etat: " + etat + ", id cours: " + cours + ", id type: " + type_cours;
     }
