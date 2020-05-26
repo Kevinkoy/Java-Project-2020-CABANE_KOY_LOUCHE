@@ -1,8 +1,6 @@
 package DataAcessObject;
 
-import Modele.Cours;
-import Modele.Type_cours;
-import Modele.Utilisateur;
+import Modele.Site;
 import java.sql.Connection;
 
 public class Tester {
@@ -13,18 +11,22 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Type_cours> objetdao = new Type_coursDAO(connection);
+        DAO<Site> objetdao = new SiteDAO(connection);
 
         // On crée un objet pour manipuler 
-        Type_cours objet = new Type_cours();
+        Site objet = new Site();
         // Configuration setter
-        objet.setId(9);
-        objet.setNom("Koshou");
+        objet.setId(0);
+        objet.setNom("koshou");
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean executed = objetdao.update(objet);
+        boolean executed = objetdao.create(objet);
         System.out.println(executed);
-  
-        // Affichage
+        
+        // FIND
+        Site find = objetdao.find(10);
+        System.out.println(find.toString());
+        
+        
 
         
        
