@@ -1,7 +1,6 @@
 package DataAcessObject;
 
-import Modele.Enseignant;
-import Modele.Etudiant;
+import Modele.Cours;
 import Modele.Utilisateur;
 import java.sql.Connection;
 
@@ -12,43 +11,23 @@ public class Tester {
         // On crée une connection, specifique à notre base de donnée
         Connection connection = ConnectMySQL.getInstance();
 
-        // On crée un objet utilisateurDataAcessObject (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
+        // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
+        DAO<Cours> objetdao = new CoursDAO(connection);
 
-        // On crée un objet Utilisateur (pour manipuler)
-        Utilisateur kevin = new Utilisateur();
-        //kevin.setId(25); // is AUTO INCREMENTED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        kevin.setEmail("tester@edu.ece.fr");
-        kevin.setPasswd("test_passwd");
-        kevin.setNom("test_nom");
-        kevin.setPrenom("test_prenom");
-        kevin.setDroit(0);
+        // On crée un objet pour manipuler 
+        Cours objet = new Cours();      
+        // Configuration setter
+        objet.setId(1);
+        objet.setNom("Java");
+        
+        // TEST des fonctions CREATE, DELETE, UPDATE, FIND
+        //boolean create = objetdao.create(objet);
+        
+        
+        
+        
+        
 
-        /// TEST DES FONCTIONS *******************************************************
-        // On va supprimer l'utilisateurdao kevin de la BDD
-        boolean deleted = utilisateurdao.delete(kevin);
-        if (deleted) {
-            //System.out.println("DELETED:" + kevin);
-        }
-
-        // **************************************************************************
-        // On va créer l'utilisateurdao kevin
-        boolean created = utilisateurdao.create(kevin);
-        if (created) {
-            // On le cherche par email car id auto increment, et on l'affiche
-            //System.out.println("CREATED:" + utilisateurdao.find;
-        }
-
-        kevin.setPasswd("UPDATED_passwd");
-
-        // On va update l'utilisateurdao par kevin
-        boolean updated = utilisateurdao.update(kevin);
-
-        // Si updated...
-        if (updated) {
-            // On le chercher par id, et on l'affiche avec ses changements
-            //System.out.println("UPDATED:" + utilisateurdao.find(kevin.getId()).toString());
-        }
 
     }
 }
