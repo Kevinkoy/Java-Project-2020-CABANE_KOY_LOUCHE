@@ -1,6 +1,6 @@
 package DataAcessObject;
 
-import Modele.Promotion;
+import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
@@ -11,23 +11,29 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Promotion> objetdao = new PromotionDAO(connection);
+        DAO<Utilisateur> objetdao = new UtilisateurDAO(connection);
         
         // ObjetDao Unitaire
-        //PromotionDAO objetdao = new PromotionDAO(connection);
+        //UtilisateurDAO objetdao = new UtilisateurDAO(connection);
 
         // On crée un objet pour manipuler 
-        Promotion objet = new Promotion();
+        Utilisateur objet = new Utilisateur();
         // Configuration setter
-        objet.setId(8);
-        objet.setNom("koshou");
+        objet.setId(12);
+        objet.setEmail("testupdated@edu.ece.fr");
+        objet.setPasswd("test_mdp");
+        objet.setNom("test_nom");
+        objet.setPrenom("test_prenom");
+        objet.setDroit(0);
+        
+        
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        //boolean executed = objetdao.update(objet);
-        //System.out.println(executed);
+        boolean executed = objetdao.update(objet);
+        System.out.println(executed);
         
         // FIND
-        Promotion find = objetdao.find(10);
-        System.out.println(find.toString());
+        //Utilisateur find = objetdao.find("testupdated@edu.ece.fr");
+        //System.out.println(find.toString());
         
         
 
