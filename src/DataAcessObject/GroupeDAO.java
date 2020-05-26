@@ -22,7 +22,7 @@ public class GroupeDAO extends DAO<Groupe> {
     public boolean create(Groupe obj) {
         try {
             // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
-            String sql = "INSERT INTO `groupe`(`ID`,`Nom`,`ID_Promotion`) VALUES(" + "NULL" + ",'" + obj.getNom() + "','"+ obj.getPromotion()+  "');";
+            String sql = "INSERT INTO `groupe`(`ID`,`Nom`,`ID_Promotion`) VALUES(" + "NULL" + ",'" + obj.getNom() + "','"+ obj.getPromotion().getId()+  "');";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
@@ -56,7 +56,7 @@ public class GroupeDAO extends DAO<Groupe> {
         Groupe copie = obj;
         try {
             // REQUETE SQL : DELETE
-            String sql = "DELETE FROM `groupe` WHERE ID ='" + obj.getId() + "' AND Nom ='" + obj.getNom() + "' AND ID_Promotion = '"+ obj.getPromotion()+"'";
+            String sql = "DELETE FROM `groupe` WHERE ID ='" + obj.getId() + "' AND Nom ='" + obj.getNom() + "' AND ID_Promotion = '"+ obj.getPromotion().getId() +"'";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
@@ -79,7 +79,7 @@ public class GroupeDAO extends DAO<Groupe> {
     public boolean update(Groupe obj) {
         try {
             // REQUETE SQL : UPDATE
-            String sql = "UPDATE `groupe` SET `ID`='" + obj.getId() + "',`Nom`='" + obj.getNom() +"',`ID_Promotion`='" + obj.getPromotion() + "' WHERE ID='" + obj.getId() + "'";
+            String sql = "UPDATE `groupe` SET `ID`='" + obj.getId() + "',`Nom`='" + obj.getNom() +"',`ID_Promotion`='" + obj.getPromotion().getId() + "' WHERE ID='" + obj.getId() + "'";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)

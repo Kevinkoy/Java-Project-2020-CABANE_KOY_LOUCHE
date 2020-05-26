@@ -1,6 +1,7 @@
 package DataAcessObject;
 
-import Modele.Site;
+import Modele.Groupe;
+import Modele.Promotion;
 import java.sql.Connection;
 
 public class Tester {
@@ -11,20 +12,21 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Site> objetdao = new SiteDAO(connection);
+        DAO<Groupe> objetdao = new GroupeDAO(connection);
 
         // On crée un objet pour manipuler 
-        Site objet = new Site();
+        Groupe objet = new Groupe();
         // Configuration setter
-        objet.setId(0);
-        objet.setNom("koshou");
+        objet.setId(5);
+        objet.setNom("loulou");
+        objet.setPromotion(new Promotion(1,"Ing1"));
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean executed = objetdao.create(objet);
-        System.out.println(executed);
+        //boolean executed = objetdao.update(objet);
+        //System.out.println(executed);
         
         // FIND
-        Site find = objetdao.find(10);
-        System.out.println(find.toString());
+        //Groupe find = objetdao.find(1);
+        //System.out.println(find.toString());
         
         
 
