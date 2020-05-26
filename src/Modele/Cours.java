@@ -34,7 +34,7 @@ public class Cours {
     public String toString() {
         if(this.id == 0)
         {
-          return "Cours Introuvable";
+          return "Cours introuvable";
         }
         return " id: " + this.id + ", nom: " + this.nom;
     }
