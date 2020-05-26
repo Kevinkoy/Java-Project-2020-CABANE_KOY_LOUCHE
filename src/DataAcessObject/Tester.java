@@ -20,7 +20,14 @@ public class Tester {
         objet.setId(1);
         objet.setNom("Java");
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean create = objetdao.create(objet);
+        Cours find = objetdao.find(9);
+        
+        // Affichage
+        System.out.println(find.toString());
+        
+       
+        
+        
 
     }
 }
