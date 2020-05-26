@@ -35,6 +35,9 @@ public class Groupe {
     // toString
     @Override
     public String toString() {
+        if (this.id == 0) {
+            return "Groupe introuvable";
+        }
         return " id: " + this.id + ",nom: " + this.nom + ", promotion: " + this.promotion;
     }
 
