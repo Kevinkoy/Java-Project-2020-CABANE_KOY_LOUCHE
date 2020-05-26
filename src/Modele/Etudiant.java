@@ -38,7 +38,11 @@ public class Etudiant extends Utilisateur {
     // toString
     @Override
     public String toString() {
-        /// RETURN COMPLET : VALEURS CLASSE MERE + FILLE (UTILISATEUR + ETUDIANT)
+        if(this.id==0)
+        {
+            return "Etudiant introuvable";
+        }
+        else
         return super.toString() + " numero: " + this.numero + ", groupe: " + this.groupe;
     }
 
