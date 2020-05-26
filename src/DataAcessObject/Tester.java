@@ -17,7 +17,7 @@ public class Tester {
         // On crée un objet pour manipuler 
         Cours objet = new Cours();
         // Configuration setter
-        objet.setId(3);
+        objet.setId(1);
         objet.setNom("Java");
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
         boolean create = objetdao.create(objet);

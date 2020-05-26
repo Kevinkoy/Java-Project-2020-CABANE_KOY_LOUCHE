@@ -49,13 +49,14 @@ public class CoursDAO extends DAO<Cours> {
                 }
             } catch (SQLIntegrityConstraintViolationException ex) {
                 System.out.println(ex.getMessage());
+                return false;
             } catch (SQLException e) {
                 //e.printStackTrace();
-                System.out.println("Impossible de se connecter!");
+                System.out.println(e.getMessage());
             }
 
         } // déjà existant...
-        System.out.println(find.toString()); // toString id=0 ("INTROUVABLE")
+        System.out.println("Deja existant:" + find.toString());
         return false;
     }
 
