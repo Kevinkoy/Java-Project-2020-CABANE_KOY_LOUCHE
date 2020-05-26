@@ -1,6 +1,5 @@
 package DataAcessObject;
 
-import Modele.Cours;
 import Modele.Salle;
 import Modele.Site;
 import java.sql.Connection;
