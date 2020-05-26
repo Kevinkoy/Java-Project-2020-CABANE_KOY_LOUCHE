@@ -47,10 +47,11 @@ public class CoursDAO extends DAO<Cours> {
                 } else {
                     throw new java.sql.SQLIntegrityConstraintViolationException();
                 }
+            } catch (SQLIntegrityConstraintViolationException ex) {
+                System.out.println(ex.getMessage());
             } catch (SQLException e) {
-                System.out.println(e.toString());
                 //e.printStackTrace();
-                //System.out.println("Impossible de se connecter!");
+                System.out.println("Impossible de se connecter!");
             }
 
         } // déjà existant...
