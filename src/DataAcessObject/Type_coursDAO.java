@@ -18,6 +18,8 @@ public class Type_coursDAO extends DAO<Type_cours> {
         super(connection);
     }
 
+    
+    
     @Override
     public boolean create(Type_cours obj) {
         try {
