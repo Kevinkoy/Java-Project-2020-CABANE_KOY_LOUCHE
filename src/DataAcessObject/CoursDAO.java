@@ -55,7 +55,7 @@ public class CoursDAO extends DAO<Cours> {
         Cours copie = obj;
         try {
             // REQUETE SQL : DELETE
-            String sql = "DELETE FROM `cours` WHERE cours.ID ='" + obj.getId() + "' AND cours.Nom ='" + obj.getNom() + "'";
+            String sql = "DELETE FROM `cours` WHERE ID ='" + obj.getId() + "' AND Nom ='" + obj.getNom() + "'";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
@@ -103,7 +103,7 @@ public class CoursDAO extends DAO<Cours> {
         Cours returned = new Cours();
         try {
             // REQUETE
-            String sql = "SELECT * FROM `cours` WHERE cours.ID ='" + id + "'";
+            String sql = "SELECT * FROM `cours` WHERE ID ='" + id + "'";
             // PrepareStatement
             PreparedStatement preparestatement = this.connection.prepareStatement(sql);
             // ResultSet
@@ -112,7 +112,7 @@ public class CoursDAO extends DAO<Cours> {
             // SI RESULTAT...
             if (result.next()) {
                 /// return = RESULTAT
-                returned = new Cours(result.getInt("cours.ID"), result.getString("cours.Nom"));
+                returned = new Cours(result.getInt("ID"), result.getString("Nom"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -127,7 +127,7 @@ public class CoursDAO extends DAO<Cours> {
         Cours returned = new Cours();
         try {
             // REQUETE
-            String sql = "SELECT * FROM `cours` WHERE cours.Nom ='" + nom + "'";
+            String sql = "SELECT * FROM `cours` WHERE Nom ='" + nom + "'";
             // PrepareStatement
             PreparedStatement preparestatement = this.connection.prepareStatement(sql);
             // ResultSet
@@ -136,7 +136,7 @@ public class CoursDAO extends DAO<Cours> {
             // SI RESULTAT...
             if (result.next()) {
                 /// return = RESULTAT
-                returned = new Cours(result.getInt("cours.ID"), result.getString("cours.Nom"));
+                returned = new Cours(result.getInt("ID"), result.getString("Nom"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -151,7 +151,7 @@ public class CoursDAO extends DAO<Cours> {
         Cours returned = new Cours();
         try {
             // REQUETE
-            String sql = "SELECT * FROM `cours` WHERE cours.ID ='" + obj.getId() + "' AND cours.Nom='" + obj.getNom() + "'";
+            String sql = "SELECT * FROM `cours` WHERE ID ='" + obj.getId() + "' AND Nom='" + obj.getNom() + "'";
             // PrepareStatement
             PreparedStatement preparestatement = this.connection.prepareStatement(sql);
             // ResultSet
@@ -160,7 +160,7 @@ public class CoursDAO extends DAO<Cours> {
             // SI RESULTAT...
             if (result.next()) {
                 /// return = RESULTAT
-                returned = new Cours(result.getInt("cours.ID"), result.getString("cours.Nom"));
+                returned = new Cours(result.getInt("ID"), result.getString("Nom"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
