@@ -1,10 +1,13 @@
 package DataAcessObject;
 
 import Modele.Cours;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,7 +49,9 @@ public class CoursDAO extends DAO<Cours> {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+            System.out.println("Duplicata");
+            e.printStackTrace();
+            // System.out.println("Base de donnée introuvable");
         }
         return false;
 
@@ -62,7 +67,7 @@ public class CoursDAO extends DAO<Cours> {
             if (find.getId() != 0) {
                 // ETAPE 2 : DELETE
                 // REQUETE SQL
-                String sql = "DELETE FROM `cours` WHERE cours.ID ='"+ obj.getId() +"' AND cours.Nom ='"+ obj.getNom() +"'";
+                String sql = "DELETE FROM `cours` WHERE cours.ID ='" + obj.getId() + "' AND cours.Nom ='" + obj.getNom() + "'";
                 // PrepareStatement
                 PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
 
@@ -88,7 +93,7 @@ public class CoursDAO extends DAO<Cours> {
 
     @Override
     public boolean update(Cours obj) {
-            try {
+        try {
             // ETAPE 1: VERIFICATION si il existe...
             Cours find = this.find(obj);
 
@@ -96,7 +101,7 @@ public class CoursDAO extends DAO<Cours> {
             if (find.getId() != 0) {
                 // ETAPE 2 : UPDATE
                 // REQUETE SQL
-                String sql = "UPDATE `cours` SET `ID`='"+ obj.getId() +"',`Nom`='"+ obj.getNom() +"' WHERE ID='"+ obj.getId() +"'";
+                String sql = "UPDATE `cours` SET `ID`='" + obj.getId() + "',`Nom`='" + obj.getNom() + "' WHERE ID='" + obj.getId() + "'";
                 // PrepareStatement
                 PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
 
@@ -127,7 +132,7 @@ public class CoursDAO extends DAO<Cours> {
         Cours obj_returned = new Cours();
 
         // REQUETE
-        String sql = "SELECT * FROM `cours` WHERE cours.ID ='"+id+"'";
+        String sql = "SELECT * FROM `cours` WHERE cours.ID ='" + id + "'";
 
         try {
             // PrepareStatement
