@@ -17,7 +17,7 @@ public class Tester {
 
         // On crée un objet Utilisateur (pour manipuler)
         Utilisateur kevin = new Utilisateur();
-        kevin.setId(24); // is AUTO INCREMENTED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //kevin.setId(25); // is AUTO INCREMENTED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         kevin.setEmail("tester@edu.ece.fr");
         kevin.setPasswd("test_passwd");
         kevin.setNom("test_nom");

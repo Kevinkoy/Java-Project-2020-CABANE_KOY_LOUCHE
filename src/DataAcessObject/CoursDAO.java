@@ -17,88 +17,16 @@ public class CoursDAO extends DAO<Cours> {
     }
 
     @Override
-    public boolean create(Cours cours) {
+    public boolean create(Cours obj) {
         try {
             // ETAPE 1: VERIFICATION si il existe...
-            Cours create = this.find(cours);
+            Cours find = this.find(obj);
 
             // Il n'existe pas!
-            if (create.getId() == 0) {
+            if (find.getId() == 0) {
                 // ETAPE 2 : CREATE (ID value NULL pour Auto-incrémentation)
                 // REQUETE SQL
-                String sql = "INSERT INTO `utilisateur`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + cours.getNom() + "');";
-                // PrepareStatement
-                PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
-
-                // ResultSet (result)
-                int result = preparedstatement.executeUpdate(sql);
-
-                // SI RESULTAT
-                if (result == 1) {
-                    // On récupère ID Auto Incrementé => et on adapte son ID;
-                    cours.setId(this.find(cours).getId());
-                    System.out.println("INSERTION Success:" + cours.toString()); // ID mis à jour, on affiche ses infos
-                    return true;
-                }
-                // déjà existant...
-            } else {
-                System.out.println(create.toString()); // toString id=0 ("INTROUVABLE")
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
-        }
-        return false;
-
-    }
-
-    @Override
-    public boolean delete(Cours cours) {
-        try {
-            // ETAPE 1: VERIFICATION si il existe...
-            Cours delete = this.find(cours);
-
-            // Il existe!
-            if (delete.getId() != 0) {
-                // ETAPE 2 : DELETE (INSERT INTO nomTable('ID') value (NULL) pour Auto-incrémentation)
-                // REQUETE SQL
-                String sql = "INSERT INTO `utilisateur`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + cours.getNom() + "');";
-                // PrepareStatement
-                PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
-
-                // ResultSet (result)
-                int result = preparedstatement.executeUpdate(sql);
-
-                // SI RESULTAT
-                if (result == 1) {
-                    // On récupère ID Auto Incrementé => et on adapte son ID;
-                    cours.setId(this.find(cours).getId());
-                    System.out.println("INSERTION Success:" + cours.toString()); // ID mis à jour, on affiche ses infos
-                    return true;
-                }
-                // Il n'existe pas
-            } else {
-                System.out.println(delete.toString()); // toString id=0 ("INTROUVABLE")
-                return false;
-            }
-        } catch (SQLException e) {
-            // System.out.println("Base de donnée introuvable");
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean update(Cours obj) {
-            try {
-            // ETAPE 1: VERIFICATION si il existe...
-            Cours update = this.find(obj);
-
-            // Il existe!
-            if (update.getId() != 0) {
-                // ETAPE 2 : UPDATE ID Value NULL pour Auto-Incrementations
-                // REQUETE SQL
-                String sql = "UPDATE `utilisateur`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + obj.getNom() + "');";
+                String sql = "INSERT INTO `cours`(`ID`, `Nom`) VALUES(" + "NULL" + ",'" + obj.getNom() + "');";
                 // PrepareStatement
                 PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
 
@@ -112,9 +40,77 @@ public class CoursDAO extends DAO<Cours> {
                     System.out.println("INSERTION Success:" + obj.toString()); // ID mis à jour, on affiche ses infos
                     return true;
                 }
+                // déjà existant...
+            } else {
+                System.out.println(find.toString()); // toString id=0 ("INTROUVABLE")
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // System.out.println("Base de donnée introuvable");
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean delete(Cours obj) {
+        try {
+            // ETAPE 1: VERIFICATION si il existe...
+            Cours find = this.find(obj);
+
+            // Il existe!
+            if (find.getId() != 0) {
+                // ETAPE 2 : DELETE
+                // REQUETE SQL
+                String sql = "DELETE FROM `cours` WHERE cours.ID ='"+ obj.getId() +"' AND cours.Nom ='"+ obj.getNom() +"'";
+                // PrepareStatement
+                PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+
+                // ResultSet (result)
+                int result = preparedstatement.executeUpdate(sql);
+
+                // SI RESULTAT   
+                if (result == 1) {
+                    System.out.println("DELETE Success:" + find.toString()); // Affichage de l'objet supprimé
+                    return true;
+                }
                 // Il n'existe pas
             } else {
-                System.out.println(update.toString()); // toString id=0 ("INTROUVABLE")
+                System.out.println(find.toString()); // toString id=0 ("INTROUVABLE")
+                return false;
+            }
+        } catch (SQLException e) {
+            // System.out.println("Base de donnée introuvable");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean update(Cours obj) {
+            try {
+            // ETAPE 1: VERIFICATION si il existe...
+            Cours find = this.find(obj);
+
+            // Il existe!
+            if (find.getId() != 0) {
+                // ETAPE 2 : UPDATE
+                // REQUETE SQL
+                String sql = "UPDATE `cours` SET `ID`='"+ obj.getId() +"',`Nom`='"+ obj.getNom() +"' WHERE ID='"+ obj.getId() +"'";
+                // PrepareStatement
+                PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+
+                // ResultSet (result)
+                int result = preparedstatement.executeUpdate(sql);
+
+                // SI RESULTAT
+                if (result == 1) {
+                    System.out.println("UPDATE Success:" + obj.toString()); // Affichage update
+                    return true;
+                }
+                // Il n'existe pas
+            } else {
+                System.out.println(find.toString()); // toString id=0 ("INTROUVABLE")
                 return false;
             }
         } catch (SQLException e) {
@@ -126,16 +122,12 @@ public class CoursDAO extends DAO<Cours> {
 
     @Override
     public Cours find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public Cours find(Cours cours) {
-
-        /// UTILISATEUR NULL (PAR DEFAUT)
-        Cours cours_returned = new Cours();
+        /// CONSTRUCTEUR NULL (PAR DEFAUT)
+        Cours obj_returned = new Cours();
 
         // REQUETE
-        String sql = "SELECT * FROM `cours` WHERE cours.ID ='" + cours.getId() + "' AND cours.Nom='" + cours.getNom() + "'";
+        String sql = "SELECT * FROM `cours` WHERE cours.ID ='"+id+"'";
 
         try {
             // PrepareStatement
@@ -147,14 +139,42 @@ public class CoursDAO extends DAO<Cours> {
             // SI RESULTAT...
             if (result.next()) {
                 /// Récupérer le resultat trouvé...
-                cours_returned = new Cours(result.getInt("cours.ID"), result.getString("cours.Nom"));
+                obj_returned = new Cours(result.getInt("cours.ID"), result.getString("cours.Nom"));
             }
         } catch (SQLException e) {
             //System.out.println("Impossible de se connecter!");        
             e.printStackTrace();
         }
         // return soit NULL || soit resultat....
-        return cours_returned;
+        return obj_returned;
+    }
+
+    public Cours find(Cours obj) {
+
+        /// CONSTRUCTEUR NULL (PAR DEFAUT)
+        Cours obj_returned = new Cours();
+
+        // REQUETE
+        String sql = "SELECT * FROM `cours` WHERE cours.ID ='" + obj.getId() + "' AND cours.Nom='" + obj.getNom() + "'";
+
+        try {
+            // PrepareStatement
+            PreparedStatement preparestatement = this.connection.prepareStatement(sql);
+
+            // ResultSet
+            ResultSet result = preparestatement.executeQuery(sql);
+
+            // SI RESULTAT...
+            if (result.next()) {
+                /// Récupérer le resultat trouvé...
+                obj_returned = new Cours(result.getInt("cours.ID"), result.getString("cours.Nom"));
+            }
+        } catch (SQLException e) {
+            //System.out.println("Impossible de se connecter!");        
+            e.printStackTrace();
+        }
+        // return soit NULL || soit resultat....
+        return obj_returned;
     }
 
 }
