@@ -50,7 +50,7 @@ public class EnseignantDAO extends DAO<Enseignant> {
                         result.getString("utilisateur.Passwd"),
                         result.getString("utilisateur.Nom"),
                         result.getString("utilisateur.Prenom"),
-                        new Modele.Cours(result.getInt("enseignant.ID_Cours"), "vide")
+                        new Modele.Cours(result.getInt("enseignant.ID_Cours"), result.getString("vide"))
                 );
             } /// SINON PAS DE RESULTAT
             else {

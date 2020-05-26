@@ -19,7 +19,6 @@ public class Site {
 
     /**
      * CONSTRUCTEUR SURCHARGE
-     *
      * @param id
      * @param nom
      */

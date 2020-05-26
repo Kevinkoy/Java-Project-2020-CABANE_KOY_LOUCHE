@@ -2,6 +2,7 @@ package DataAcessObject;
 
 import Modele.Salle;
 import Modele.Site;
+import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
@@ -12,27 +13,23 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Salle> objetdao = new SalleDAO(connection);
+        DAO<Utilisateur> objetdao = new UtilisateurDAO(connection);
         
         // ObjetDao Unitaire
         //SalleDAO objetdao = new SalleDAO(connection);
 
         // On crée un objet pour manipuler 
-        Salle objet = new Salle();
+        Utilisateur objet = new Utilisateur();
         // Configuration setter
-        objet.setId(0);
-        objet.setNom("testupdated_nom");
-        objet.setCapacite(787);
-        objet.setSite(new Site(3,"E1"));
-        
-        
+        /*objet.setId(8);
+        objet.setNom("update_alice");*/
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean executed = objetdao.update(objet);
+        boolean executed = objetdao.create(objet);
         System.out.println(executed);
         
         // FIND
-        Salle find = objetdao.find(1);
-        System.out.println(find.toString());
+        //Salle find = objetdao.find(1);
+        //System.out.println(find.toString());
         
         
 
