@@ -34,7 +34,7 @@ public class Site {
     public String toString() {
         if(this.id == 0)
         {
-          return "Type_cours introuvable";
+          return "Site introuvable";
         }
         return " id: " + this.id + ", nom: " + this.nom;
     }
