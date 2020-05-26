@@ -68,30 +68,22 @@ public class Utilisateur {
     // droit : 1 administrateur | 2 référent pédagogique | 3 enseignant | 4 étudiant
     @Override
     public String toString() {
-        /*if (this.id == 0) {
+        if (this.id == 0) {
             return "Utilisateur introuvable!";
         } else {
-            return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
-        }*/
-        if(this.id == 0)
-        {
-            return "Utilisateur introuvable!";
-        }
-        else
-        switch (this.droit) {
-            case 0:
-                return "Utilisateur introuvable!";
-            case 1:
-                return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "administrateur";
-            case 2:
-                return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "référent pédagogique";
-            case 3:
-                return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "enseignant";
-            case 4:
-                return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "étudiant";
-            default:
-                return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
+            switch (this.droit) {
+                case 1:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "administrateur";
+                case 2:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "référent pédagogique";
+                case 3:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "enseignant";
+                case 4:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "étudiant";
+                default:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
 
+            }
         }
     }
 

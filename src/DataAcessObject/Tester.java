@@ -23,6 +23,10 @@ public class Tester {
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
         //boolean create = objetdao.create(objet);
         
+        Utilisateur user = new Utilisateur();
+        user.setId(1);
+        //user.setDroit(5);
+        System.out.println(user.toString());
         
         
         
