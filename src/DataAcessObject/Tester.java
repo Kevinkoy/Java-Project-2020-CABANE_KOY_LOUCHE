@@ -1,10 +1,6 @@
 package DataAcessObject;
 
 import Modele.Cours;
-import Modele.Etudiant;
-import Modele.Groupe;
-import Modele.Promotion;
-import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
