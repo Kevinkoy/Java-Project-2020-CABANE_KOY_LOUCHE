@@ -1,12 +1,11 @@
 package DataAcessObject;
 
 import Modele.Enseignant;
-import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  *
@@ -20,53 +19,149 @@ public class EnseignantDAO extends DAO<Enseignant> {
 
     @Override
     public boolean create(Enseignant obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
+            String sql = "INSERT INTO `enseignant`(`ID_Utilisateur`, `ID_Cours`) VALUES(" + "NULL" + ",'" + obj.getCours().getId() + "');";
+            // PrepareStatement
+            PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+            // ResultSet (result)
+            int result = preparedstatement.executeUpdate(sql);
+
+            // SI RESULTAT
+            if (result == 1) {
+                // On récupère ID Auto Incrementé, en recherchant par son nom
+                int id = this.find(obj.getEmail()).getId();
+                obj.setId(id); // => et on adapte son ID;
+                // Afficher de l'objet created (id updated)
+                System.out.println("INSERTION Success:" + obj.toString());
+                return true;
+            } /// Duplicata sur clef UNIQUE, il existe déjà!
+            else {
+                throw new java.sql.SQLIntegrityConstraintViolationException();
+            }
+
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
     public boolean delete(Enseignant obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Copie en cas de delete réussi
+        Enseignant copie = obj;
+        try {
+            // REQUETE SQL : DELETE
+            String sql = "DELETE FROM `enseignant` WHERE `ID_Utilisateur` = " + obj.getId();
+            // PrepareStatement
+            PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+            // ResultSet (result)
+            int result = preparedstatement.executeUpdate(sql);
+
+            // SI RESULTAT   
+            if (result == 1) {
+                // Affichage de l'objet deleted
+                System.out.println("DELETE Success:" + copie.toString());
+                return true;
+            }
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
     public boolean update(Enseignant obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // REQUETE SQL : UPDATE
+            String sql = "UPDATE `enseignant` SET `ID_Utilisateur`='" + obj.getId() + "',`ID_Cours`='" + obj.getCours().getId() + "' WHERE ID ='" + obj.getId() + "';";
+            // PrepareStatement
+            PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
+            // ResultSet (result)
+            int result = preparedstatement.executeUpdate(sql);
+
+            // SI RESULTAT
+            if (result == 1) {
+                // Affichage de l'objet updated
+                System.out.println("UPDATE Success:" + obj.toString());
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public Enseignant find(int id) {
-
-        Enseignant enseignant = new Enseignant();
+        /// CONSTRUCTEUR NULL (PAR DEFAUT)
+        Enseignant returned = new Enseignant();
         try {
-            ResultSet result = this.connection.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM `enseignant`INNER JOIN utilisateur ON enseignant.ID_Utilisateur = utilisateur.ID WHERE ID=" + id);
+            // REQUETE
+            String sql = "SELECT * FROM `enseignant` "
+                    + " INNER JOIN `utilisateur` ON enseignant.ID_Utilisateur = utilisateur.ID "
+                    + " INNER JOIN `cours` ON enseignant.ID_Cours = cours.ID "
+                    + " WHERE enseignant.ID_Utilisateur = '" + id + "';";
+            // PrepareStatement
+            PreparedStatement preparestatement = this.connection.prepareStatement(sql);
+            // ResultSet
+            ResultSet result = preparestatement.executeQuery(sql);
 
-            // SI RESULTAT
+            // SI RESULTAT...
             if (result.next()) {
-                enseignant = new Enseignant(
-                        id,
+                /// return = RESULTAT
+                returned = new Enseignant(
+                        result.getInt("enseignant.ID_Utilisateur"), // id
                         result.getString("utilisateur.Email"),
                         result.getString("utilisateur.Passwd"),
                         result.getString("utilisateur.Nom"),
                         result.getString("utilisateur.Prenom"),
-                        new Modele.Cours(result.getInt("enseignant.ID_Cours"), result.getString("vide"))
-                );
-            } /// SINON PAS DE RESULTAT
-            else {
-                throw new IOException();
+                        new Modele.Cours(result.getInt("enseignant.ID_Cours"), result.getString("cours.Nom")));
             }
-
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             //e.printStackTrace();
-            //System.out.print("Probleme de connection à la DataBase");
-
-        } catch (IOException ex) {
-            //System.out.print(" Enseignant introuvable dans la base de donnée avec l'id:" +id);
-            //Logger.getLogger(EnseignantDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // return soit NULL || soit RESULTAT...
+        return returned;
+    }
 
-        return enseignant;
+    public Enseignant find(String email) {
+        /// CONSTRUCTEUR NULL (PAR DEFAUT)
+        Enseignant returned = new Enseignant();
+        try {
+            // REQUETE
+            String sql = "SELECT * FROM `enseignant` "
+                    + " INNER JOIN `utilisateur` ON enseignant.ID_Utilisateur = utilisateur.ID "
+                    + " INNER JOIN `cours` ON enseignant.ID_Cours = cours.ID "
+                    + " WHERE utilisateur.Email = '" + email + "';";
+            // PrepareStatement
+            PreparedStatement preparestatement = this.connection.prepareStatement(sql);
+            // ResultSet
+            ResultSet result = preparestatement.executeQuery(sql);
+
+            // SI RESULTAT...
+            if (result.next()) {
+                /// return = RESULTAT
+                returned = new Enseignant(
+                        result.getInt("enseignant.ID_Utilisateur"), // id
+                        result.getString("utilisateur.Email"),
+                        result.getString("utilisateur.Passwd"),
+                        result.getString("utilisateur.Nom"),
+                        result.getString("utilisateur.Prenom"),
+                        new Modele.Cours(result.getInt("enseignant.ID_Cours"), result.getString("cours.Nom")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+        // return soit NULL || soit RESULTAT...
+        return returned;
     }
 
 }
