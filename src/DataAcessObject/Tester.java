@@ -1,5 +1,9 @@
 package DataAcessObject;
 
+import Modele.Cours;
+import Modele.Etudiant;
+import Modele.Groupe;
+import Modele.Promotion;
 import Modele.Utilisateur;
 import java.sql.Connection;
 
@@ -11,31 +15,32 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Utilisateur> objetdao = new UtilisateurDAO(connection);
-
+        //DAO<Etudiant> objetdao = new EtudiantDAO(connection);
         // ObjetDao Unitaire
-        //UtilisateurDAO objetdao = new UtilisateurDAO(connection);
+        CoursDAO objetdao = new CoursDAO(connection);
+        
+        
         // On crée un objet pour manipuler 
-        Utilisateur objet = new Utilisateur();
+        Cours objet = new Cours();
         // Configuration setter
-        //objet.setId(0);
-        //objet.setNom("tester_nom");
+        objet.setId(0);
+        objet.setNom("Java");
+        
 
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        //boolean executed = objetdao.create(objet);
-        //System.out.println(executed);
+        boolean executed = objetdao.create(objet);
+        System.out.println(executed);
+        
+        //UtilisateurDAO userdao = new UtilisateurDAO(connection);
+        //userdao.delete(objet);
+       
+        
         // FIND
-        for (int i = 1; i < 20; i++) {
-            Utilisateur find = objetdao.find(i);
-            if (find.getId() == 0) {
-
-            } else {
-                System.out.println(find.toString());
-            }
-
-        }
+        //Etudiant find = objetdao.find(11);
+        //System.out.println(find.toString());
+        
     }
-}
+    }
 
 ///////////////////////////////////////////////////////////////////////////////
 /*

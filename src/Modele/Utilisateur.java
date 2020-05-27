@@ -72,13 +72,13 @@ public class Utilisateur {
         } else {
             switch (this.droit) {
                 case 1:
-                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "administrateur";
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "administrateur,";
                 case 2:
-                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "référent pédagogique";
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "référent pédagogique,";
                 case 3:
-                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "enseignant";
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "enseignant,";
                 case 4:
-                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "étudiant";
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "étudiant,";
                 default:
                     return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
 

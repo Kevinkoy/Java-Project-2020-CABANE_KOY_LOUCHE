@@ -21,9 +21,12 @@ public class EtudiantDAO extends DAO<Etudiant> {
 
     @Override
     public boolean create(Etudiant obj) {
+        // INSERT INTO 'utilisateur'
+        UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
+        objetdao.create(obj); // obj.setID a été appelé, ID est auto incrémenté 
         try {
             // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
-            String sql = "INSERT INTO `etudiant`(`ID_Utilisateur`, `Numero`, `ID_Groupe`) VALUES(" + "NULL" + ",'" + obj.getNumero() + "','" + obj.getGroupe().getId() + "');";
+            String sql = "INSERT INTO `etudiant`(`ID_Utilisateur`, `Numero`, `ID_Groupe`) VALUES('" + obj.getId() + "','" + obj.getNumero() + "','" + obj.getGroupe().getId() + "');";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
@@ -53,6 +56,10 @@ public class EtudiantDAO extends DAO<Etudiant> {
 
     @Override
     public boolean delete(Etudiant obj) {
+        // Delete en CASCADE FROM TABLE 'Utilisateur'
+        UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
+        boolean delete = objetdao.delete(obj);
+        
         // Copie en cas de delete réussi
         Etudiant copie = obj;
         try {
@@ -78,6 +85,10 @@ public class EtudiantDAO extends DAO<Etudiant> {
 
     @Override
     public boolean update(Etudiant obj) {
+        // UPDATE 'utilisateur'
+        UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
+        objetdao.update(obj); 
+        
         try {
             // REQUETE SQL : UPDATE
             String sql = "UPDATE `etudiant` SET `ID`= '" + obj.getId() + "',`Numero`= '" + obj.getNumero() + "',`ID_Groupe`= '" + obj.getGroupe().getId() + "' WHERE ID = '" + obj.getId() + "'";
@@ -121,7 +132,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
                         result.getString("utilisateur.Nom"),
                         result.getString("utilisateur.Prenom"),
                         result.getInt("etudiant.Numero"),
-                        new Groupe(result.getInt("etudiant.ID_Groupe"), "", new Promotion(result.getInt("groupe.ID_Promotion"),result.getString("Promotion.Nom"))));
+                        new Groupe(result.getInt("etudiant.ID_Groupe"), "", new Promotion(result.getInt("groupe.ID_Promotion"), result.getString("Promotion.Nom"))));
 
             }
         } catch (SQLException e) {
@@ -153,7 +164,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
                         result.getString("utilisateur.Nom"),
                         result.getString("utilisateur.Prenom"),
                         result.getInt("etudiant.Numero"),
-                        new Groupe(result.getInt("etudiant.ID_Groupe"), "", new Promotion(result.getInt("groupe.ID_Promotion"),result.getString("Promotion.Nom"))));
+                        new Groupe(result.getInt("etudiant.ID_Groupe"), "", new Promotion(result.getInt("groupe.ID_Promotion"), result.getString("Promotion.Nom"))));
 
             }
         } catch (SQLException e) {
