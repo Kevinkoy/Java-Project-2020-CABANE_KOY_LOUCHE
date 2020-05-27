@@ -6,7 +6,6 @@ package Modele;
  *
  */
 public class Utilisateur {
-
     ///ATTRIBUTS
     protected int id;
     protected String email;

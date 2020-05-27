@@ -1,7 +1,5 @@
 package DataAcessObject;
 
-import Modele.Salle;
-import Modele.Site;
 import Modele.Utilisateur;
 import java.sql.Connection;
 
@@ -14,30 +12,28 @@ public class Tester {
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
         DAO<Utilisateur> objetdao = new UtilisateurDAO(connection);
-        
-        // ObjetDao Unitaire
-        //SalleDAO objetdao = new SalleDAO(connection);
 
+        // ObjetDao Unitaire
+        //UtilisateurDAO objetdao = new UtilisateurDAO(connection);
         // On crée un objet pour manipuler 
         Utilisateur objet = new Utilisateur();
         // Configuration setter
-        /*objet.setId(8);
-        objet.setNom("update_alice");*/
+        //objet.setId(0);
+        //objet.setNom("tester_nom");
+
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean executed = objetdao.create(objet);
-        System.out.println(executed);
-        
+        //boolean executed = objetdao.create(objet);
+        //System.out.println(executed);
         // FIND
-        //Salle find = objetdao.find(1);
-        //System.out.println(find.toString());
-        
-        
+        for (int i = 1; i < 20; i++) {
+            Utilisateur find = objetdao.find(i);
+            if (find.getId() == 0) {
 
-        
-       
-        
-        
+            } else {
+                System.out.println(find.toString());
+            }
 
+        }
     }
 }
 
