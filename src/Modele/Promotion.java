@@ -33,7 +33,16 @@ public class Promotion {
         this.nom = nom;
     }
 
-    /// METHODES
+    // METHODES
+    // toString : retourner le contenue d'objet sous forme de chaine
+    @Override
+    public String toString() {
+        if (this.id == 0) {
+            return "Promotion introuvable";
+        }
+        return " id: " + this.id + ", nom: " + this.nom;
+    }
+
     // Getters
     public int getId() {
         return this.id;

@@ -31,7 +31,11 @@ public class Type_cours {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        return "id: " + id + ", nom: " + nom;
+        if(this.id == 0)
+        {
+          return "Type_cours introuvable";
+        }
+        return " id: " + this.id + ", nom: " + this.nom;
     }
 
     // GETTERS

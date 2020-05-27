@@ -38,7 +38,12 @@ public class Etudiant extends Utilisateur {
     // toString
     @Override
     public String toString() {
-        return "numero: " + numero + ", id_groupe: " + groupe;
+        if(this.id==0)
+        {
+            return "Etudiant introuvable";
+        }
+        else
+        return super.toString() + " numero: " + this.numero + ", groupe: " + this.groupe;
     }
 
     //Getters

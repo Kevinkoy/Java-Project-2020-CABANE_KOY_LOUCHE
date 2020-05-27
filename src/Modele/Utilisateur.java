@@ -1,7 +1,5 @@
 package Modele;
 
-import java.sql.Connection;
-
 /**
  *
  * @author KévinKOY
@@ -16,7 +14,7 @@ public class Utilisateur {
     protected String nom;
     protected String prenom;
     /**
-     * 1 administrateur |2 référent pédagogique |3 enseignant | 4 étudiant
+     * 1 administrateur | 2 référent pédagogique | 3 enseignant | 4 étudiant
      */
     protected int droit;
 
@@ -29,7 +27,7 @@ public class Utilisateur {
         passwd = "";
         nom = "";
         prenom = "";
-
+        droit = 0;
     }
 
     /**
@@ -67,9 +65,26 @@ public class Utilisateur {
 
 // Methodes ////////////////////////////////////////////////////////////////////
 // toString : retourner le contenue d'objet sous forme de chaine
+    // droit : 1 administrateur | 2 référent pédagogique | 3 enseignant | 4 étudiant
     @Override
     public String toString() {
-        return "id: " + id + ", email: " + email + ", passwd: " + passwd + ", nom: " + nom + ", prenom: " + prenom + ", droit: " + droit;
+        if (this.id == 0) {
+            return "Utilisateur introuvable!";
+        } else {
+            switch (this.droit) {
+                case 1:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "administrateur";
+                case 2:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "référent pédagogique";
+                case 3:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "enseignant";
+                case 4:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + "étudiant";
+                default:
+                    return " id: " + this.id + ", email: " + this.email + ", passwd: " + this.passwd + ", nom: " + this.nom + ", prenom: " + this.prenom + ", droit: " + this.droit;
+
+            }
+        }
     }
 
 // Getters /////////////////////////////////////////////////////////////////////

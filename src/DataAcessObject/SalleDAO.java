@@ -1,36 +1,36 @@
-package DAO;
+package DataAcessObject;
 
-import Modele.Utilisateur;
+import Modele.Salle;
 import java.sql.Connection;
 
 /**
  *
  * @author KévinKOY
  */
-public class UtilisateurDAO extends DAO<Utilisateur>{
+public class SalleDAO extends DAO<Salle> {
 
-    public UtilisateurDAO(Connection connection) {
+    public SalleDAO(Connection connection) {
         super(connection);
     }
 
     @Override
-    public boolean create(Utilisateur obj) {
+    public boolean create(Salle obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Utilisateur obj) {
+    public boolean delete(Salle obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Utilisateur obj) {
+    public boolean update(Salle obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Utilisateur find(int id) {
+    public Salle find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
