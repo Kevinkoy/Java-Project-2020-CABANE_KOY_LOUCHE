@@ -27,7 +27,7 @@ public class Tester {
         //obj.setDroit(3);
 
         // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        //boolean executed = objetdao.update(obj);
+        //boolean executed = objetdao.create(obj);
         //System.out.println(executed);
         
         // FIND
