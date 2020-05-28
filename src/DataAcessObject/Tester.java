@@ -1,40 +1,37 @@
 package DataAcessObject;
 
 import Modele.Cours;
+import Modele.Enseignant;
 import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
 
     public static void main(String[] args) {
-        // Declaration et initialisation
-        // On crée une connection, specifique à notre base de donnée
+        // ETAPE 1 - On crée une connection, specifique à notre base de donnée
         Connection connection = ConnectMySQL.getInstance();
 
-        // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
-        // ObjetDao Unitaire
-        //CoursDAO objetdao = new CoursDAO(connection);
+        // ETAPE 2 - On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
+        DAO<Enseignant> objetdao = new EnseignantDAO(connection);
+        // ETAPE 2 - ObjetDao Unitaire
     
-        // On crée un objet pour manipuler 
-        Utilisateur user = new Utilisateur();
+        // ETAPE 3 - On crée un objet POJO pour manipuler 
+        Enseignant obj = new Enseignant();
         // Configuration setter
-        user.setId(23);
-        user.setEmail("temail");
-        user.setPasswd("tpasswd");
-        user.setNom("tnom");
-        user.setPrenom("tprenom");
-        user.setDroit(0);
+        obj.setId(23);
+        obj.setEmail("test_email");
+        obj.setPasswd("test_passwd");
+        obj.setNom("test_nom");
+        obj.setPrenom("test_prenom");
+        obj.setCours(new Cours(1,"Java"));
+        //obj.setDroit(3);
 
-
-        // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean create = utilisateurdao.delete(user);
+        // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
+        boolean create = objetdao.create(obj);
         System.out.println(create);
         
-        //UtilisateurDAO userdao = new UtilisateurDAO(connection);
-        //userdao.delete(objet);
         // FIND
-        //Etudiant find = objetdao.find(11);
+        //Enseignant find = objetdao.find(11);
         //System.out.println(find.toString());
     }
 }

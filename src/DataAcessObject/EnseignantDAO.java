@@ -19,9 +19,12 @@ public class EnseignantDAO extends DAO<Enseignant> {
 
     @Override
     public boolean create(Enseignant obj) {
+        // INSERT INTO 'utilisateur'
+        UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
+        objetdao.create(obj); // obj.setID a été appelé, ID est auto incrémenté 
         try {
             // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
-            String sql = "INSERT INTO `enseignant`(`ID_Utilisateur`, `ID_Cours`) VALUES(" + "NULL" + ",'" + obj.getCours().getId() + "');";
+            String sql = "INSERT INTO `enseignant`(`ID_Utilisateur`, `ID_Cours`) VALUES('" + obj.getId() + "','" + obj.getCours().getId() + "');";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
@@ -51,6 +54,10 @@ public class EnseignantDAO extends DAO<Enseignant> {
 
     @Override
     public boolean delete(Enseignant obj) {
+        // Delete en CASCADE FROM TABLE 'Utilisateur'
+        UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
+        boolean delete = objetdao.delete(obj);
+
         // Copie en cas de delete réussi
         Enseignant copie = obj;
         try {
@@ -76,6 +83,10 @@ public class EnseignantDAO extends DAO<Enseignant> {
 
     @Override
     public boolean update(Enseignant obj) {
+        // UPDATE 'utilisateur'
+        UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
+        objetdao.update(obj);
+        
         try {
             // REQUETE SQL : UPDATE
             String sql = "UPDATE `enseignant` SET `ID_Utilisateur`='" + obj.getId() + "',`ID_Cours`='" + obj.getCours().getId() + "' WHERE ID ='" + obj.getId() + "';";
