@@ -18,7 +18,7 @@ public class Tester {
         // ETAPE 3 - On crée un objet POJO pour manipuler 
         Enseignant obj = new Enseignant();
         // Configuration setter
-        obj.setId(13);
+        obj.setId(0);
         obj.setEmail("testupdated_email");
         obj.setPasswd("test_passwd");
         obj.setNom("test_nom");
@@ -31,7 +31,7 @@ public class Tester {
         //System.out.println(executed);
         
         // FIND
-        Enseignant find = objetdao.find("testupdated_email");
+        Enseignant find = objetdao.find(1);
         System.out.println(find.toString());
     }
 }
