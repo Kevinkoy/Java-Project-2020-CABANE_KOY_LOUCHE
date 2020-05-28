@@ -59,7 +59,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
         // Delete en CASCADE FROM TABLE 'Utilisateur'
         UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
         boolean delete = objetdao.delete(obj);
-        
+
         // Copie en cas de delete réussi
         Etudiant copie = obj;
         try {
@@ -87,8 +87,8 @@ public class EtudiantDAO extends DAO<Etudiant> {
     public boolean update(Etudiant obj) {
         // UPDATE 'utilisateur'
         UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
-        objetdao.update(obj); 
-        
+        objetdao.update(obj);
+
         try {
             // REQUETE SQL : UPDATE
             String sql = "UPDATE `etudiant` SET `ID`= '" + obj.getId() + "',`Numero`= '" + obj.getNumero() + "',`ID_Groupe`= '" + obj.getGroupe().getId() + "' WHERE ID = '" + obj.getId() + "'";

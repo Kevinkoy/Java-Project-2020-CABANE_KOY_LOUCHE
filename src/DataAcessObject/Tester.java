@@ -14,29 +14,24 @@ public class Tester {
         //DAO<Etudiant> objetdao = new EtudiantDAO(connection);
         // ObjetDao Unitaire
         CoursDAO objetdao = new CoursDAO(connection);
-        
-        
+
         // On crée un objet pour manipuler 
         Cours objet = new Cours();
         // Configuration setter
         objet.setId(0);
         objet.setNom("Java");
-        
 
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
         boolean executed = objetdao.create(objet);
         System.out.println(executed);
-        
+
         //UtilisateurDAO userdao = new UtilisateurDAO(connection);
         //userdao.delete(objet);
-       
-        
         // FIND
         //Etudiant find = objetdao.find(11);
         //System.out.println(find.toString());
-        
     }
-    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /*
