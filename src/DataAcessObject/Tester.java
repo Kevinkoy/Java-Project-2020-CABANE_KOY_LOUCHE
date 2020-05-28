@@ -1,6 +1,7 @@
 package DataAcessObject;
 
 import Modele.Cours;
+import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
@@ -11,20 +12,25 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        //DAO<Etudiant> objetdao = new EtudiantDAO(connection);
+        DAO<Utilisateur> utilisateurdao = new UtilisateurDAO(connection);
         // ObjetDao Unitaire
-        CoursDAO objetdao = new CoursDAO(connection);
-
+        //CoursDAO objetdao = new CoursDAO(connection);
+    
         // On crée un objet pour manipuler 
-        Cours objet = new Cours();
+        Utilisateur user = new Utilisateur();
         // Configuration setter
-        objet.setId(0);
-        objet.setNom("Java");
+        user.setId(23);
+        user.setEmail("temail");
+        user.setPasswd("tpasswd");
+        user.setNom("tnom");
+        user.setPrenom("tprenom");
+        user.setDroit(0);
+
 
         // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean executed = objetdao.create(objet);
-        System.out.println(executed);
-
+        boolean create = utilisateurdao.delete(user);
+        System.out.println(create);
+        
         //UtilisateurDAO userdao = new UtilisateurDAO(connection);
         //userdao.delete(objet);
         // FIND
