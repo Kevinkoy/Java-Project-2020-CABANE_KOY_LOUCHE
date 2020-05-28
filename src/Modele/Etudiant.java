@@ -29,7 +29,7 @@ public class Etudiant extends Utilisateur {
      * @param groupe
      */
     public Etudiant(int id, String email, String passwd, String nom, String prenom, int numero, Groupe groupe) {
-        super(id, email, passwd, nom, prenom, 4);
+        super(id, email, passwd, nom, prenom, 4); // droit = 4 etudiant
         this.numero = numero;
         this.groupe = groupe;
     }
