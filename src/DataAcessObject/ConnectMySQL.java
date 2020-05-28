@@ -87,6 +87,23 @@ public class ConnectMySQL {
         return passwd;
     }
 
+    ////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param connect
+     */
+    public static void setConnect(Connection connect) {
+        ConnectMySQL.connect = connect;
+    }
+
+    /**
+     *
+     * @param url
+     */
+    public static void setUrl(String url) {
+        ConnectMySQL.url = url;
+    }
+
     /**
      *
      *
