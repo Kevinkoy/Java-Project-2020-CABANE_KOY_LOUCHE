@@ -2,7 +2,6 @@ package DataAcessObject;
 
 import Modele.Cours;
 import Modele.Enseignant;
-import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
@@ -12,27 +11,28 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // ETAPE 2 - On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Enseignant> objetdao = new EnseignantDAO(connection);
+        //DAO<Enseignant> objetdao = new EnseignantDAO(connection);
         // ETAPE 2 - ObjetDao Unitaire
+        EnseignantDAO objetdao = new EnseignantDAO(connection);
     
         // ETAPE 3 - On crée un objet POJO pour manipuler 
         Enseignant obj = new Enseignant();
         // Configuration setter
-        obj.setId(23);
-        obj.setEmail("test_email");
+        obj.setId(13);
+        obj.setEmail("testupdated_email");
         obj.setPasswd("test_passwd");
         obj.setNom("test_nom");
         obj.setPrenom("test_prenom");
-        obj.setCours(new Cours(1,"Java"));
+        obj.setCours(new Cours(2,"Java"));
         //obj.setDroit(3);
 
         // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean create = objetdao.create(obj);
-        System.out.println(create);
+        //boolean executed = objetdao.update(obj);
+        //System.out.println(executed);
         
         // FIND
-        //Enseignant find = objetdao.find(11);
-        //System.out.println(find.toString());
+        Enseignant find = objetdao.find("testupdated_email");
+        System.out.println(find.toString());
     }
 }
 

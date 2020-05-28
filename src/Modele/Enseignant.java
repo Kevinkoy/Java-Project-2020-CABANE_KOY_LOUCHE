@@ -40,7 +40,7 @@ public class Enseignant extends Utilisateur {
             return "Enseignant introuvable";
         }
         else
-        return super.toString() + ", cours: " + this.cours;
+        return super.toString() + " cours: " + this.cours;
     }
 
     // GETTERS

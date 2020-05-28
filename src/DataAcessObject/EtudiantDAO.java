@@ -59,7 +59,8 @@ public class EtudiantDAO extends DAO<Etudiant> {
         // Delete en CASCADE FROM TABLE 'Utilisateur'
         UtilisateurDAO objetdao = new UtilisateurDAO(this.connection);
         boolean delete = objetdao.delete(obj);
-
+        return delete;
+        /*
         // Copie en cas de delete réussi
         Etudiant copie = obj;
         try {
@@ -80,7 +81,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
             //e.printStackTrace();
             System.out.println(e.getMessage());
         }
-        return false;
+        return false;*/
     }
 
     @Override
@@ -91,7 +92,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
 
         try {
             // REQUETE SQL : UPDATE
-            String sql = "UPDATE `etudiant` SET `ID`= '" + obj.getId() + "',`Numero`= '" + obj.getNumero() + "',`ID_Groupe`= '" + obj.getGroupe().getId() + "' WHERE ID = '" + obj.getId() + "'";
+            String sql = "UPDATE `etudiant` SET `ID`= '" + obj.getId() + "',`Numero`= '" + obj.getNumero() + "',`ID_Groupe`= '" + obj.getGroupe().getId() + "' WHERE ID_Utilisateur = '" + obj.getId() + "'";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
             // ResultSet (result)
