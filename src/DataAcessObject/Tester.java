@@ -11,9 +11,9 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // ETAPE 2 - On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        //DAO<Enseignant> objetdao = new EnseignantDAO(connection);
+        DAO<Enseignant> objetdao = new EnseignantDAO(connection);
         // ETAPE 2 - ObjetDao Unitaire
-        EnseignantDAO objetdao = new EnseignantDAO(connection);
+        //EnseignantDAO objetdao = new EnseignantDAO(connection);
     
         // ETAPE 3 - On crée un objet POJO pour manipuler 
         Enseignant obj = new Enseignant();

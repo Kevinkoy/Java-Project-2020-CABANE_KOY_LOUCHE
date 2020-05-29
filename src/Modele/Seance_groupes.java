@@ -1,5 +1,7 @@
 package Modele;
 
+import java.sql.Connection;
+
 /**
  *
  * @author KévinKOY
