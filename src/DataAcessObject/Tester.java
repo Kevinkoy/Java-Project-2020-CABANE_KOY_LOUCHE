@@ -1,7 +1,14 @@
 package DataAcessObject;
 
+import Controleur.Recherche_informations;
 import Modele.Cours;
 import Modele.Enseignant;
+import Modele.Etudiant;
+import Modele.Groupe;
+import Modele.Promotion;
+import Modele.Seance;
+import Modele.Seance_groupes;
+import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
@@ -11,28 +18,30 @@ public class Tester {
         Connection connection = ConnectMySQL.getInstance();
 
         // ETAPE 2 - On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Enseignant> objetdao = new EnseignantDAO(connection);
+        DAO<Seance_groupes> objetdao = new Seance_groupesDAO(connection);
         // ETAPE 2 - ObjetDao Unitaire
         //EnseignantDAO objetdao = new EnseignantDAO(connection);
     
         // ETAPE 3 - On crée un objet POJO pour manipuler 
-        Enseignant obj = new Enseignant();
+        Seance_groupes obj = new Seance_groupes();
         // Configuration setter
-        obj.setId(0);
-        obj.setEmail("testupdated_email");
-        obj.setPasswd("test_passwd");
-        obj.setNom("test_nom");
-        obj.setPrenom("test_prenom");
-        obj.setCours(new Cours(2,"Java"));
-        //obj.setDroit(3);
+        Seance seance = new Modele.Seance();
+        seance.setId(2);
+        obj.setSeance(seance);
+        obj.setGroupe(new Groupe(1,"",new Promotion(1,"")));
+                
 
         // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
         //boolean executed = objetdao.create(obj);
         //System.out.println(executed);
-        
         // FIND
-        Enseignant find = objetdao.find(1);
+        Seance_groupes find = objetdao.find(1);
         System.out.println(find.toString());
+        
+        // RECHERCHER INFORMATIONS
+        //Object search = new Recherche_informations().by_ID(obj);
+        //System.out.println(search.toString());
+
     }
 }
 

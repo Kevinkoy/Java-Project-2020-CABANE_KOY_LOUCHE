@@ -17,7 +17,7 @@ import java.sql.Connection;
  * @author KévinKOY
  * @param <T>
  */
-public abstract class DAO<T> {
+public abstract class DAO<T>{
 
     protected Connection connection = null;
 
