@@ -9,22 +9,7 @@ import java.sql.Connection;
 public class Tester {
 
     public static void main(String[] args) {
-        // ETAPE 1 - On crée une connection, specifique à notre base de donnée
-        //Connection connection = ConnectMySQL.getInstance();
 
-        // ETAPE 2 - On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        //DAO<Etudiant> objetdao = new EtudiantDAO(connection);
-        // ETAPE 2 - ObjetDao Unitaire
-        //EnseignantDAO objetdao = new EnseignantDAO(connection);
-        // ETAPE 3 - On crée un objet POJO pour manipuler 
-        // Configuration setter
-        // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        //boolean executed = objetdao.create(obj);
-        //System.out.println(executed);
-        // FIND
-        //Seance_groupes find = objetdao.find(1);
-        //System.out.println(find.toString());
-        
         // LOGGIN
         String email = "kevin.koy@edu.ece.fr";
         String passwd = "123";
@@ -35,14 +20,11 @@ public class Tester {
         /// Si pas trouvé...
         if (find.getId() == 0) {
             System.out.println("Email ou mot de passe incorrect");
-        }
-        /// Sinon résultat, on appelle le constructeur de recherche_informations (initialisation).
+        } /// Sinon résultat, on appelle le constructeur de recherche_informations (initialisation).
         else {
-            Recherche_informations  search = new Recherche_informations(email, passwd);
+            Recherche_informations search = new Recherche_informations(email, passwd);
             System.out.println("Informations sur l'utilisateur:" + search.getUser());
         }
-       
-       
 
     }
 }
