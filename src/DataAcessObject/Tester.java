@@ -24,16 +24,22 @@ public class Tester {
         // FIND
         //Seance_groupes find = objetdao.find(1);
         //System.out.println(find.toString());
+        
         // LOGGIN
         String email = "kevin.koy@edu.ece.fr";
         String passwd = "123";
-        // SE CONNECTER
+        // BOUTTON: CONNEXION....
+        // =>DAO: Data Acess Object, on va chercher dans la BDD
         UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
-        Utilisateur find = objetdao.find(email, passwd); // return Utilisateur NULL ou Trouvé!
+        Utilisateur find = objetdao.find(email, passwd); // return (Utilisateur NULL ou Trouvé...)
+        /// Si pas trouvé...
         if (find.getId() == 0) {
             System.out.println("Email ou mot de passe incorrect");
-        } else {
+        }
+        /// Sinon résultat, on appelle le constructeur de recherche_informations (initialisation).
+        else {
             Recherche_informations  search = new Recherche_informations(email, passwd);
+            System.out.println("Informations sur l'utilisateur:" + search.getUser());
         }
        
        

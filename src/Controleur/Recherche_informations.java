@@ -30,17 +30,18 @@ public class Recherche_informations {
      * @param passwd
      */
     public Recherche_informations(String email, String passwd) {
-        // PAGE LOGGIN: FIND(email,passwd)
-        UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
+        // Loggin: Find(email,passwd)
+        UtilisateurDAO utilisateurdao = new UtilisateurDAO(ConnectMySQL.getInstance());
         // Initialisation de user
-        this.user = objetdao.find(email, passwd); // return Utilisateur NULL ou Trouvé!
+        this.user = utilisateurdao.find(email, passwd); // find: return Utilisateur NULL ou Trouvé!
 
-        // Aucun utilisateur connecté...
+        // Aucun utilisateur connecté... =======================================================
         if (this.user.getId() == 0) {
-            System.out.println("Aucun utilisateur connecté: " + user.toString());
-        } // Utilisateur connecté !
+            System.out.println("Aucun utilisateur trouvé: " + user.toString());
+        } // Utilisateur connecté ! ============================================================
         else {
             System.out.println("Utilisateur connecté!: " + user.toString());
+            // Quel type d'utilisateur connecté... =============================================
             switch (this.user.getDroit()) {
                 case 1:
                     System.out.println("Administrateur");
@@ -49,19 +50,23 @@ public class Recherche_informations {
                 case 3:
                     System.out.println("Enseignant");
                     this.teacher = new EnseignantDAO(ConnectMySQL.getInstance()).find(this.user.getId());
-
                 case 4:
                     System.out.println("Etudiant");
                     this.student = new EtudiantDAO(ConnectMySQL.getInstance()).find(this.user.getId());
                 //EtudiantDAO etudiantdao = new EtudiantDAO(ConnectMySQL.getInstance());
                 //this.student = etudiantdao.find(this.user.getId())
-                default:
-                    System.out.println("");
+                default:;
             }
         }
     }
 
     // Getters /////////////////////////////////////////////////////////////////////
+    
+    public Utilisateur getUser()
+    {
+       return this.student;
+    }
+    
     /**
      * Si Utilisateur connecté = ETUDIANT
      *
