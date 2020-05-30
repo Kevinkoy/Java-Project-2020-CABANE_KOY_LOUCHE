@@ -2,7 +2,6 @@ package DataAcessObject;
 
 import Modele.Cours;
 import Modele.Groupe;
-import Modele.MaDate;
 import Modele.Promotion;
 import Modele.Seance;
 import Modele.Seance_groupes;

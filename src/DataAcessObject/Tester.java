@@ -1,46 +1,38 @@
 package DataAcessObject;
 
 import Controleur.Recherche_informations;
-import Modele.Cours;
-import Modele.Enseignant;
 import Modele.Etudiant;
 import Modele.Groupe;
-import Modele.Promotion;
-import Modele.Seance;
-import Modele.Seance_groupes;
-import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
 
     public static void main(String[] args) {
         // ETAPE 1 - On crée une connection, specifique à notre base de donnée
-        Connection connection = ConnectMySQL.getInstance();
+        //Connection connection = ConnectMySQL.getInstance();
 
         // ETAPE 2 - On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Seance_groupes> objetdao = new Seance_groupesDAO(connection);
+        //DAO<Etudiant> objetdao = new EtudiantDAO(connection);
         // ETAPE 2 - ObjetDao Unitaire
         //EnseignantDAO objetdao = new EnseignantDAO(connection);
     
         // ETAPE 3 - On crée un objet POJO pour manipuler 
-        Seance_groupes obj = new Seance_groupes();
         // Configuration setter
-        Seance seance = new Modele.Seance();
-        seance.setId(2);
-        obj.setSeance(seance);
-        obj.setGroupe(new Groupe(1,"",new Promotion(1,"")));
+       
+        
                 
 
         // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
         //boolean executed = objetdao.create(obj);
         //System.out.println(executed);
         // FIND
-        Seance_groupes find = objetdao.find(1);
-        System.out.println(find.toString());
+        //Seance_groupes find = objetdao.find(1);
+        //System.out.println(find.toString());
         
         // RECHERCHER INFORMATIONS
-        //Object search = new Recherche_informations().by_ID(obj);
-        //System.out.println(search.toString());
+        String email = "kevin.koy@edu.ece.fr";
+        String passwd = "12";
+        Recherche_informations search = new Recherche_informations(email,passwd);
 
     }
 }

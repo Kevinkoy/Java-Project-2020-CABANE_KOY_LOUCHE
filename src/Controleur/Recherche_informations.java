@@ -6,19 +6,8 @@
 package Controleur;
 
 import DataAcessObject.ConnectMySQL;
-import DataAcessObject.CoursDAO;
-import DataAcessObject.DAO;
-import DataAcessObject.EnseignantDAO;
-import DataAcessObject.EtudiantDAO;
-import DataAcessObject.Seance_groupesDAO;
 import DataAcessObject.UtilisateurDAO;
-import Modele.Cours;
-import Modele.Enseignant;
-import Modele.Etudiant;
-import Modele.Seance_groupes;
 import Modele.Utilisateur;
-import java.sql.Connection;
-import static javafx.scene.input.KeyCode.T;
 
 /**
  *
@@ -26,12 +15,61 @@ import static javafx.scene.input.KeyCode.T;
  */
 public class Recherche_informations {
 
+    //ATTRIBUTS 
+    protected Utilisateur user;
+
     public Recherche_informations() {
     }
 
+    /**
+     * CONSTRUCTEUR Surcharge (PAGE LOGGIN: SAISIE du email+passwd)
+     * Initialisation de l'utilisateur connecté
+     *
+     * @param email
+     * @param passwd
+     */
+    public Recherche_informations(String email, String passwd) {
+
+        // FIND(email,passwd) DE LA PAGE LOGGIN
+        UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
+        Utilisateur find = objetdao.find(email, passwd); // RETURN UTILISATEUR NULL OU TROUVER!
+
+        // Aucun utilisateur connecté...
+        if (find.getId() == 0) {
+            this.user = find;
+            System.out.println("Aucun utilisateur connecté:" + user.toString());
+        } // Utilisateur connecté !
+        else {
+            this.user = find;
+            System.out.println("Utilisateur connecté!:" + user.toString());
+        }
+    }
+
+    /**
+     *
+     * @return String du Droit utilisateur connecté
+     */
+    public String getDroit() {
+        switch (this.user.getDroit()) {
+            case 1:
+                return "Administrateur";
+            case 2:
+                return "Référent pédagogique";
+            case 3:
+                return "Enseignant";
+            case 4:
+                return "Etudiant";
+            default:
+                return "";
+        }
+    }
+}
+
+
+/*
     public Object by_ID(Object obj) {
         // OBJECT NULL PAR DEFAUT
-        Object returned = null;       
+        Object returned = null;
         // INSTANCE OF ? 
         if (obj instanceof Utilisateur) {
             Utilisateur find = new UtilisateurDAO(ConnectMySQL.getInstance()).find(((Utilisateur) obj).getId());
@@ -47,44 +85,7 @@ public class Recherche_informations {
         } else if (obj instanceof Cours) {
             Cours find = new CoursDAO(ConnectMySQL.getInstance()).find(((Cours) obj).getId());
             returned = find;
-        } 
+        }
 
         return returned;
-    }
-
-    
-    
-    
-    
-    
-    public DAO<Seance_groupes> Seance_groupes(Etudiant obj) {
-        Connection connection = ConnectMySQL.getInstance();
-        DAO<Seance_groupes> objetdao = new Seance_groupesDAO(connection);
-
-        Seance_groupes find = objetdao.find(obj.getGroupe().getId());
-
-        return objetdao;
-
-    }
-
-    /**
-     * Verifie le droit, d'un utilisateur passé en paramètre.
-     *
-     * @param obj
-     * @return 1 2 3 4
-     */
-    public int verifier_Droit(Utilisateur obj) {
-        switch (obj.getDroit()) {
-            case 1:
-                return 1;
-            case 2:
-                return 2;
-            case 3:
-                return 3;
-            case 4:
-                return 4;
-            default:
-                return 0;
-        }
-    }
-}
+    }*/
