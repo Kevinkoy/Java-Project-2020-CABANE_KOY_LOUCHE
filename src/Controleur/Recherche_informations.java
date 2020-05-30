@@ -23,8 +23,10 @@ public class Recherche_informations {
     }
 
     /**
-     * CONSTRUCTEUR Surcharge (PAGE LOGGIN: SAISIE du email+passwd)
-     * Initialisation de l'utilisateur connecté
+     * Constructeur surchargé (Loggin: Saisir email + passwd)
+     *
+     *  / Initialise l'utilisateur, si l'email et le password match dans la
+     * DataBase.
      *
      * @param email
      * @param passwd
@@ -35,13 +37,13 @@ public class Recherche_informations {
         // Initialisation de user
         this.user = utilisateurdao.find(email, passwd); // find: return Utilisateur NULL ou Trouvé!
 
-        // Aucun utilisateur connecté... =======================================================
+        // Aucun utilisateur connecté... =====================================================================================
         if (this.user.getId() == 0) {
             System.out.println("Aucun utilisateur trouvé: " + user.toString());
-        } // Utilisateur connecté ! ============================================================
+        } // Utilisateur connecté ! ==========================================================================================
         else {
             System.out.println("Utilisateur connecté!: " + user.toString());
-            // Quel type d'utilisateur connecté... =============================================
+            // Quel type d'utilisateur connecté... ===========================================================================
             switch (this.user.getDroit()) {
                 case 1:
                     System.out.println("Administrateur");
@@ -57,13 +59,15 @@ public class Recherche_informations {
                 //this.student = etudiantdao.find(this.user.getId())
                 default:;
             }
-        }
+        } // ==================================================================================================================
     }
 
     // Getters /////////////////////////////////////////////////////////////////////
     /**
+     * Methode qui retourne l'Utilisateur Connecté (Utilisateur OU Enseignant OU
+     * Etudiant)
      *
-     * @return Utilisateur | ENSEIGNANT | ETUDIANT
+     * @return Utilisateur | Enseignant | Etudiant
      */
     public Utilisateur getUser() {
         switch (this.user.getDroit()) {
@@ -81,6 +85,7 @@ public class Recherche_informations {
     }
 
     /**
+     * Methode pour récuperer id utilisateur connecté
      *
      * @return id utilisateur
      */
@@ -89,6 +94,7 @@ public class Recherche_informations {
     }
 
     /**
+     * Methode pour récuperer email utilisateur connecté
      *
      * @return email utilisateur
      */
@@ -97,6 +103,7 @@ public class Recherche_informations {
     }
 
     /**
+     * Methode pour récuperer passwd utilisateur connecté
      *
      * @return passwd utilisateur
      */
@@ -105,6 +112,7 @@ public class Recherche_informations {
     }
 
     /**
+     * Methode pour récuperer nom utilisateur connecté
      *
      * @return nom utilisateur
      */
@@ -113,6 +121,7 @@ public class Recherche_informations {
     }
 
     /**
+     * Methode pour récuperer prenom utilisateur connecté
      *
      * @return prenom utilisateur
      */
@@ -121,6 +130,7 @@ public class Recherche_informations {
     }
 
     /**
+     * Methode pour récuperer STRING droit (statut) de utilisateur connecté
      *
      * @return String du Droit utilisateur connecté
      */
@@ -141,7 +151,8 @@ public class Recherche_informations {
 
     /// UTILISATEUR CONNECTED = ETUDIANT ================================================================================================================
     /**
-     * Si Utilisateur connecté = ETUDIANT
+     * Si Utilisateur connecté = ETUDIANT Methode pour récuperer le numero de
+     * l'étudiant connecté
      *
      * @return Numero Etudiant, sinon 0
      */
@@ -150,7 +161,8 @@ public class Recherche_informations {
     }
 
     /**
-     * Si Utilisateur connecté = ETUDIANT
+     * Si Utilisateur connecté = ETUDIANT; Methode pour récuperer le nom du
+     * groupe de l'étudiant connecté
      *
      * @return Nom du Groupe, sinon null
      */
@@ -159,7 +171,8 @@ public class Recherche_informations {
     }
 
     /**
-     * Si Utilisateur connecté = ETUDIANT
+     * Si Utilisateur connecté = ETUDIANT; Methode pour récuperer le nom de la
+     * promotion de l'étudiant connecté
      *
      * @return Nom de la Promotion, sinon null
      */
@@ -170,7 +183,8 @@ public class Recherche_informations {
 
     /// UTILISATEUR CONNECTED = Enseignant  ==========================================================================================================
     /**
-     * Si Utilisateur connecté = Enseignant
+     * Si Utilisateur connecté = Enseignant; Methode pour récuperer le nom du
+     * cours de l'enseignant connecté
      *
      * @return Nom du cours, sinon null
      */
