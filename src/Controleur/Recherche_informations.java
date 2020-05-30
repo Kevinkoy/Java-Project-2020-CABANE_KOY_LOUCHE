@@ -61,33 +61,28 @@ public class Recherche_informations {
     }
 
     // Getters /////////////////////////////////////////////////////////////////////
-    
-    public Utilisateur getUser()
-    {
-       return this.student;
-    }
-    
     /**
-     * Si Utilisateur connecté = ETUDIANT
      *
-     * @return Numero Etudiant, sinon 0
+     * @return Utilisateur | ENSEIGNANT | ETUDIANT
      */
-    public int getNumero() {
-        return this.student.getNumero();
-    }
-
-    /**
-     * Si Utilisateur connecté = ETUDIANT
-     *
-     * @return l'id du groupe
-     */
-    public int getID_Groupe() {
-        return this.student.getGroupe().getId();
+    public Utilisateur getUser() {
+        switch (this.user.getDroit()) {
+            case 1:
+                return this.user;
+            case 2:
+                return this.user;
+            case 3:
+                return this.teacher;
+            case 4:
+                return this.student;
+            default:
+                return this.user;
+        }
     }
 
     /**
      *
-     * @return id
+     * @return id utilisateur
      */
     public int getId() {
         return this.user.getId();
@@ -95,7 +90,7 @@ public class Recherche_informations {
 
     /**
      *
-     * @return email
+     * @return email utilisateur
      */
     public String getEmail() {
         return this.user.getEmail();
@@ -103,7 +98,7 @@ public class Recherche_informations {
 
     /**
      *
-     * @return passwd
+     * @return passwd utilisateur
      */
     public String getPasswd() {
         return this.user.getPasswd();
@@ -111,7 +106,7 @@ public class Recherche_informations {
 
     /**
      *
-     * @return nom
+     * @return nom utilisateur
      */
     public String getNom() {
         return this.user.getNom();
@@ -119,7 +114,7 @@ public class Recherche_informations {
 
     /**
      *
-     * @return prenom
+     * @return prenom utilisateur
      */
     public String getPrenom() {
         return this.user.getPrenom();
@@ -127,17 +122,9 @@ public class Recherche_informations {
 
     /**
      *
-     * @return int droit
-     */
-    public int getDroit() {
-        return this.user.getDroit();
-    }
-
-    /**
-     *
      * @return String du Droit utilisateur connecté
      */
-    public String getStringDroit() {
+    public String getDroit() {
         switch (this.user.getDroit()) {
             case 1:
                 return "Administrateur";
@@ -152,6 +139,45 @@ public class Recherche_informations {
         }
     }
 
+    /// UTILISATEUR CONNECTED = ETUDIANT ================================================================================================================
+    /**
+     * Si Utilisateur connecté = ETUDIANT
+     *
+     * @return Numero Etudiant, sinon 0
+     */
+    public int getNumero() {
+        return this.student.getNumero();
+    }
+
+    /**
+     * Si Utilisateur connecté = ETUDIANT
+     *
+     * @return Nom du Groupe, sinon null
+     */
+    public String getGroupe() {
+        return this.student.getGroupe().getNom();
+    }
+
+    /**
+     * Si Utilisateur connecté = ETUDIANT
+     *
+     * @return Nom de la Promotion, sinon null
+     */
+    public String getPromotion() {
+        return this.student.getGroupe().getPromotion().getNom();
+    }
+    // ===============================================================================================================================================
+
+    /// UTILISATEUR CONNECTED = Enseignant  ==========================================================================================================
+    /**
+     * Si Utilisateur connecté = Enseignant
+     *
+     * @return Nom du cours, sinon null
+     */
+    public String getCours() {
+        return this.teacher.getCours().getNom();
+    }
+    /// ==============================================================================================================================================
 }
 
 /*
