@@ -8,8 +8,8 @@ public class Tester {
     public static void main(String[] args) {
 
         // LOGGIN
-        String email = "administrateur@edu.ece.fr";
-        String passwd = "mdpA";
+        String email = "enseignant@edu.ece.fr";
+        String passwd = "mdpE";
 
         // BOUTTON: CONNEXION....
         // =>DAO: Data Acess Object, on va chercher dans la BDD

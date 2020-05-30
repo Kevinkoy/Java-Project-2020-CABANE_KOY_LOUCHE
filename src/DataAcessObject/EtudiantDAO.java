@@ -133,7 +133,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
                         result.getString("utilisateur.Nom"),
                         result.getString("utilisateur.Prenom"),
                         result.getInt("etudiant.Numero"),
-                        new Groupe(result.getInt("etudiant.ID_Groupe"), "", new Promotion(result.getInt("groupe.ID_Promotion"), result.getString("Promotion.Nom"))));
+                        new Groupe(result.getInt("etudiant.ID_Groupe"), result.getString("groupe.Nom"), new Promotion(result.getInt("groupe.ID_Promotion"), result.getString("Promotion.Nom"))));
 
             }
         } catch (SQLException e) {
@@ -165,7 +165,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
                         result.getString("utilisateur.Nom"),
                         result.getString("utilisateur.Prenom"),
                         result.getInt("etudiant.Numero"),
-                        new Groupe(result.getInt("etudiant.ID_Groupe"), "", new Promotion(result.getInt("groupe.ID_Promotion"), result.getString("Promotion.Nom"))));
+                        new Groupe(result.getInt("etudiant.ID_Groupe"), result.getString("groupe.Nom"), new Promotion(result.getInt("groupe.ID_Promotion"), result.getString("Promotion.Nom"))));
 
             }
         } catch (SQLException e) {
