@@ -32,24 +32,88 @@ public class Recherche_informations {
 
         // FIND(email,passwd) DE LA PAGE LOGGIN
         UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
-        Utilisateur find = objetdao.find(email, passwd); // RETURN UTILISATEUR NULL OU TROUVER!
+        Utilisateur find = objetdao.find(email, passwd); // return Utilisateur NULL ou Trouvé!
+        // Initialisation de user
+        this.user = find;
 
         // Aucun utilisateur connecté...
-        if (find.getId() == 0) {
-            this.user = find;
-            System.out.println("Aucun utilisateur connecté:" + user.toString());
+        if (this.user.getId() == 0) {
+            System.out.println("Aucun utilisateur connecté: " + user.toString());
         } // Utilisateur connecté !
         else {
-            this.user = find;
-            System.out.println("Utilisateur connecté!:" + user.toString());
+            System.out.println("Utilisateur connecté!: " + user.toString());
+            switch (this.user.getDroit()) {
+                case 1:
+                    System.out.println("Administrateur");
+                case 2:
+                    System.out.println("Référent pédagogique");
+                case 3:
+                    System.out.println("Enseignant");
+                    
+                case 4:
+                    System.out.println("Etudiant");
+                default:
+                    System.out.println("");
+            }
         }
     }
+    
+    
+    // Getters /////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @return id
+     */
+    public int getId() {
+        return this.user.getId();
+    }
+
+    /**
+     *
+     * @return email
+     */
+    public String getEmail() {
+        return this.user.getEmail();
+    }
+
+    /**
+     *
+     * @return passwd
+     */
+    public String getPasswd() {
+        return this.user.getPasswd();
+    }
+
+    /**
+     *
+     * @return nom
+     */
+    public String getNom() {
+        return this.user.getNom();
+    }
+
+    /**
+     *
+     * @return prenom
+     */
+    public String getPrenom() {
+        return this.user.getPrenom();
+    }
+
+    /**
+     *
+     * @return int droit
+     */
+    public int getDroit() {
+        return this.user.getDroit();
+    }
+
 
     /**
      *
      * @return String du Droit utilisateur connecté
      */
-    public String getDroit() {
+    public String getStringDroit() {
         switch (this.user.getDroit()) {
             case 1:
                 return "Administrateur";
@@ -63,7 +127,22 @@ public class Recherche_informations {
                 return "";
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
+
+
+
 
 
 /*

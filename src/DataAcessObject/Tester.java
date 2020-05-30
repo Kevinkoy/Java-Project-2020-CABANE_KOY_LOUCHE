@@ -31,7 +31,7 @@ public class Tester {
         
         // RECHERCHER INFORMATIONS
         String email = "kevin.koy@edu.ece.fr";
-        String passwd = "12";
+        String passwd = "123";
         Recherche_informations search = new Recherche_informations(email,passwd);
 
     }
