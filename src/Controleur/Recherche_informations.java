@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controleur;
 
 import DataAcessObject.ConnectMySQL;
+import DataAcessObject.EnseignantDAO;
+import DataAcessObject.EtudiantDAO;
 import DataAcessObject.UtilisateurDAO;
+import Modele.Enseignant;
+import Modele.Etudiant;
 import Modele.Utilisateur;
 
 /**
@@ -17,6 +16,8 @@ public class Recherche_informations {
 
     //ATTRIBUTS 
     protected Utilisateur user;
+    protected Etudiant student;
+    protected Enseignant teacher;
 
     public Recherche_informations() {
     }
@@ -29,12 +30,10 @@ public class Recherche_informations {
      * @param passwd
      */
     public Recherche_informations(String email, String passwd) {
-
-        // FIND(email,passwd) DE LA PAGE LOGGIN
+        // PAGE LOGGIN: FIND(email,passwd)
         UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
-        Utilisateur find = objetdao.find(email, passwd); // return Utilisateur NULL ou Trouvé!
         // Initialisation de user
-        this.user = find;
+        this.user = objetdao.find(email, passwd); // return Utilisateur NULL ou Trouvé!
 
         // Aucun utilisateur connecté...
         if (this.user.getId() == 0) {
@@ -49,17 +48,38 @@ public class Recherche_informations {
                     System.out.println("Référent pédagogique");
                 case 3:
                     System.out.println("Enseignant");
-                    
+                    this.teacher = new EnseignantDAO(ConnectMySQL.getInstance()).find(this.user.getId());
+
                 case 4:
                     System.out.println("Etudiant");
+                    this.student = new EtudiantDAO(ConnectMySQL.getInstance()).find(this.user.getId());
+                //EtudiantDAO etudiantdao = new EtudiantDAO(ConnectMySQL.getInstance());
+                //this.student = etudiantdao.find(this.user.getId())
                 default:
                     System.out.println("");
             }
         }
     }
-    
-    
+
     // Getters /////////////////////////////////////////////////////////////////////
+    /**
+     * Si Utilisateur connecté = ETUDIANT
+     *
+     * @return Numero Etudiant, sinon 0
+     */
+    public int getNumero() {
+        return this.student.getNumero();
+    }
+
+    /**
+     * Si Utilisateur connecté = ETUDIANT
+     *
+     * @return l'id du groupe
+     */
+    public int getID_Groupe() {
+        return this.student.getGroupe().getId();
+    }
+
     /**
      *
      * @return id
@@ -108,7 +128,6 @@ public class Recherche_informations {
         return this.user.getDroit();
     }
 
-
     /**
      *
      * @return String du Droit utilisateur connecté
@@ -127,23 +146,8 @@ public class Recherche_informations {
                 return "";
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
-
-
-
-
-
 
 /*
     public Object by_ID(Object obj) {

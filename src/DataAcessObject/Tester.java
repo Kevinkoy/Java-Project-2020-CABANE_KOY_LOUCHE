@@ -3,6 +3,7 @@ package DataAcessObject;
 import Controleur.Recherche_informations;
 import Modele.Etudiant;
 import Modele.Groupe;
+import Modele.Utilisateur;
 import java.sql.Connection;
 
 public class Tester {
@@ -15,24 +16,27 @@ public class Tester {
         //DAO<Etudiant> objetdao = new EtudiantDAO(connection);
         // ETAPE 2 - ObjetDao Unitaire
         //EnseignantDAO objetdao = new EnseignantDAO(connection);
-    
         // ETAPE 3 - On crée un objet POJO pour manipuler 
         // Configuration setter
-       
-        
-                
-
         // ETAPE 4 - TEST des fonctions CREATE, DELETE, UPDATE, FIND
         //boolean executed = objetdao.create(obj);
         //System.out.println(executed);
         // FIND
         //Seance_groupes find = objetdao.find(1);
         //System.out.println(find.toString());
-        
-        // RECHERCHER INFORMATIONS
+        // LOGGIN
         String email = "kevin.koy@edu.ece.fr";
         String passwd = "123";
-        Recherche_informations search = new Recherche_informations(email,passwd);
+        // SE CONNECTER
+        UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
+        Utilisateur find = objetdao.find(email, passwd); // return Utilisateur NULL ou Trouvé!
+        if (find.getId() == 0) {
+            System.out.println("Email ou mot de passe incorrect");
+        } else {
+            Recherche_informations  search = new Recherche_informations(email, passwd);
+        }
+       
+       
 
     }
 }
