@@ -1,29 +1,39 @@
 package DataAcessObject;
 
 import Controleur.Recherche_informations;
-import Modele.Etudiant;
-import Modele.Groupe;
 import Modele.Utilisateur;
-import java.sql.Connection;
 
 public class Tester {
 
     public static void main(String[] args) {
 
         // LOGGIN
-        String email = "kevin.koy@edu.ece.fr";
-        String passwd = "123";
+        String email = "administrateur@edu.ece.fr";
+        String passwd = "mdpA";
+
         // BOUTTON: CONNEXION....
         // =>DAO: Data Acess Object, on va chercher dans la BDD
         UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
-        Utilisateur find = objetdao.find(email, passwd); // return (Utilisateur NULL ou Trouvé...)
-        /// Si pas trouvé...
+        Utilisateur find = objetdao.find(email, passwd);
+
+        /// Si on trouve pas dans la DataBase...
         if (find.getId() == 0) {
             System.out.println("Email ou mot de passe incorrect");
-        } /// Sinon résultat, on appelle le constructeur de recherche_informations (initialisation).
+        } /// On trouve l'utilisateur dans la DataBase...
+        // On appelle le constructeur de recherche_informations (initialisation).
         else {
             Recherche_informations search = new Recherche_informations(email, passwd);
-            System.out.println("Informations sur l'utilisateur:" + search.getUser());
+            System.out.println("Informations sur l'utilisateur:" + search.getUser().toString());
+            System.out.println("Id:" + search.getId());
+            System.out.println("Email:" + search.getEmail());
+            System.out.println("Mot de passe:" + search.getPasswd());
+            System.out.println("Nom:" + search.getNom());
+            System.out.println("Prenom:" + search.getPrenom());
+            System.out.println("Droit:" + search.getDroit());
+            System.out.println("Numero:" + search.getNumero());
+            System.out.println("Groupe:" + search.getGroupe());
+            System.out.println("Promotion:" + search.getPromotion());
+            System.out.println("Cours:" + search.getCours());
         }
 
     }

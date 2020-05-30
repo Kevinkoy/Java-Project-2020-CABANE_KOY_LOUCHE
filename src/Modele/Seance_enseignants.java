@@ -14,6 +14,8 @@ public class Seance_enseignants {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance_enseignants() {
+        this.seance = new Seance();
+        this.enseignant = new Enseignant();
     }
 
     /**

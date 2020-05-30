@@ -15,6 +15,7 @@ public class Enseignant extends Utilisateur {
     public Enseignant() {
         super();
         this.droit = 3; // 3 enseignant
+        this.cours = new Cours();
     }
 
     /**

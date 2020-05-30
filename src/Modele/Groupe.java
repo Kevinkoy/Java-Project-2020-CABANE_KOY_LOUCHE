@@ -15,7 +15,9 @@ public class Groupe {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Groupe() {
-
+        this.id = 0;
+        this.nom = "";
+        this.promotion = new Promotion();
     }
 
     /**

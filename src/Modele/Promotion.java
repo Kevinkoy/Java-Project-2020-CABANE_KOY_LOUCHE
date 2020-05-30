@@ -19,6 +19,8 @@ public class Promotion {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Promotion() {
+        this.id = 0;
+        this.nom = "";
 
     }
 

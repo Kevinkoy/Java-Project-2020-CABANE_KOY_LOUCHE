@@ -16,7 +16,10 @@ public class Salle {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Salle() {
-
+        this.id = 0;
+        this.nom = "";
+        this.capacite = 0;
+        this.site = new Site();
     }
 
     /**

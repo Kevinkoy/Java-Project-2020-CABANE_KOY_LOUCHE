@@ -14,11 +14,13 @@ public class Site {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Site() {
-
+        this.id = 0;
+        this.nom = "";
     }
 
     /**
      * CONSTRUCTEUR SURCHARGE
+     *
      * @param id
      * @param nom
      */
@@ -31,9 +33,8 @@ public class Site {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        if(this.id == 0)
-        {
-          return "Site introuvable";
+        if (this.id == 0) {
+            return "Site introuvable";
         }
         return " id: " + this.id + ", nom: " + this.nom;
     }

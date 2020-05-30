@@ -36,6 +36,8 @@ public class Recherche_informations {
         UtilisateurDAO utilisateurdao = new UtilisateurDAO(ConnectMySQL.getInstance());
         // Initialisation de user
         this.user = utilisateurdao.find(email, passwd); // find: return Utilisateur NULL ou Trouvé!
+        this.student = new Etudiant();
+        this.teacher = new Enseignant();
 
         // Aucun utilisateur connecté... =====================================================================================
         if (this.user.getId() == 0) {
@@ -47,16 +49,18 @@ public class Recherche_informations {
             switch (this.user.getDroit()) {
                 case 1:
                     System.out.println("Administrateur");
+                    break;
                 case 2:
                     System.out.println("Référent pédagogique");
+                    break;
                 case 3:
                     System.out.println("Enseignant");
                     this.teacher = new EnseignantDAO(ConnectMySQL.getInstance()).find(this.user.getId());
+                    break;
                 case 4:
                     System.out.println("Etudiant");
                     this.student = new EtudiantDAO(ConnectMySQL.getInstance()).find(this.user.getId());
-                //EtudiantDAO etudiantdao = new EtudiantDAO(ConnectMySQL.getInstance());
-                //this.student = etudiantdao.find(this.user.getId())
+                    break;
                 default:;
             }
         } // ==================================================================================================================

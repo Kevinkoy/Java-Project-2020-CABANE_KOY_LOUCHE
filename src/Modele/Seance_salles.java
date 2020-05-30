@@ -14,6 +14,8 @@ public class Seance_salles {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance_salles() {
+        this.seance = new Seance();
+        this.salle = new Salle();
     }
 
     /**

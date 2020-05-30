@@ -16,6 +16,8 @@ public class Etudiant extends Utilisateur {
     public Etudiant() {
         super();
         this.droit = 4; // 4 étudiant
+        this.numero = 0;
+        this.groupe = new Groupe();
     }
 
     /**
