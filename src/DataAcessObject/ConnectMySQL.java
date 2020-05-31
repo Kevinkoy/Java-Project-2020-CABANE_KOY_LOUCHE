@@ -2,8 +2,6 @@ package DataAcessObject;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -15,8 +13,6 @@ public class ConnectMySQL {
 
     /// ATTRIBUTS //////////////////////////////////////////////////////////////
     private static Connection connect;
-    private static Statement st;
-    private static ResultSet rst;
 
     /**
      * phpMyAdmin: URL de connection
@@ -37,7 +33,6 @@ public class ConnectMySQL {
     public ConnectMySQL() {
 
     }
-
 
     /// METHODES ///////////////////////////////////////////////////////////////
     /**
@@ -60,6 +55,22 @@ public class ConnectMySQL {
     /// ACCESSEURS : GETTERS & SETTERS /////////////////////////////////////////
     /**
      *
+     * @return connect
+     */
+    public static Connection getConnect() {
+        return connect;
+    }
+
+    /**
+     *
+     * @return url
+     */
+    public static String getUrl() {
+        return url;
+    }
+
+    /**
+     *
      *
      * @return user
      */
@@ -74,6 +85,23 @@ public class ConnectMySQL {
      */
     public String getPasswd() {
         return passwd;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param connect
+     */
+    public static void setConnect(Connection connect) {
+        ConnectMySQL.connect = connect;
+    }
+
+    /**
+     *
+     * @param url
+     */
+    public static void setUrl(String url) {
+        ConnectMySQL.url = url;
     }
 
     /**

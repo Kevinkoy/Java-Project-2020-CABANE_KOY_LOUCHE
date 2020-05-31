@@ -1,46 +1,40 @@
 package DataAcessObject;
 
+import Controleur.Recherche_informations;
 import Modele.Utilisateur;
-import java.sql.Connection;
 
 public class Tester {
 
     public static void main(String[] args) {
-        // Declaration et initialisation
-        // On crée une connection, specifique à notre base de donnée
-        Connection connection = ConnectMySQL.getInstance();
 
-        // On crée un objetDao (recuperer/stocker les donnees), avec passage de la connection crée
-        DAO<Utilisateur> objetdao = new UtilisateurDAO(connection);
-        
-        // ObjetDao Unitaire
-        //UtilisateurDAO objetdao = new UtilisateurDAO(connection);
+        // LOGGIN
+        String email = "enseignant@edu.ece.fr";
+        String passwd = "mdpE";
 
-        // On crée un objet pour manipuler 
-        Utilisateur objet = new Utilisateur();
-        // Configuration setter
-        objet.setId(12);
-        objet.setEmail("testupdated@edu.ece.fr");
-        objet.setPasswd("test_mdp");
-        objet.setNom("test_nom");
-        objet.setPrenom("test_prenom");
-        objet.setDroit(0);
-        
-        
-        // TEST des fonctions CREATE, DELETE, UPDATE, FIND
-        boolean executed = objetdao.update(objet);
-        System.out.println(executed);
-        
-        // FIND
-        //Utilisateur find = objetdao.find("testupdated@edu.ece.fr");
-        //System.out.println(find.toString());
-        
-        
+        // BOUTTON: CONNEXION....
+        // =>DAO: Data Acess Object, on va chercher dans la BDD
+        UtilisateurDAO objetdao = new UtilisateurDAO(ConnectMySQL.getInstance());
+        Utilisateur find = objetdao.find(email, passwd);
 
-        
-       
-        
-        
+        /// Si on trouve pas dans la DataBase...
+        if (find.getId() == 0) {
+            System.out.println("Email ou mot de passe incorrect");
+        } /// On trouve l'utilisateur dans la DataBase...
+        // On appelle le constructeur de recherche_informations (initialisation).
+        else {
+            Recherche_informations search = new Recherche_informations(email, passwd);
+            System.out.println("Informations sur l'utilisateur:" + search.getUser().toString());
+            System.out.println("Id:" + search.getId());
+            System.out.println("Email:" + search.getEmail());
+            System.out.println("Mot de passe:" + search.getPasswd());
+            System.out.println("Nom:" + search.getNom());
+            System.out.println("Prenom:" + search.getPrenom());
+            System.out.println("Droit:" + search.getDroit());
+            System.out.println("Numero:" + search.getNumero());
+            System.out.println("Groupe:" + search.getGroupe());
+            System.out.println("Promotion:" + search.getPromotion());
+            System.out.println("Cours:" + search.getCours());
+        }
 
     }
 }

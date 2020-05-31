@@ -15,6 +15,7 @@ public class Enseignant extends Utilisateur {
     public Enseignant() {
         super();
         this.droit = 3; // 3 enseignant
+        this.cours = new Cours();
     }
 
     /**
@@ -27,7 +28,7 @@ public class Enseignant extends Utilisateur {
      * @param cours
      */
     public Enseignant(int id, String email, String passwd, String nom, String prenom, Cours cours) {
-        super(id, email, passwd, nom, prenom, 3);
+        super(id, email, passwd, nom, prenom, 3); // droit = 3 enseignant
         this.cours = cours;
     }
 
@@ -40,7 +41,7 @@ public class Enseignant extends Utilisateur {
             return "Enseignant introuvable";
         }
         else
-        return super.toString() + ", cours: " + this.cours;
+        return super.toString() + " cours: " + this.cours;
     }
 
     // GETTERS

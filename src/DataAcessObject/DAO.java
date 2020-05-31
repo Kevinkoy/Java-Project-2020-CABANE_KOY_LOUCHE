@@ -17,7 +17,7 @@ import java.sql.Connection;
  * @author KévinKOY
  * @param <T>
  */
-public abstract class DAO<T> {
+public abstract class DAO<T>{
 
     protected Connection connection = null;
 
@@ -30,7 +30,7 @@ public abstract class DAO<T> {
      * Méthode de création
      *
      * @param obj
-     * @return boolean
+     * @return boolean : TRUE | FALSE
      */
     public abstract boolean create(T obj);
 
@@ -38,7 +38,7 @@ public abstract class DAO<T> {
      * Méthode de suppression
      *
      * @param obj
-     * @return boolean
+     * @return boolean : TRUE | FALSE
      */
     public abstract boolean delete(T obj);
 
@@ -46,22 +46,23 @@ public abstract class DAO<T> {
      * Méthode de mise à jour des données
      *
      * @param obj
-     * @return boolean
+     * @return boolean : TRUE | FALSE
      */
     public abstract boolean update(T obj);
 
     /**
-     * Méthode de recherche des informations
+     * Methode de recherche des informations_with ID
      *
      * @param id
-     * @return T
+     * @return T: un objet de Type T
      */
     public abstract T find(int id);
-    
+
     /**
+     * Methode de recherche des informations_with nom/email
      *
-     * @param email
-     * @return T
+     * @param nom, OU email pour UtilisateurDAO | EtudiantDAO | EnseignantDAO
+     * @return T : un objet de type T
      */
-    //public abstract T find(String email);
+    /* public abstract T find(String nom);*/
 }

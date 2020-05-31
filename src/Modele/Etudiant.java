@@ -16,6 +16,8 @@ public class Etudiant extends Utilisateur {
     public Etudiant() {
         super();
         this.droit = 4; // 4 étudiant
+        this.numero = 0;
+        this.groupe = new Groupe();
     }
 
     /**
@@ -29,7 +31,7 @@ public class Etudiant extends Utilisateur {
      * @param groupe
      */
     public Etudiant(int id, String email, String passwd, String nom, String prenom, int numero, Groupe groupe) {
-        super(id, email, passwd, nom, prenom, 4);
+        super(id, email, passwd, nom, prenom, 4); // droit = 4 etudiant
         this.numero = numero;
         this.groupe = groupe;
     }

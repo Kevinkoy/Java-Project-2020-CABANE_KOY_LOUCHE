@@ -23,7 +23,14 @@ public class Seance {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance() {
-
+       this.id = 0;
+       this.semaine = 0;
+       this.date = new MaDate();
+       this.heure_debut = null;
+       this.heure_fin = null;
+       this.etat = 0;
+       this.cours = new Cours();
+       this.type_cours = new Type_cours();
     }
 
     /**

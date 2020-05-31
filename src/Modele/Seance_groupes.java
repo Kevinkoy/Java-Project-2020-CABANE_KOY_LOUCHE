@@ -1,5 +1,7 @@
 package Modele;
 
+import java.sql.Connection;
+
 /**
  *
  * @author KévinKOY
@@ -14,6 +16,8 @@ public class Seance_groupes {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance_groupes() {
+        this.seance = new Seance();
+        this.groupe = new Groupe();
     }
 
     /**

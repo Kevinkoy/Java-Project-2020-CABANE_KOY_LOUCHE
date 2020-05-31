@@ -22,12 +22,12 @@ public class Utilisateur {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Utilisateur() {
-        id = 0;
-        email = "";
-        passwd = "";
-        nom = "";
-        prenom = "";
-        droit = 0;
+        this.id = 0;
+        this.email = "";
+        this.passwd = "";
+        this.nom = "";
+        this.prenom = "";
+        this.droit = 0;
     }
 
     /**

@@ -157,5 +157,35 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
         // return soit NULL || soit RESULTAT...
         return returned;
     }
+    
+        public Utilisateur find(String email, String passwd) {
+        /// CONSTRUCTEUR NULL (PAR DEFAUT)
+        Utilisateur returned = new Utilisateur();
+        try {
+            // REQUETE
+            String sql = "SELECT * FROM Utilisateur WHERE Email = '" + email + "' AND Passwd ='"+ passwd+ "';";
+            // PrepareStatement
+            PreparedStatement preparestatement = this.connection.prepareStatement(sql);
+            // ResultSet
+            ResultSet result = preparestatement.executeQuery(sql);
+
+            // SI RESULTAT...
+            if (result.next()) {
+                /// return = RESULTAT
+                returned = new Utilisateur(
+                        result.getInt("ID"),
+                        result.getString("Email"),
+                        result.getString("Passwd"),
+                        result.getString("Nom"),
+                        result.getString("Prenom"),
+                        result.getInt("Droit"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+        // return soit NULL || soit RESULTAT...
+        return returned;
+    }
 
 }

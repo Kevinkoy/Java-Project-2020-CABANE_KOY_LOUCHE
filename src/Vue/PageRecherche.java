@@ -606,10 +606,8 @@ public class PageRecherche extends Header {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PageRecherche().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PageRecherche().setVisible(true);
         });
     }
 

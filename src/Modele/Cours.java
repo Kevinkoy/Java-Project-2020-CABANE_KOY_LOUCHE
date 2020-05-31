@@ -14,7 +14,8 @@ public class Cours {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Cours() {
-
+        this.id = 0;
+        this.nom = "";
     }
 
     /**
@@ -32,9 +33,8 @@ public class Cours {
     // toString : retourner le contenue d'objet sous forme de chaine
     @Override
     public String toString() {
-        if(this.id == 0)
-        {
-          return "Cours introuvable";
+        if (this.id == 0) {
+            return "Cours introuvable";
         }
         return " id: " + this.id + ", nom: " + this.nom;
     }
