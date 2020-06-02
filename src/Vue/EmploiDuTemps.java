@@ -12,36 +12,16 @@ import java.util.*;
  *
  * @author Syl
  */
-public class AmploiDuTemps extends Header {
+public class EmploiDuTemps extends Header {
 
-    MaDate dateAffichage;
-    //Calendar calendrier = new Calendar(2020, 1, 1);
+    ArrayList <MaDate> datesAffichage;
     /**
      * Creates new form AmploiDuTemps
      */
-    public AmploiDuTemps(Utilisateur utilisateur) {
-        super(utilisateur);
-        dateAffichage = new MaDate(1, 1, 2020);
-        
-        /*calendrier.clear();
-        calendrier.set(Calendar.YEAR, 2020);
-        calendrier.set(Calendar.MONTH, 1);
-        calendrier.set(Calendar.DAY_OF_MONTH, 1);*/
+    public EmploiDuTemps(Utilisateur user) {
+        super(user);
         
         initComponents();
-        
-        //int semaine = calendrier.getWeekYear();
-        //SemaineSelection.setText(""+semaine);
-    }
-    
-    public AmploiDuTemps(Utilisateur utilisateur, MaDate dateActuel) {
-        super(utilisateur);
-        dateAffichage = dateActuel;
-        //calendrier.set(dateActuel.getYear(), dateActuel.getMonth(), dateActuel.getDay());
-        initComponents();
-        
-        //int semaine = calendrier.getWeekYear();
-        //SemaineSelection.setText(""+semaine);
     }
 
     /**
@@ -186,7 +166,7 @@ public class AmploiDuTemps extends Header {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[], Utilisateur utilisateur) {
+    public static void main(String args[], Utilisateur user) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -200,20 +180,20 @@ public class AmploiDuTemps extends Header {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmploiDuTemps.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AmploiDuTemps(utilisateur).setVisible(true);
+                new EmploiDuTemps(user).setVisible(true);
             }
         });
     }
