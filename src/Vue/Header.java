@@ -18,8 +18,13 @@ public class Header extends javax.swing.JFrame {
     /**
      * Creates new form Header
      */
-    public Header() {
+    public Header(Utilisateur user) {
         initComponents();
+        this.user = user;
+        if(1 != this.user.getDroit())
+        {
+            ajout_seance.setVisible(false);
+        }
     }
 
     /**
@@ -37,13 +42,13 @@ public class Header extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        ajout_seance = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 123));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Syl\\hubiC\\ING_3\\semestre_6\\java\\projet\\Java-Project-2020-CABANE_KOY_LOUCHE-master\\Java-Project-2020-CABANE_KOY_LOUCHE-master\\image\\Logo_ECE_fond_vert.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vue/Logo_ECE_fond_vert.png"))); // NOI18N
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vue/acceuil.png"))); // NOI18N
 
@@ -58,8 +63,8 @@ public class Header extends javax.swing.JFrame {
 
         jButton4.setText("statistique");
 
-        jButton5.setText("ajout de séance");
-        jButton5.setToolTipText("");
+        ajout_seance.setText("ajout de séance");
+        ajout_seance.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,7 +80,7 @@ public class Header extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
                 .addGap(53, 53, 53)
-                .addComponent(jButton5)
+                .addComponent(ajout_seance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -86,7 +91,7 @@ public class Header extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ajout_seance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -120,7 +125,7 @@ public class Header extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[], Utilisateur user) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -147,18 +152,18 @@ public class Header extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Header().setVisible(true);
-                System.out.println("plop2");
+                new Header(user).setVisible(true);
             }
         });
     }
 
+    private Utilisateur user;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ajout_seance;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
