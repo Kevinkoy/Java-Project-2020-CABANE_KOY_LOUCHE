@@ -1,14 +1,15 @@
 package DataAcessObject;
 
 import Controleur.Recherche_informations;
-import Modele.Utilisateur;
+import Modele.*;
+import Vue.*;
 
 public class Tester {
 
     public static void main(String[] args) {
 
         // LOGGIN
-        String email = "enseignant@edu.ece.fr";
+        /*String email = "enseignant@edu.ece.fr";
         String passwd = "mdpE";
 
         // BOUTTON: CONNEXION....
@@ -34,8 +35,16 @@ public class Tester {
             System.out.println("Groupe:" + search.getGroupe());
             System.out.println("Promotion:" + search.getPromotion());
             System.out.println("Cours:" + search.getCours());
-        }
-
+        }*/
+        
+        /*ResultaRecherche page = new ResultaRecherche();
+        
+        page.setVisible(true);*/
+        Utilisateur utilisateur = new Utilisateur();
+        
+        
+        EmploiDuTemps head = new EmploiDuTemps(utilisateur);
+        head.setVisible(true);
     }
 }
 
