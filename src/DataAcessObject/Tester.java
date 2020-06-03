@@ -3,6 +3,7 @@ package DataAcessObject;
 import Controleur.Recherche_informations;
 import Modele.*;
 import Vue.*;
+import java.util.*;
 
 public class Tester {
 
@@ -41,10 +42,28 @@ public class Tester {
         
         page.setVisible(true);*/
         Utilisateur utilisateur = new Utilisateur();
+        ArrayList <Seance_enseignants> seanceEnseignants = new ArrayList<Seance_enseignants>();
+        ArrayList <Seance_salles> seanceSalles = new ArrayList<Seance_salles>();
         
+        MaDate d = new MaDate(1, 6, 2020);
         
-        EmploiDuTemps head = new EmploiDuTemps(utilisateur);
-        head.setVisible(true);
+        System.out.println("jour " + d.getDay());
+        
+        Seance s = new Seance();
+        
+        Enseignant e = new Enseignant();
+        
+        s.setDate(d);
+        
+        Seance_enseignants test = new Seance_enseignants(s, e);
+        
+        seanceEnseignants.add(test);
+        
+        //Header head = new Header(utilisateur);
+        //head.setVisible(true);
+        
+        EmploiDuTemps emp = new EmploiDuTemps(utilisateur, seanceEnseignants, seanceSalles);
+        emp.setVisible(true);
     }
 }
 
