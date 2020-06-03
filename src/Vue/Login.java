@@ -10,6 +10,7 @@ import Controleur.*;
 import DataAcessObject.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Calendar;
 import javax.swing.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -76,12 +77,18 @@ public class Login extends JFrame implements ActionListener {
             if (valid) {
                 Utilisateur user = new Utilisateur();
                 //user = find(email, mdp) //find dans quel classe ? besin creer une entite recheche info ?
-                if (email.equals("alice@ece.fr")) //si non null
+                if (email.equals("alice@edu.ece.fr")) //si non null
                 {
                     //j'appelle edt en envoyant user
                     //EmploiDuTemps edt = new EmploiDuTemps(use);
-                    System.out.println(email);
-                    System.out.println(mdp);
+                    Recherche_informations infos = new Recherche_informations(email, mdpString);
+                    Utilisateur userco = infos.getUser();
+                    Calendar cal = Calendar.getInstance();
+                    int sem = cal.get(Calendar.WEEK_OF_YEAR);
+                    EDTTest edt = new EDTTest(userco, userco, sem);
+                            //System.out.println(email);
+                            //System.out.println(mdpString);
+;
                 } else {
                     JOptionPane.showMessageDialog(null, "L'email et/ou le mot de passe que vous avez saisi sont erronés", "Mauvais match", JOptionPane.INFORMATION_MESSAGE);
                 }
