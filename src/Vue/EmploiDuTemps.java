@@ -28,9 +28,14 @@ public class EmploiDuTemps extends Header {
         
         initComponents();
         
+        this.SemaineSelection.setText("" + calendrier.get(Calendar.WEEK_OF_YEAR));
+        
         //cree_cours();
         
-        this.SemaineSelection.setText("" + calendrier.get(Calendar.WEEK_OF_YEAR));
+        
+        
+        
+        actualise_dates_affichage();
     }
     
     //créé les affichage pour chaque cours
@@ -92,6 +97,31 @@ public class EmploiDuTemps extends Header {
                 }
             }
         }
+    }
+    
+    public void actualise_dates_affichage()
+    {
+        Calendar cal = Calendar.getInstance();
+        
+        cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.MONDAY);
+        this.lundi.setText("Lundi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
+        
+        cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.TUESDAY);
+        this.mardi.setText("Mardi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
+        
+        cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.WEDNESDAY);
+        this.mercredi.setText("Mercredi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
+        
+        cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.THURSDAY);
+        this.jeudi.setText("Jeudi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
+        
+        cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.FRIDAY);
+        this.vendredi.setText("Vendredi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
+        
+        cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.SATURDAY);
+        this.samedi.setText("Samedi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
+        
+        
     }
 
     /**
