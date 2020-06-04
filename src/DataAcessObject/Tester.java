@@ -49,7 +49,7 @@ public class Tester {
         
         System.out.println("jour " + d.getDay());
         
-        Seance s = new Seance();
+        /*Seance s = new Seance();
         
         Enseignant e = new Enseignant();
         
@@ -57,7 +57,7 @@ public class Tester {
         
         Seance_enseignants test = new Seance_enseignants(s, e);
         
-        seanceEnseignants.add(test);
+        seanceEnseignants.add(test);*/
         
         //Header head = new Header(utilisateur);
         //head.setVisible(true);
