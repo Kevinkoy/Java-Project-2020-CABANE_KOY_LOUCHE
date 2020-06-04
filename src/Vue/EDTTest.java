@@ -6,18 +6,13 @@
 package Vue;
 
 import Modele.*;
+import Controleur.*;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -54,11 +49,13 @@ public class EDTTest extends JFrame {
         container.setBackground(Color.white);
         container.setLayout(new BorderLayout());
 
+        //on rentre dans notre combo tous les étudiants
         combo1.setPreferredSize(new Dimension(100, 20));
         for (int i = 0; i < etudiants.size(); i++) {
             combo1.addItem(etudiants.get(i));
         }
         combo1.addItemListener(new ItemState());
+        //on rentre dans notre combo tous les enseignants
         combo2.setPreferredSize(new Dimension(100, 20));
         for (int i = 0; i < enseignants.size(); i++) {
             combo2.addItem(enseignants.get(i));
@@ -70,6 +67,14 @@ public class EDTTest extends JFrame {
         top.add(combo1);
         top.add(label2);
         top.add(combo2);
+        
+        //affichage de l'emploi du temps
+        for(int i=0; i<seances.size(); i++)
+        {
+            String cours = seances.get(i).getCours().getNom();
+            MaDate date = seances.get(i).getDate();
+            Time heure = seances.get(i).getHeure_debut();
+        }
 
         container.add(top, BorderLayout.NORTH);
 
