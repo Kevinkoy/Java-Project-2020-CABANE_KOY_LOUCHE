@@ -22,16 +22,25 @@ import javax.swing.*;
  */
 public class EDTTest extends JFrame {
 
-    private JPanel container = new JPanel();
-    private JComboBox combo1 = new JComboBox();
-    private JComboBox combo2 = new JComboBox();
-    private JLabel label1 = new JLabel("Etudiant : ");
-    private JLabel label2 = new JLabel("Enseignant : ");
-    private Utilisateur userco = new Utilisateur();
-    private ArrayList<JButton> boutons = new ArrayList<JButton>();
-    GridBagConstraints gbc = new GridBagConstraints();
+    private JPanel container;
+    private JComboBox combo1;
+    private JComboBox combo2;
+    private JLabel label1;
+    private JLabel label2;
+    private Utilisateur userco;
+    private ArrayList<JButton> boutons;
+    private GridBagConstraints gbc;
 
     public EDTTest(Utilisateur userco, Utilisateur userprint, int sem) {
+        
+        this.gbc = new GridBagConstraints();
+        this.userco = new Utilisateur();
+        this.label2 = new JLabel("Enseignant : ");
+        this.label1 = new JLabel("Etudiant : ");
+        this.combo2 = new JComboBox();
+        this.boutons = new ArrayList<JButton>();
+        this.combo1 = new JComboBox();
+        this.container = new JPanel();
 
         int droit = userco.getDroit();
         this.userco = userco;
@@ -77,6 +86,7 @@ public class EDTTest extends JFrame {
 
         container.setBackground(Color.white);
         container.setLayout(new BorderLayout());
+        container.setSize(400, 600);
 
         //on rentre dans notre combo tous les étudiants
         combo1.setPreferredSize(new Dimension(100, 20));
@@ -99,6 +109,10 @@ public class EDTTest extends JFrame {
 
         //affichage de l'emploi du temps
         JPanel bot = new JPanel();
+        //bot.setSize(300, 400);
+        bot.setSize(new java.awt.Dimension(400, 500));
+        bot.setBackground(Color.yellow);
+        
         for (int i = 0; i < seances.size(); i++) {
             String cours = seances.get(i).getCours().getNom();
             MaDate date = seances.get(i).getDate();
@@ -116,14 +130,17 @@ public class EDTTest extends JFrame {
             }
 
             JButton b = new JButton(cours);
+            
             gbc.gridx = x;
             gbc.gridy = y;
-            top.add(b, gbc);
+            System.out.println("Mon x et mon y :" + x + y);
+            bot.add(b, gbc);
             //boutons.add(b);
             //grid bag avec mon x et mon y
         }
 
-        container.add(top, BorderLayout.NORTH);
+        container.add(top,  BorderLayout.NORTH);
+        container.add(bot,  BorderLayout.SOUTH);
 
         this.setContentPane(container);
         this.setVisible(true);
