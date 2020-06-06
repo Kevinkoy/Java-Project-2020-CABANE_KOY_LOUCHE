@@ -479,6 +479,7 @@ public class PageRecherche extends Header {
         {
             System.out.println(typeRecherche + " " + infoRecherche);
         }
+        ResultaRecherche newPage = new ResultaRecherche(this.user);
     }//GEN-LAST:event_jButton_recherche_eleve_ActionPerformed
 
     private void jButton_recherche_salle_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_recherche_salle_ActionPerformed

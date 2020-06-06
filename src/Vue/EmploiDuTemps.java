@@ -32,8 +32,6 @@ public class EmploiDuTemps extends Header {
         //cree_cours();
         
         
-        
-        
         actualise_dates_affichage();
     }
     
