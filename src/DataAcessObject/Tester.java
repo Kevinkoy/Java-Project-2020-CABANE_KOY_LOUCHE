@@ -62,8 +62,9 @@ public class Tester {
         //Header head = new Header(utilisateur);
         //head.setVisible(true);
         
-        EmploiDuTemps emp = new EmploiDuTemps(utilisateur, seanceEnseignants, seanceSalles);
+        EmploiDuTemps emp = new EmploiDuTemps(utilisateur);
         emp.setVisible(true);
+        
     }
 }
 
