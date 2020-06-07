@@ -45,10 +45,10 @@ public class EDTTest extends JFrame implements ActionListener {
         this.gbc = new GridBagConstraints();
         this.userco = userco;
         this.userprint = userco;
-        
+
         int semaine = cal.get(Calendar.WEEK_OF_YEAR);
         this.sem = semaine;
-        
+
         this.label2 = new JLabel("Enseignant : ");
         this.label1 = new JLabel("Etudiant : ");
         this.combo2 = new JComboBox();
@@ -115,6 +115,7 @@ public class EDTTest extends JFrame implements ActionListener {
         container.setLayout(new BorderLayout());
         container.setSize(1300, 900);
 
+        JPanel top = new JPanel();
         //Si l'utilisateur connecté est un ref ped (2) ou un admin (1)
         if (droit == 1 || droit == 2) {
 
@@ -137,15 +138,19 @@ public class EDTTest extends JFrame implements ActionListener {
             }
             this.combo2.addActionListener(this);
 
-            JPanel top = new JPanel();
             top.add(this.label1);
             top.add(this.combo1);
             top.add(this.label2);
             top.add(this.combo2);
-
-            top.setBorder(BorderFactory.createTitledBorder("TOP"));
-            container.add(top, BorderLayout.NORTH);
         }
+
+        JButton ligne = new JButton("Passer en ligne");
+        ligne.setName("ligne");
+        ligne.addActionListener(this);
+        top.add(ligne);
+
+        top.setBorder(BorderFactory.createTitledBorder("TOP"));
+        container.add(top, BorderLayout.NORTH);
 
         //affichages des semaines
         JPanel middle = new JPanel();
@@ -335,7 +340,7 @@ public class EDTTest extends JFrame implements ActionListener {
                 EntireFrenchDate = "Samedi " + date + " " + this.getNameMonth(mois);
                 break;
             case 6:
-                cal.set(Calendar.WEEK_OF_YEAR, this.sem+1);
+                cal.set(Calendar.WEEK_OF_YEAR, this.sem + 1);
                 cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 date = cal.getTime().getDate();
                 mois = cal.getTime().getMonth();
@@ -383,32 +388,37 @@ public class EDTTest extends JFrame implements ActionListener {
         if (src instanceof JButton) {
             JButton b = (JButton) src;
             String name = b.getName();
-            for (int i = 0; i < this.tabButton.length; i++) {
-                String test = "" + (i + 1);
-                if (name.equals(test)) {
-                    semaine = i + 1;
+            if (name.equals("ligne")) {
+                //je crée une instance de emploidutemps
+                EmploiDuTemps edtLigne = new EmploiDuTemps(this.userco);
+                this.setVisible(false);
+            } else {
+                for (int i = 0; i < this.tabButton.length; i++) {
+                    String test = "" + (i + 1);
+                    if (name.equals(test)) {
+                        semaine = i + 1;
+                    }
                 }
+                this.setSem(semaine);
+                System.out.println("Changement de semaine " + this.getSem());
+                this.afficherEDT();
             }
-            this.setSem(semaine);
-            System.out.println("Changement de semaine " + this.getSem());
-            this.afficherEDT();
-        } else if (src instanceof JComboBox){
+        } else if (src instanceof JComboBox) {
             JComboBox combo = (JComboBox) src;
-            if(combo.getSelectedItem()!=null)
-            {
-            Object selected = combo.getSelectedItem();
-            for (int i = 0; i < this.etudiants.size(); i++) {
-                if (selected.toString().equals(this.etudiants.get(i).getPrenom() + " " + this.etudiants.get(i).getNom())) {
-                    System.out.println("j'ai trouvé un match etudiant : " + selected);
-                    Etudiant userSelected = this.etudiants.get(i);
+            if (combo.getSelectedItem() != null) {
+                Object selected = combo.getSelectedItem();
+                for (int i = 0; i < this.etudiants.size(); i++) {
+                    if (selected.toString().equals(this.etudiants.get(i).getPrenom() + " " + this.etudiants.get(i).getNom())) {
+                        System.out.println("j'ai trouvé un match etudiant : " + selected);
+                        Etudiant userSelected = this.etudiants.get(i);
+                    }
                 }
-            }
-            for (int i = 0; i < this.enseignants.size(); i++) {
-                if (selected.toString().equals(this.enseignants.get(i).getPrenom() + " " + this.enseignants.get(i).getNom())) {
-                    Enseignant userSelected = this.enseignants.get(i);
-                    System.out.println("j'ai trouvé un match enseignant : " + selected);
+                for (int i = 0; i < this.enseignants.size(); i++) {
+                    if (selected.toString().equals(this.enseignants.get(i).getPrenom() + " " + this.enseignants.get(i).getNom())) {
+                        Enseignant userSelected = this.enseignants.get(i);
+                        System.out.println("j'ai trouvé un match enseignant : " + selected);
+                    }
                 }
-            }
             }
         }
         /*if (droit == 1 || droit == 2) {
