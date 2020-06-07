@@ -5,14 +5,14 @@ import java.util.Calendar;
 
 /**
  *
- * @author KévinKOY
+ * @author KÃ©vinKOY
  */
 public class Seance {
 
     /// Attributs
     private int id;
     private int semaine;
-    private MaDate date;
+    private Date date;
     private Time heure_debut;
     private Time heure_fin;
     private int etat;
@@ -23,14 +23,14 @@ public class Seance {
      * CONSTRUCTEUR PAR DEFAUT
      */
     public Seance() {
-       this.id = 0;
-       this.semaine = 0;
-       this.date = new MaDate();
-       this.heure_debut = null;
-       this.heure_fin = null;
-       this.etat = 0;
-       this.cours = new Cours();
-       this.type_cours = new Type_cours();
+        this.id = 0;
+        this.semaine = 0;
+        this.date = null;
+        this.heure_debut = null;
+        this.heure_fin = null;
+        this.etat = 0;
+        this.cours = new Cours();
+        this.type_cours = new Type_cours();
     }
 
     /**
@@ -43,18 +43,15 @@ public class Seance {
      * @param cours
      * @param type_cours
      */
-    public Seance(int id, MaDate date, Time heure_debut, Time heure_fin, int etat, Cours cours, Type_cours type_cours) {
+    public Seance(int id, int semaine, Date date, Time heure_debut, Time heure_fin, int etat, Cours cours, Type_cours type_cours) {
         // MODIFICATION POSSIBLE
         this.id = id;
-        //this.semaine = (int) Math.ceil(((date.getMois()-1)*30.41 + date.getJour())/7);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         this.semaine = cal.get(Calendar.WEEK_OF_YEAR);
-        this.date = new MaDate(date);
+        this.date = date;
         this.heure_debut = heure_debut;
-        // heure_fin est définit par debut + duree de 1h30 de cours PAR DEFAULT
-        this.heure_fin = new Time(heure_debut.getHours() + 1, heure_debut.getMinutes() + 30, 0);
-        //this.heure_fin = heure_fin;
+        this.heure_fin = heure_fin;
         this.etat = etat;
         this.cours = cours;
         this.type_cours = type_cours;
@@ -96,7 +93,7 @@ public class Seance {
         return this.semaine;
     }
 
-    public MaDate getDate() {
+    public Date getDate() {
         return this.date;
     }
 
@@ -129,7 +126,7 @@ public class Seance {
         this.semaine = semaine;
     }
 
-    public void setDate(MaDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

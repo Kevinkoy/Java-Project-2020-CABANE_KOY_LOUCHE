@@ -81,7 +81,6 @@ public class Login extends JFrame implements ActionListener {
                 //user = find(email, mdp) //find dans quel classe ? besin creer une entite recheche info ?
                 if (userco!=null) //si non null
                 {
-                    
                     EDTTest edt = new EDTTest(userco);
                 } else {
                     JOptionPane.showMessageDialog(null, "L'email et/ou le mot de passe que vous avez saisi sont erronés", "Mauvais match", JOptionPane.INFORMATION_MESSAGE);
