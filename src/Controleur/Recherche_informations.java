@@ -3,10 +3,17 @@ package Controleur;
 import DataAcessObject.ConnectMySQL;
 import DataAcessObject.EnseignantDAO;
 import DataAcessObject.EtudiantDAO;
+import DataAcessObject.SeanceDAO;
+import DataAcessObject.Seance_enseignantsDAO;
+import DataAcessObject.Seance_groupesDAO;
 import DataAcessObject.UtilisateurDAO;
 import Modele.Enseignant;
 import Modele.Etudiant;
+import Modele.Seance;
+import Modele.Seance_enseignants;
+import Modele.Seance_groupes;
 import Modele.Utilisateur;
+import java.util.ArrayList;
 
 /**
  *
@@ -66,7 +73,111 @@ public class Recherche_informations {
         } // ==================================================================================================================
     }
 
-    // Getters /////////////////////////////////////////////////////////////////////
+    public ArrayList<Etudiant> getAll_Etudiant() {
+        ArrayList<Etudiant> ALL = new ArrayList();
+
+        EtudiantDAO objetdao = new EtudiantDAO(ConnectMySQL.getInstance());
+        for (int i = 0; i < 100; i++) {
+            Etudiant find = objetdao.find(i);
+            if (find.getId() != 0) {
+                ALL.add(find);
+            } else {
+
+            }
+        }
+
+        return ALL;
+    }
+
+    public ArrayList<Enseignant> getAll_Enseignant() {
+        ArrayList<Enseignant> ALL = new ArrayList();
+
+        EnseignantDAO objetdao = new EnseignantDAO(ConnectMySQL.getInstance());
+        for (int i = 0; i < 100; i++) {
+            Enseignant find = objetdao.find(i);
+            if (find.getId() != 0) {
+                ALL.add(find);
+            } else {
+
+            }
+        }
+
+        return ALL;
+    }
+
+    public ArrayList<Seance> getAll_Seance(Utilisateur utilisateur, int semaine) {
+        ArrayList<Seance> ALL = new ArrayList();
+        SeanceDAO seancedao = new SeanceDAO(ConnectMySQL.getInstance());
+
+        // Si Utilisateur = Etudiant
+        if (utilisateur instanceof Etudiant) {
+            Seance_groupesDAO sgdao = new Seance_groupesDAO(ConnectMySQL.getInstance());
+
+            // PARCOURS DE LA TABLE
+            for (int i = 0; i < 100; i++) {
+                Seance_groupes find_by_id_groupe = sgdao.find_by_id_groupe(i);
+                // SI le groupe correspond a celui de l'étudiant
+                if (find_by_id_groupe.getGroupe().getId() == ((Etudiant) utilisateur).getGroupe().getId()) {
+                    // On va verifier sa semaine
+                    Seance find = seancedao.find(i);
+                    {
+                        // La semaine correspondante
+                        if (find.getSemaine() == semaine) {
+                            // On le rajoute au tableau de seance
+                            ALL.add(find);
+                        } // N'appartient pas a la semaine
+                        else {
+                        }
+                    }
+
+                } // n'Appartient pas au groupe
+                else {
+                }
+
+            }
+            /// Si Utilisateur = Enseignant
+        } else if (utilisateur instanceof Enseignant) {
+            Seance_enseignantsDAO sgdao = new Seance_enseignantsDAO(ConnectMySQL.getInstance());
+            // PARCOURS DE LA TABLE
+            for (int i = 0; i < 100; i++) {
+                Seance_enseignants find_by_id_enseignant = sgdao.find_by_id_enseignant(i);
+                // SI le groupe correspond a celui de l'étudiant
+                if (find_by_id_enseignant.getEnseignant().getId() == ((Enseignant) utilisateur).getId()) {
+                    // On va verifier sa semaine
+                    Seance find = seancedao.find(i);
+                    {
+                        // La semaine correspondante
+                        if (find.getSemaine() == semaine) {
+                            // On le rajoute au tableau de seance
+                            ALL.add(find);
+                        } // N'appartient pas a la semaine
+                        else {
+                        }
+                    }
+
+                } // n'Appartient pas au groupe
+                else {
+                }
+
+            }
+        } /// Sinon admin ou ref on affiche tout pour une semaine donnée
+        else {
+            for (int i = 0; i < 100; i++) {
+                Seance find = seancedao.find(i);
+                // On va verifier sa semaine
+                if (find.getSemaine() == semaine) {
+                    ALL.add(find);
+                } else {
+
+                }
+            }
+
+        }
+
+        return ALL;
+    }
+// Getters /////////////////////////////////////////////////////////////////////
+
     /**
      * Methode qui retourne l'Utilisateur Connecté (Utilisateur OU Enseignant OU
      * Etudiant)
@@ -197,27 +308,3 @@ public class Recherche_informations {
     }
     /// ==============================================================================================================================================
 }
-
-/*
-    public Object by_ID(Object obj) {
-        // OBJECT NULL PAR DEFAUT
-        Object returned = null;
-        // INSTANCE OF ? 
-        if (obj instanceof Utilisateur) {
-            Utilisateur find = new UtilisateurDAO(ConnectMySQL.getInstance()).find(((Utilisateur) obj).getId());
-            returned = find;
-
-        } else if (obj instanceof Etudiant) {
-            Etudiant find = new EtudiantDAO(ConnectMySQL.getInstance()).find(((Etudiant) obj).getId());
-            returned = find;
-
-        } else if (obj instanceof Enseignant) {
-            Enseignant find = new EnseignantDAO(ConnectMySQL.getInstance()).find(((Enseignant) obj).getId());
-            returned = find;
-        } else if (obj instanceof Cours) {
-            Cours find = new CoursDAO(ConnectMySQL.getInstance()).find(((Cours) obj).getId());
-            returned = find;
-        }
-
-        return returned;
-    }*/
