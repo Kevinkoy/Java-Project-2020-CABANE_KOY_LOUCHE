@@ -14,7 +14,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  *
- * @author KévinKOY
+ * @author KÃ©vinKOY
  */
 public class Seance_groupesDAO extends DAO<Seance_groupes> {
 
@@ -25,7 +25,7 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
     @Override
     public boolean create(Seance_groupes obj) {
         try {
-            // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
+            // REQUETE SQL (INSERT, ID value NULL pour Auto-incrÃ©mentation)
             String sql = "INSERT INTO `seance_groupes`(`ID_Seance`, `ID_Groupe`) VALUES ('" + obj.getSeance().getId() + "','" + obj.getGroupe().getId() + "');";
             // PrepareStatement
             PreparedStatement preparedstatement = this.connection.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
                 // Afficher de l'objet created (id updated)
                 System.out.println("INSERTION Success:" + obj.toString());
                 return true;
-            } /// Duplicata sur clef UNIQUE, il existe déjà!
+            } /// Duplicata sur clef UNIQUE, il existe dÃ©jÃ !
             else {
                 throw new java.sql.SQLIntegrityConstraintViolationException();
             }
@@ -53,7 +53,7 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
 
     @Override
     public boolean delete(Seance_groupes obj) {
-        // Copie en cas de delete réussi
+        // Copie en cas de delete rÃ©ussi
         Seance_groupes copie = obj;
         try {
             // REQUETE SQL : DELETE

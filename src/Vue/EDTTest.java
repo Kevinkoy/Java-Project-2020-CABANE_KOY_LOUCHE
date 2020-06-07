@@ -17,6 +17,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.*;
 
 /**
@@ -93,17 +94,8 @@ public class EDTTest extends JFrame implements ActionListener {
         //On récupère toutes les séances de l'utilisateur à afficher
         ArrayList<Seance> seances = new ArrayList<Seance>();
         seances.clear();
-        //TEST
-        Cours cours1 = new Cours(0, "POO Java");
-        Type_cours type_cours1 = new Type_cours(0, "TP");
-        Seance seance1 = new Seance(0, new MaDate(4, 6, 2020), new Time(8, 30, 0), new Time(10, 0, 0), 0, cours1, type_cours1);
-        seances.add(seance1);
-        Seance seance2 = new Seance(1, new MaDate(4, 6, 2020), new Time(10, 15, 0), new Time(11, 45, 0), 0, cours1, type_cours1);
-        seances.add(seance2);
-        Seance seance3 = new Seance(2, new MaDate(5, 6, 2020), new Time(8, 30, 0), new Time(10, 0, 0), 0, cours1, type_cours1);
-        seances.add(seance3);
-        //TEST
-        //seances = findSeances(userprint, sem);
+        
+        //A AJOUTER seances = findSeances(userprint, sem);
 
         //On créé notre JFrame et Notre Jpanel
         this.setTitle("EDT");
@@ -200,7 +192,7 @@ public class EDTTest extends JFrame implements ActionListener {
 
         for (int i = 0; i < seances.size(); i++) {
             String cours = seances.get(i).getCours().getNom();
-            MaDate date = seances.get(i).getDate();
+            Date date = seances.get(i).getDate();
             Time heure = seances.get(i).getHeure_debut();
             int x = date.getDay();
             int creneau = 8;

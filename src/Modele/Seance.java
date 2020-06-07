@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author KévinKOY
+ * @author KÃ©vinKOY
  */
 public class Seance {
 

@@ -11,7 +11,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  *
- * @author KévinKOY
+ * @author KÃ©vinKOY
  */
 public class SeanceDAO extends DAO<Seance> {
 
