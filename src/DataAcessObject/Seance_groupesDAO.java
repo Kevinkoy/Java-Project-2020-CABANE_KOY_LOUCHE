@@ -101,7 +101,68 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
     }
 
     @Override
-    public Seance_groupes find(int id_groupe) {
+    public Seance_groupes find(int id_seance) {
+        /// CONSTRUCTEUR NULL (PAR DEFAUT)
+        Seance_groupes returned = new Seance_groupes();
+        try {
+            // REQUETE
+            String sql = "SELECT * FROM `seance_groupes`\n"
+                    + "INNER JOIN `seance`ON seance_groupes.ID_Seance = seance.ID\n"
+                    + "INNER JOIN `cours`ON seance.ID_Cours = cours.ID\n"
+                    + "INNER JOIN `type_cours`ON seance.ID_Type = type_cours.ID\n"                  
+                    + "INNER JOIN `groupe`ON seance_groupes.ID_Groupe = groupe.ID\n"
+                    + "INNER JOIN `promotion`ON groupe.ID_Promotion = promotion.ID\n"
+                    + "WHERE seance_groupes.ID_Seance ='" + id_seance + "';";
+            // PrepareStatement
+            PreparedStatement preparestatement = this.connection.prepareStatement(sql);
+            // ResultSet
+            ResultSet result = preparestatement.executeQuery(sql);
+
+            // SI RESULTAT...
+            if (result.next()) {
+                /// return = RESULTAT
+                Seance seance = new Seance();
+                seance.setId(result.getInt("seance_groupes.ID_Seance"));
+                seance.setSemaine(result.getInt("seance.Semaine"));
+                seance.setDate(result.getDate("seance.Date"));
+                seance.setHeure_debut(result.getTime("seance.Heure_Debut"));
+                seance.setHeure_fin(result.getTime("seance.Heure_Fin"));
+                seance.setEtat(result.getInt("seance.Etat"));
+                /// ***
+                Cours cours = new Cours();
+                cours.setId(result.getInt("seance.ID_Cours"));
+                cours.setNom(result.getString("cours.Nom"));
+                /// *** 
+                seance.setCours(cours);
+
+                ///***
+                Type_cours type_cours = new Type_cours();
+                type_cours.setId(result.getInt("seance.ID_Type"));
+                type_cours.setNom("type_cours.Nom");
+                ///*** 
+                seance.setType_cours(type_cours);
+
+                Groupe groupe = new Groupe();
+                groupe.setId(result.getInt("seance_groupes.ID_Groupe"));
+                groupe.setNom(result.getString("groupe.Nom"));
+                
+                Promotion promotion = new Promotion();
+                promotion.setId(result.getInt("groupe.ID_Promotion"));
+                promotion.setNom(result.getString("promotion.Nom"));
+                
+                groupe.setPromotion(promotion);
+
+                returned = new Seance_groupes(seance, groupe);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+        // return soit NULL || soit RESULTAT...
+        return returned;
+    }
+    
+     public Seance_groupes find_by_id_groupe(int id_groupe) {
         /// CONSTRUCTEUR NULL (PAR DEFAUT)
         Seance_groupes returned = new Seance_groupes();
         try {
@@ -124,7 +185,7 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
                 Seance seance = new Seance();
                 seance.setId(result.getInt("seance_groupes.ID_Seance"));
                 seance.setSemaine(result.getInt("seance.Semaine"));
-                //seance.setDate(result.getDate("seance.Date"));
+                seance.setDate(result.getDate("seance.Date"));
                 seance.setHeure_debut(result.getTime("seance.Heure_Debut"));
                 seance.setHeure_fin(result.getTime("seance.Heure_Fin"));
                 seance.setEtat(result.getInt("seance.Etat"));
