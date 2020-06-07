@@ -47,8 +47,6 @@ public class Tester {
         
         MaDate d = new MaDate(1, 6, 2020);
         
-        System.out.println("jour " + d.getDay());
-        
         /*Seance s = new Seance();
         
         Enseignant e = new Enseignant();
@@ -61,6 +59,8 @@ public class Tester {
         
         //Header head = new Header(utilisateur);
         //head.setVisible(true);
+        
+        utilisateur.setDroit(1);
         
         EmploiDuTemps emp = new EmploiDuTemps(utilisateur);
         emp.setVisible(true);

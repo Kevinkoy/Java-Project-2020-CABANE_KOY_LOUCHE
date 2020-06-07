@@ -201,6 +201,7 @@ public class EmploiDuTemps extends Header {
         samedi = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jList_samedi = new javax.swing.JList<>();
+        jComboBox_presentation = new javax.swing.JComboBox<>();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -545,22 +546,34 @@ public class EmploiDuTemps extends Header {
 
         jScrollPane.setViewportView(jPanel3);
 
+        jComboBox_presentation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cours en liste", "cours en tableau" }));
+        jComboBox_presentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_presentationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox_presentation, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(147, 147, 147)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_presentation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -576,6 +589,16 @@ public class EmploiDuTemps extends Header {
         actualise_dates_affichage();
         
     }//GEN-LAST:event_jButton_semaineActionPerformed
+
+    private void jComboBox_presentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_presentationActionPerformed
+        // TODO add your handling code here:
+        if("cours en tableau" == jComboBox_presentation.getSelectedItem().toString())
+        {
+            /*EDTTest newPage = new EDTTest(user);
+            newPage.setVisible(true);
+            this.setVisible(false);*/
+        }
+    }//GEN-LAST:event_jComboBox_presentationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,6 +638,7 @@ public class EmploiDuTemps extends Header {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner SemaineSelection;
     private javax.swing.JButton jButton_semaine;
+    private javax.swing.JComboBox<String> jComboBox_presentation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList_jeudi;
     private javax.swing.JList<String> jList_lundi;

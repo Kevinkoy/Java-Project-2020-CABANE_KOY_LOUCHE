@@ -51,6 +51,11 @@ public class Header extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Logo_ECE_fond_vert.png"))); // NOI18N
 
         jButton_acceuille.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/acceuil.png"))); // NOI18N
+        jButton_acceuille.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_acceuilleActionPerformed(evt);
+            }
+        });
 
         jButton_cours.setText("cours");
         jButton_cours.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +75,11 @@ public class Header extends javax.swing.JFrame {
 
         ajout_seance.setText("ajout de séance");
         ajout_seance.setToolTipText("");
+        ajout_seance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajout_seanceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,7 +96,7 @@ public class Header extends javax.swing.JFrame {
                 .addComponent(jButton_statistique)
                 .addGap(53, 53, 53)
                 .addComponent(ajout_seance)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -113,8 +123,8 @@ public class Header extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,6 +149,20 @@ public class Header extends javax.swing.JFrame {
         newPage.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_rechercheActionPerformed
+
+    private void jButton_acceuilleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_acceuilleActionPerformed
+        // TODO add your handling code here:
+        Login newPage = new Login();
+        newPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton_acceuilleActionPerformed
+
+    private void ajout_seanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajout_seanceActionPerformed
+        // TODO add your handling code here:
+        ajoutCours newPage = new ajoutCours(user);
+        newPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ajout_seanceActionPerformed
 
     /**
      * @param args the command line arguments

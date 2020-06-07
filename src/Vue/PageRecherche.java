@@ -85,6 +85,11 @@ public class PageRecherche extends Header {
         jLabel2.setText("Saisir les information pour la recherche :");
 
         jComboBox_prof.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nom", "id", "email" }));
+        jComboBox_prof.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_profActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Chercher le professeur pas son");
@@ -315,7 +320,7 @@ public class PageRecherche extends Header {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -381,7 +386,7 @@ public class PageRecherche extends Header {
                             .addGap(18, 18, 18)
                             .addComponent(jButton_recherche_salle)))
                     .addComponent(jButton_liste_prof))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,6 +586,10 @@ public class PageRecherche extends Header {
     private void jTextField_profActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_profActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_profActionPerformed
+
+    private void jComboBox_profActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_profActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_profActionPerformed
 
     /**
      * @param args the command line arguments
