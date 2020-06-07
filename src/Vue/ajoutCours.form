@@ -439,6 +439,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="TD1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxTD1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxTD2">
       <Properties>

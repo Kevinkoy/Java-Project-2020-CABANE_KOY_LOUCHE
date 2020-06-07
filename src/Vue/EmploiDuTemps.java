@@ -16,9 +16,9 @@ import Controleur.Recherche_informations;
  */
 public class EmploiDuTemps extends Header {
 
-    ArrayList <Seance_enseignants> seanceEnseignants;
-    ArrayList <Seance_salles> seanceSalles;
-    Calendar calendrier = Calendar.getInstance();
+    private ArrayList<Seance_enseignants> seanceEnseignants;
+    private ArrayList <Seance_salles> seanceSalles;
+    private Calendar calendrier = Calendar.getInstance();
     /**
      * Creates new form AmploiDuTemps
      */

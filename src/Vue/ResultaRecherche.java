@@ -18,9 +18,9 @@ public class ResultaRecherche extends Header {
     /**
      * Creates new form ResultaRecherche
      */
-    String ChoseRechercher; //designe ce que lutilisateur recherche (prof, eleve, salles...)
-    String infoRecherche;   //information sur ce qui est rechercher
-    String typeRecherche;   //précise le type des infoRecherche (si il s'agit d'une id, d'un nom...)
+    private String ChoseRechercher; //designe ce que lutilisateur recherche (prof, eleve, salles...)
+    private String infoRecherche;   //information sur ce qui est rechercher
+    private String typeRecherche;   //précise le type des infoRecherche (si il s'agit d'une id, d'un nom...)
     
     
     public ResultaRecherche(Utilisateur utilisateur) {

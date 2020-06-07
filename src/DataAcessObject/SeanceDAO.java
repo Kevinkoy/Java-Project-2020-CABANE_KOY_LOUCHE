@@ -22,7 +22,7 @@ public class SeanceDAO extends DAO<Seance> {
     @Override
     public boolean create(Seance obj) {
         try {
-            // REQUETE SQL (INSERT, ID value NULL pour Auto-incrÃ©mentation)
+            // REQUETE SQL (INSERT, ID value NULL pour Auto-incrémentation)
             String sql = "INSERT INTO `seance`(`ID`, `Semaine`, `Date`, `Heure_Debut`, `Heure_Fin`, `Etat`, `ID_Cours`, `ID_Type`) VALUES ("
                     + "NULL" + ",'"
                     + obj.getSemaine() + "','"
@@ -42,7 +42,7 @@ public class SeanceDAO extends DAO<Seance> {
                 // Afficher de l'objet created (id updated)
                 System.out.println("INSERTION Success:" + obj.toString());
                 return true;
-            } /// Duplicata sur clef UNIQUE, il existe dÃ©jÃ !
+            } /// Duplicata sur clef UNIQUE, il existe déjà!
             else {
                 throw new java.sql.SQLIntegrityConstraintViolationException();
             }
@@ -58,7 +58,7 @@ public class SeanceDAO extends DAO<Seance> {
 
     @Override
     public boolean delete(Seance obj) {
-        // Copie en cas de delete rÃ©ussi
+        // Copie en cas de delete réussi
         Seance copie = obj;
         try {
             // REQUETE SQL : DELETE

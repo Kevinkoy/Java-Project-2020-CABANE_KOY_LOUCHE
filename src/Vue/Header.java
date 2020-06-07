@@ -14,7 +14,8 @@ import Modele.*;
 import Modele.MaDate;
 import java.sql.Time;
 public class Header extends javax.swing.JFrame {
-
+    
+    protected Utilisateur user;
     /**
      * Creates new form Header
      */
@@ -199,7 +200,7 @@ public class Header extends javax.swing.JFrame {
         });
     }
 
-    protected Utilisateur user;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajout_seance;
     private javax.swing.JButton jButton_acceuille;

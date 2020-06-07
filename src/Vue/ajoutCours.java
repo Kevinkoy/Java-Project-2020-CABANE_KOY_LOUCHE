@@ -6,7 +6,8 @@
 package Vue;
 
 import Modele.*;
-import java.util.*;
+import java.util.Calendar;
+import java.util.ArrayList;
 import DataAcessObject.*;
 import java.sql.*;
 
@@ -15,13 +16,27 @@ import java.sql.*;
  * @author Syl
  */
 public class ajoutCours extends Header {
-
+    
+    private ArrayList<javax.swing.JCheckBox> checkBoxs;
     /**
      * Creates new form ajoutCours
      */
     public ajoutCours(Utilisateur user) {
         super(user);
         initComponents();
+        
+        checkBoxs.add(jCheckBoxTD1);
+        checkBoxs.add(jCheckBoxTD2);
+        checkBoxs.add(jCheckBoxTD3);
+        checkBoxs.add(jCheckBoxTD4);
+        checkBoxs.add(jCheckBoxTD5);
+        checkBoxs.add(jCheckBoxTD6);
+        checkBoxs.add(jCheckBoxTD7);
+        checkBoxs.add(jCheckBoxTD8);
+        checkBoxs.add(jCheckBoxTD9);
+        checkBoxs.add(jCheckBoxTD10);
+        checkBoxs.add(jCheckBoxTD11);
+        checkBoxs.add(jCheckBoxTD12);
     }
 
     /**
@@ -182,6 +197,11 @@ public class ajoutCours extends Header {
         jLabel16.setText("groupe:");
 
         jCheckBoxTD1.setText("TD1");
+        jCheckBoxTD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxTD1ActionPerformed(evt);
+            }
+        });
 
         jCheckBoxTD2.setText("TD2");
         jCheckBoxTD2.addActionListener(new java.awt.event.ActionListener() {
@@ -519,7 +539,7 @@ public class ajoutCours extends Header {
         int mois = Integer.parseInt(jTextFieldMois.getText().toString());
         int annee = Integer.parseInt(jTextFieldAnnee.getText().toString());
         
-        MaDate DateCours = new MaDate(jour, mois, annee);
+        Date DateCours = Date.valueOf(annee +"-" +mois + "-" + jour);
         
         
         int heur = Integer.parseInt(jTextFieldHeurDebut.getText().toString());        
@@ -548,7 +568,6 @@ public class ajoutCours extends Header {
         newSeance.setSemaine(semaine);
         
         SeanceDAO ajoutSeance = new SeanceDAO(ConnectMySQL.getInstance());
-        
         boolean boolCreation = ajoutSeance.create(newSeance);
         
         if(false == boolCreation)
@@ -567,19 +586,47 @@ public class ajoutCours extends Header {
         Seance_enseignants  seance_enseignant = new Seance_enseignants(newSeance, professeur);
         
         Seance_enseignantsDAO ajoutSeance_enseignants = new Seance_enseignantsDAO(ConnectMySQL.getInstance());
-        
         boolCreation = ajoutSeance_enseignants.create(seance_enseignant);
         
         if(false == boolCreation)
         {
-            System.out.println("erreur ajoutSeance");
+            System.out.println("erreur ajoutSeance_enseignants");
         }
+        
+        Promotion promo = new Promotion();
+        promo.setNom(jTextFieldPromo.getText().toString());
+        
+        Groupe groupe = new Groupe();
+        groupe.setPromotion(promo);
+        //groupe.setNom(jTextFieldTD.getText().toString());
+        
+        for(int compteur = 0; compteur < 12; ++compteur)
+        {
+            if(true == this.checkBoxs.get(compteur).isSelected())
+            {
+                groupe.setNom("TD" + compteur);
+                
+                Seance_groupes seance_groupe = new Seance_groupes(newSeance, groupe);
+                
+                Seance_groupesDAO ajoutSeance_groupe = new Seance_groupesDAO(ConnectMySQL.getInstance());
+                boolCreation = ajoutSeance_groupe.create(seance_groupe);
+
+                if(false == boolCreation)
+                {
+                    System.out.println("erreur ajoutSeance_groupe TD" + compteur);
+                }
+            }
+        }   
         
     }//GEN-LAST:event_jButtonAjourtActionPerformed
 
     private void jTextFieldPrenomProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrenomProfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPrenomProfActionPerformed
+
+    private void jCheckBoxTD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTD1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxTD1ActionPerformed
 
     /**
      * @param args the command line arguments
