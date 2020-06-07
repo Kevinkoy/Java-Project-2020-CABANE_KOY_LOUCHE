@@ -35,6 +35,7 @@ public class EmploiDuTemps extends Header {
         actualise_dates_affichage();
     }
     
+    
     //créé les affichage pour chaque cours
     public void cree_cours()
     {        
@@ -53,14 +54,11 @@ public class EmploiDuTemps extends Header {
         
         ArrayList<Seance_salles> tabSS = new ArrayList();
 
-        for(int i=0;i<100;i++)
+        for(int compteur=0;compteur<seanceEnseignants.size();compteur++)
         {
             Seance_sallesDAO objetdao = new Seance_sallesDAO(ConnectMySQL.getInstance());
-            Seance_salles find = objetdao.find(i);
-            if(Integer.parseInt(this.SemaineSelection.getValue().toString()) == find.getSeance().getSemaine())
-            {
-                tabSS.add(find);
-            }
+            Seance_salles find = objetdao.find(seanceEnseignants.get(compteur).getSeance().getId());
+            tabSS.add(find);
         }
         seanceSalles = tabSS;
         
@@ -619,9 +617,9 @@ public class EmploiDuTemps extends Header {
         // TODO add your handling code here:
         if("cours en tableau" == jComboBox_presentation.getSelectedItem().toString())
         {
-            /*EDTTest newPage = new EDTTest(user);
+            EDTTest newPage = new EDTTest(user);
             newPage.setVisible(true);
-            this.setVisible(false);*/
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jComboBox_presentationActionPerformed
 
