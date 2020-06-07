@@ -6,19 +6,27 @@
 package Vue;
 
 import Modele.*;
+import java.util.*;
+import Controleur.*;
 
 /**
  *
  * @author Syl
  */
 public class ResultaRecherche extends Header {
-
     /**
      * Creates new form ResultaRecherche
      */
+    String ChoseRechercher; //designe ce que lutilisateur recherche (prof, eleve, salles...)
+    String infoRecherche;   //information sur ce qui est rechercher
+    String typeRecherche;   //précise le type des infoRecherche (si il s'agit d'une id, d'un nom...)
+    
+    
     public ResultaRecherche(Utilisateur utilisateur) {
         super(utilisateur);
         initComponents();
+        
+        Recherche_informations recherche = new Recherche_informations(); 
     }
 
     /**
@@ -53,11 +61,6 @@ public class ResultaRecherche extends Header {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Résultat des Recherche:");
 
-        jList_resulta.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList_resulta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

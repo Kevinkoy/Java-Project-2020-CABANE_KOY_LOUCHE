@@ -8,6 +8,7 @@ package Vue;
 import Modele.*;
 import java.util.*;
 import javax.swing.*;
+import Controleur.Recherche_informations;
 
 /**
  *
@@ -21,18 +22,14 @@ public class EmploiDuTemps extends Header {
     /**
      * Creates new form AmploiDuTemps
      */
-    public EmploiDuTemps(Utilisateur user, ArrayList <Seance_enseignants> seanceEnseignants, ArrayList <Seance_salles> seanceSalles) {
+    public EmploiDuTemps(Utilisateur user) {
         super(user);
-        this.seanceEnseignants = seanceEnseignants;
-        this.seanceSalles = seanceSalles;
         
         initComponents();
         
-        this.SemaineSelection.setText("" + calendrier.get(Calendar.WEEK_OF_YEAR));
+        this.SemaineSelection.setValue(calendrier.get(Calendar.WEEK_OF_YEAR));
         
         //cree_cours();
-        
-        
         
         
         actualise_dates_affichage();
@@ -41,6 +38,34 @@ public class EmploiDuTemps extends Header {
     //créé les affichage pour chaque cours
     public void cree_cours()
     {
+        Recherche_informations recherche = new Recherche_informations();
+        
+        for(int i = 0; i < seanceEnseignants.size()-1; ++i)
+        {
+            for(int j = i+1; j < seanceEnseignants.size(); ++j)
+            {
+                MaDate comparer = seanceEnseignants.get(i).getSeance().getDate();
+                MaDate comparateur = seanceEnseignants.get(j).getSeance().getDate();
+                
+                if(0 < comparer.compareTo(comparateur))
+                {
+                    Seance_enseignants sauve = seanceEnseignants.get(i);
+                    seanceEnseignants.remove(i);
+                    seanceEnseignants.add(i, seanceEnseignants.get(j));
+                    seanceEnseignants.remove(j);
+                    seanceEnseignants.add(j, sauve);
+                } 
+                else if(seanceEnseignants.get(i).getSeance().getHeure_debut().getHours() > seanceEnseignants.get(i).getSeance().getHeure_debut().getHours())
+                {
+                    Seance_enseignants sauve = seanceEnseignants.get(i);
+                    seanceEnseignants.remove(i);
+                    seanceEnseignants.add(i, seanceEnseignants.get(j));
+                    seanceEnseignants.remove(j);
+                    seanceEnseignants.add(j, sauve);
+                }
+            }
+        }
+        
         for(int compteur = 0; compteur < seanceEnseignants.size(); ++compteur)
         {
             int jour = -1;
@@ -119,11 +144,9 @@ public class EmploiDuTemps extends Header {
         this.vendredi.setText("Vendredi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
         
         cal.setWeekDate(calendrier.get(Calendar.YEAR), calendrier.get(Calendar.WEEK_OF_YEAR), Calendar.SATURDAY);
-        this.samedi.setText("Samedi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));
-        
-        
+        this.samedi.setText("Samedi " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1));        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,15 +165,10 @@ public class EmploiDuTemps extends Header {
         menuBar3 = new java.awt.MenuBar();
         menu5 = new java.awt.Menu();
         menu6 = new java.awt.Menu();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel30 = new javax.swing.JPanel();
-        jPanel32 = new javax.swing.JPanel();
-        jPanel34 = new javax.swing.JPanel();
-        jPanel36 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        SemaineSelection = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton_semaine = new javax.swing.JButton();
+        SemaineSelection = new javax.swing.JSpinner();
         jScrollPane = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel44 = new javax.swing.JPanel();
@@ -204,102 +222,16 @@ public class EmploiDuTemps extends Header {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 240, 240));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 138, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 103, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-        );
-        jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-        jPanel36.setLayout(jPanel36Layout);
-        jPanel36Layout.setHorizontalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 802, Short.MAX_VALUE)
-        );
-        jPanel36Layout.setVerticalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
-        jPanel34.setLayout(jPanel34Layout);
-        jPanel34Layout.setHorizontalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel34Layout.createSequentialGroup()
-                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel34Layout.setVerticalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel34Layout.createSequentialGroup()
-                .addContainerGap(194, Short.MAX_VALUE)
-                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
-        jPanel30.setLayout(jPanel30Layout);
-        jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(303, Short.MAX_VALUE))
-        );
-
-        SemaineSelection.setText("jTextField1");
-        SemaineSelection.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SemaineSelectionActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("semaine :");
+
+        jButton_semaine.setText("OK");
+        jButton_semaine.setActionCommand("ok");
+        jButton_semaine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_semaineActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -307,15 +239,20 @@ public class EmploiDuTemps extends Header {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SemaineSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_semaine)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(SemaineSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel1))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(SemaineSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_semaine))
+                .addGap(1, 1, 1))
         );
 
         jPanel44.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -603,7 +540,7 @@ public class EmploiDuTemps extends Header {
                 .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
         jScrollPane.setViewportView(jPanel3);
@@ -613,39 +550,37 @@ public class EmploiDuTemps extends Header {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(784, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(147, 147, 147)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 893, Short.MAX_VALUE)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SemaineSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SemaineSelectionActionPerformed
+    private void jButton_semaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_semaineActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SemaineSelectionActionPerformed
+        int semaineSelectioner = Integer.parseInt(this.SemaineSelection.getValue().toString());
+        this.calendrier.set(Calendar.WEEK_OF_YEAR, semaineSelectioner);
+        actualise_dates_affichage();
+        
+    }//GEN-LAST:event_jButton_semaineActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[], Utilisateur user, ArrayList <Seance_enseignants> seanceEnseignants, ArrayList <Seance_salles> seanceSalles) {
+    public static void main(String args[], Utilisateur user) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -672,13 +607,14 @@ public class EmploiDuTemps extends Header {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmploiDuTemps(user, seanceEnseignants, seanceSalles).setVisible(true);
+                new EmploiDuTemps(user).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField SemaineSelection;
+    private javax.swing.JSpinner SemaineSelection;
+    private javax.swing.JButton jButton_semaine;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList_jeudi;
     private javax.swing.JList<String> jList_lundi;
@@ -686,50 +622,20 @@ public class EmploiDuTemps extends Header {
     private javax.swing.JList<String> jList_mercredi;
     private javax.swing.JList<String> jList_samedi;
     private javax.swing.JList<String> jList_vendredi;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
-    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel40;
-    private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel44;
     private javax.swing.JPanel jPanel45;
     private javax.swing.JPanel jPanel46;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
@@ -739,19 +645,7 @@ public class EmploiDuTemps extends Header {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel jeudi;
     private javax.swing.JLabel lundi;
-    private javax.swing.JLabel lundi1;
-    private javax.swing.JLabel lundi10;
-    private javax.swing.JLabel lundi11;
-    private javax.swing.JLabel lundi12;
-    private javax.swing.JLabel lundi2;
-    private javax.swing.JLabel lundi3;
-    private javax.swing.JLabel lundi5;
-    private javax.swing.JLabel lundi6;
-    private javax.swing.JLabel lundi7;
-    private javax.swing.JLabel lundi8;
-    private javax.swing.JLabel lundi9;
     private javax.swing.JLabel mardi;
-    private javax.swing.JLabel mardi2;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
