@@ -33,21 +33,29 @@ public class EDTTest extends JFrame implements ActionListener {
     private Utilisateur userco;
     private Utilisateur userprint;
     private int sem;
-    private ArrayList<JButton> boutons;
+    private JButton[] tabButton;
     private GridBagConstraints gbc;
     private ArrayList<Enseignant> enseignants;
     private ArrayList<Etudiant> etudiants;
 
-    public EDTTest(Utilisateur userco, Utilisateur userprint, int sem) {
+    public EDTTest(Utilisateur userco) {
+
+        Calendar cal = Calendar.getInstance();
 
         this.gbc = new GridBagConstraints();
         this.userco = userco;
-        this.userprint = userprint;
-        this.sem = sem;
+        this.userprint = userco;
+
+        int semaine = cal.get(Calendar.WEEK_OF_YEAR);
+        this.sem = semaine;
+
         this.label2 = new JLabel("Enseignant : ");
         this.label1 = new JLabel("Etudiant : ");
         this.combo2 = new JComboBox();
-        this.boutons = new ArrayList<JButton>();
+
+        int nbSemaines = cal.getWeeksInWeekYear();
+        this.tabButton = new JButton[nbSemaines];
+
         this.combo1 = new JComboBox();
         this.container = new JPanel();
         this.etudiants = new ArrayList<Etudiant>();
@@ -81,7 +89,6 @@ public class EDTTest extends JFrame implements ActionListener {
         this.combo1.removeAllItems();
         this.combo2.removeAllItems();
         this.container.removeAll();
-        this.boutons.clear();
 
         //On récupère toutes les séances de l'utilisateur à afficher
         ArrayList<Seance> seances = new ArrayList<Seance>();
@@ -108,6 +115,7 @@ public class EDTTest extends JFrame implements ActionListener {
         container.setLayout(new BorderLayout());
         container.setSize(1300, 900);
 
+        JPanel top = new JPanel();
         //Si l'utilisateur connecté est un ref ped (2) ou un admin (1)
         if (droit == 1 || droit == 2) {
 
@@ -115,6 +123,9 @@ public class EDTTest extends JFrame implements ActionListener {
 
             System.out.println("nb etudiants dans la liste: " + this.etudiants.size());
             System.out.println("nb enseignants dans la liste: " + this.enseignants.size());
+
+            this.combo1.addItem("");
+            this.combo2.addItem("");
 
             for (int i = 0; i < this.etudiants.size(); i++) {
                 this.combo1.addItem(this.etudiants.get(i).getPrenom() + " " + this.etudiants.get(i).getNom());
@@ -127,32 +138,35 @@ public class EDTTest extends JFrame implements ActionListener {
             }
             this.combo2.addActionListener(this);
 
-            JPanel top = new JPanel();
             top.add(this.label1);
             top.add(this.combo1);
             top.add(this.label2);
             top.add(this.combo2);
-
-            top.setBorder(BorderFactory.createTitledBorder("TOP"));
-            container.add(top, BorderLayout.NORTH);
         }
+
+        JButton ligne = new JButton("Passer en ligne");
+        ligne.setName("ligne");
+        ligne.addActionListener(this);
+        top.add(ligne);
+
+        top.setBorder(BorderFactory.createTitledBorder("TOP"));
+        container.add(top, BorderLayout.NORTH);
 
         //affichages des semaines
         JPanel middle = new JPanel();
         middle.setPreferredSize(new Dimension(1300, 130));
         middle.setBackground(Color.red);
+
         int nbSemaines = cal.getWeeksInWeekYear();
 
-        System.out.println(nbSemaines);
-        JButton[] tabButton = new JButton[nbSemaines];
-        for (int i = 0; i < tabButton.length; i++) {
-            tabButton[i] = null;
+        for (int i = 0; i < this.tabButton.length; i++) {
+            this.tabButton[i] = null;
         }
         for (int i = 0; i < nbSemaines; i++) {
-            tabButton[i] = new JButton("" + (i + 1));
-            tabButton[i].setName("" + i);
-            tabButton[i].addActionListener(this);
-            middle.add(tabButton[i]);
+            this.tabButton[i] = new JButton("" + (i + 1));
+            this.tabButton[i].setName("" + i);
+            this.tabButton[i].addActionListener(this);
+            middle.add(this.tabButton[i]);
         }
 
         //affichage de l'emploi du temps
@@ -302,30 +316,31 @@ public class EDTTest extends JFrame implements ActionListener {
                 EntireFrenchDate = "Mardi " + date + " " + this.getNameMonth(mois);
                 break;
             case 2:
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
                 date = cal.getTime().getDate();
                 mois = cal.getTime().getMonth();
                 EntireFrenchDate = "Mercredi " + date + " " + this.getNameMonth(mois);
                 break;
             case 3:
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
                 date = cal.getTime().getDate();
                 mois = cal.getTime().getMonth();
                 EntireFrenchDate = "Jeudi " + date + " " + this.getNameMonth(mois);
                 break;
             case 4:
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
                 date = cal.getTime().getDate();
                 mois = cal.getTime().getMonth();
                 EntireFrenchDate = "Vendredi " + date + " " + this.getNameMonth(mois);
                 break;
             case 5:
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
                 date = cal.getTime().getDate();
                 mois = cal.getTime().getMonth();
                 EntireFrenchDate = "Samedi " + date + " " + this.getNameMonth(mois);
                 break;
             case 6:
+                cal.set(Calendar.WEEK_OF_YEAR, this.sem + 1);
                 cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 date = cal.getTime().getDate();
                 mois = cal.getTime().getMonth();
@@ -368,30 +383,68 @@ public class EDTTest extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Object src = e.getSource();
-        int droit = this.userco.getDroit();
-        if (droit == 1 || droit == 2) {
+        int semaine = 1;
+
+        if (src instanceof JButton) {
+            JButton b = (JButton) src;
+            String name = b.getName();
+            if (name.equals("ligne")) {
+                //je crée une instance de emploidutemps
+                EmploiDuTemps edtLigne = new EmploiDuTemps(this.userco);
+                this.setVisible(false);
+            } else {
+                for (int i = 0; i < this.tabButton.length; i++) {
+                    String test = "" + (i + 1);
+                    if (name.equals(test)) {
+                        semaine = i + 1;
+                    }
+                }
+                this.setSem(semaine);
+                System.out.println("Changement de semaine " + this.getSem());
+                this.afficherEDT();
+            }
+        } else if (src instanceof JComboBox) {
+            JComboBox combo = (JComboBox) src;
+            if (combo.getSelectedItem() != null) {
+                Object selected = combo.getSelectedItem();
+                for (int i = 0; i < this.etudiants.size(); i++) {
+                    if (selected.toString().equals(this.etudiants.get(i).getPrenom() + " " + this.etudiants.get(i).getNom())) {
+                        System.out.println("j'ai trouvé un match etudiant : " + selected);
+                        Etudiant userSelected = this.etudiants.get(i);
+                    }
+                }
+                for (int i = 0; i < this.enseignants.size(); i++) {
+                    if (selected.toString().equals(this.enseignants.get(i).getPrenom() + " " + this.enseignants.get(i).getNom())) {
+                        Enseignant userSelected = this.enseignants.get(i);
+                        System.out.println("j'ai trouvé un match enseignant : " + selected);
+                    }
+                }
+            }
+        }
+        /*if (droit == 1 || droit == 2) {
             if (src == this.combo1 || src == this.combo2) {
                 JComboBox combo = (JComboBox) src;
                 Object selected = combo.getSelectedItem();
-                System.out.println(selected);
                 String command = e.getActionCommand();
                 if ("comboBoxChanged".equals(command)) {
                     System.out.println(selected);
+                    this.afficherEDT();
                 }
-            } else {
+            } 
+            else{
                 JButton bouton = (JButton) src;
                 String name = bouton.getName();
                 int semaine = 1;
                 for (int i = 0; i < 54; i++) {
                     String test = "" + (i + 1);
                     if (name.equals(test)) {
-                        System.out.println(i);
-                        semaine = i;
+                        semaine = i+1;
                     }
                 }
                 //EDTTest edt = new EDTTest(this.userco, this.userprint, sem);
                 this.setSem(semaine);
-                System.out.println("Changement de semaine " + semaine);
+                System.out.println("Changement de semaine " + this.getSem());
+                this.afficherEDT();
             }
         } else {
             JButton bouton = (JButton) src;
@@ -401,15 +454,15 @@ public class EDTTest extends JFrame implements ActionListener {
                 String test = "" + (i + 1);
                 if (name.equals(test)) {
                     System.out.println(i);
-                    semaine = i;
+                    semaine = i+1;
                 }
             }
             //EDTTest edt = new EDTTest(this.userco, this.userprint, sem);
             this.setSem(semaine);
             System.out.println("Changement de semaine " + semaine);
-        }
-        this.afficherEDT();
-
+            this.afficherEDT();
+        }*/
+        //this.afficherEDT();
     }
 
     public void setSem(int sem) {
@@ -439,9 +492,7 @@ public class EDTTest extends JFrame implements ActionListener {
     public static void main(String[] args) {
         //TEST
         Utilisateur userco = new Utilisateur(5, "kevin.koy@edu.ece.fr", "12345", "Koy", "Kevin", 2);
-        Calendar cal = Calendar.getInstance();
-        int sem = cal.get(Calendar.WEEK_OF_YEAR);
-        EDTTest edt = new EDTTest(userco, userco, sem);
+        EDTTest edt = new EDTTest(userco);
         edt.afficherEDT();
 
         //TEST
