@@ -116,7 +116,7 @@ public class Recherche_informations {
             // PARCOURS DE LA TABLE
             for (int i = 0; i < 100; i++) {
                 Seance_groupes find_by_id_groupe = sgdao.find_by_id_groupe(i);
-                // SI le groupe correspond a celui de l'Ã©tudiant
+                // SI le groupe correspond a celui de l'étudiant
                 if (find_by_id_groupe.getGroupe().getId() == ((Etudiant) utilisateur).getGroupe().getId()) {
                     // On va verifier sa semaine
                     Seance find = seancedao.find(i);
@@ -141,7 +141,7 @@ public class Recherche_informations {
             // PARCOURS DE LA TABLE
             for (int i = 0; i < 100; i++) {
                 Seance_enseignants find_by_id_enseignant = sgdao.find_by_id_enseignant(i);
-                // SI le groupe correspond a celui de l'Ã©tudiant
+                // SI le groupe correspond a celui de l'étudiant
                 if (find_by_id_enseignant.getEnseignant().getId() == ((Enseignant) utilisateur).getId()) {
                     // On va verifier sa semaine
                     Seance find = seancedao.find(i);
@@ -160,7 +160,7 @@ public class Recherche_informations {
                 }
 
             }
-        } /// Sinon admin ou ref on affiche tout pour une semaine donnÃ©e
+        } /// Sinon admin ou ref on affiche tout pour une semaine donnée
         else {
             for (int i = 0; i < 100; i++) {
                 Seance find = seancedao.find(i);

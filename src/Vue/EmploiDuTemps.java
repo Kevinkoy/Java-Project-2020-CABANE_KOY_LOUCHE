@@ -8,7 +8,7 @@ package Vue;
 import Modele.*;
 import java.util.*;
 import javax.swing.*;
-import Controleur.Recherche_informations;
+import DataAcessObject.*;
 
 /**
  *
@@ -29,23 +29,46 @@ public class EmploiDuTemps extends Header {
         
         this.SemaineSelection.setValue(calendrier.get(Calendar.WEEK_OF_YEAR));
         
-        //cree_cours();
+        cree_cours();
         
         
         actualise_dates_affichage();
     }
     
+    
     //créé les affichage pour chaque cours
     public void cree_cours()
-    {
-        Recherche_informations recherche = new Recherche_informations();
+    {        
+        ArrayList<Seance_enseignants> tabSE = new ArrayList();
+
+        for(int i=0;i<100;i++)
+        {
+            Seance_enseignantsDAO objetdao = new Seance_enseignantsDAO(ConnectMySQL.getInstance());
+            Seance_enseignants find = objetdao.find(i);
+            if(Integer.parseInt(this.SemaineSelection.getValue().toString()) == find.getSeance().getSemaine())
+            {
+                tabSE.add(find);
+            }
+        }
+        seanceEnseignants = tabSE;
+        
+        ArrayList<Seance_salles> tabSS = new ArrayList();
+
+        for(int compteur=0;compteur<seanceEnseignants.size();compteur++)
+        {
+            Seance_sallesDAO objetdao = new Seance_sallesDAO(ConnectMySQL.getInstance());
+            Seance_salles find = objetdao.find(seanceEnseignants.get(compteur).getSeance().getId());
+            tabSS.add(find);
+        }
+        seanceSalles = tabSS;
+        
         
         for(int i = 0; i < seanceEnseignants.size()-1; ++i)
         {
             for(int j = i+1; j < seanceEnseignants.size(); ++j)
             {
-                MaDate comparer = seanceEnseignants.get(i).getSeance().getDate();
-                MaDate comparateur = seanceEnseignants.get(j).getSeance().getDate();
+                Date comparer = seanceEnseignants.get(i).getSeance().getDate();
+                Date comparateur = seanceEnseignants.get(j).getSeance().getDate();
                 
                 if(0 < comparer.compareTo(comparateur))
                 {
@@ -594,9 +617,9 @@ public class EmploiDuTemps extends Header {
         // TODO add your handling code here:
         if("cours en tableau" == jComboBox_presentation.getSelectedItem().toString())
         {
-            /*EDTTest newPage = new EDTTest(user);
+            EDTTest newPage = new EDTTest(user);
             newPage.setVisible(true);
-            this.setVisible(false);*/
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jComboBox_presentationActionPerformed
 
