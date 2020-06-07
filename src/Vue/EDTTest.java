@@ -9,9 +9,12 @@ import Modele.*;
 import Controleur.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.*;
@@ -20,7 +23,7 @@ import javax.swing.*;
  *
  * @author ocabane
  */
-public class EDTTest extends JFrame {
+public class EDTTest extends JFrame implements ActionListener {
 
     private JPanel container;
     private JComboBox combo1;
@@ -28,45 +31,63 @@ public class EDTTest extends JFrame {
     private JLabel label1;
     private JLabel label2;
     private Utilisateur userco;
+    private Utilisateur userprint;
+    private int sem;
     private ArrayList<JButton> boutons;
     private GridBagConstraints gbc;
+    private ArrayList<Enseignant> enseignants;
+    private ArrayList<Etudiant> etudiants;
 
     public EDTTest(Utilisateur userco, Utilisateur userprint, int sem) {
-        
+
         this.gbc = new GridBagConstraints();
-        this.userco = new Utilisateur();
+        this.userco = userco;
+        this.userprint = userprint;
+        this.sem = sem;
         this.label2 = new JLabel("Enseignant : ");
         this.label1 = new JLabel("Etudiant : ");
         this.combo2 = new JComboBox();
         this.boutons = new ArrayList<JButton>();
         this.combo1 = new JComboBox();
         this.container = new JPanel();
+        this.etudiants = new ArrayList<Etudiant>();
+        this.enseignants = new ArrayList<Enseignant>();
+        //on ajoute a notre panel nos combos de tous les étudiants et tous les enseignants
 
-        int droit = userco.getDroit();
-        this.userco = userco;
-
-        ArrayList<Etudiant> etudiants = new ArrayList<Etudiant>();
         //TEST
         Groupe groupe1 = new Groupe();
         Etudiant etud1 = new Etudiant(3, "alice.cabane@edu.ece.fr", "12345", "Cabane", "Alice", 1, groupe1);
-        etudiants.add(etud1);
+        this.etudiants.add(etud1);
         Etudiant etud2 = new Etudiant(1, "leonard.najman@edu.ece.fr", "12345", "Najman", "Leonard", 1, groupe1);
-        etudiants.add(etud2);
+        this.etudiants.add(etud2);
         Etudiant etud3 = new Etudiant(2, "solene.haccoun@edu.ece.fr", "12345", "Haccoun", "Solene", 1, groupe1);
-        etudiants.add(etud3);
+        this.etudiants.add(etud3);
         //TEST
-        //etudiants = findEtudiants();
+        //this.etudiants = findEtudiants();
 
-        ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
         //TEST
         Cours cours1 = new Cours(0, "POO Java");
         Enseignant prof1 = new Enseignant(4, "jean-pierre.segado@edu.ece.fr", "12345", "Segado", "Jean-Pierre", cours1);
-        enseignants.add(prof1);
+        this.enseignants.add(prof1);
         //TEST
-        //enseignants = findEnseignants();
+        //this.enseignants = findEnseignants();
+    }
 
+    public void afficherEDT() {
+
+        int droit = getUserCo().getDroit();
+
+        Calendar cal = Calendar.getInstance();
+        this.combo1.removeAllItems();
+        this.combo2.removeAllItems();
+        this.container.removeAll();
+        this.boutons.clear();
+
+        //On récupère toutes les séances de l'utilisateur à afficher
         ArrayList<Seance> seances = new ArrayList<Seance>();
+        seances.clear();
         //TEST
+        Cours cours1 = new Cours(0, "POO Java");
         Type_cours type_cours1 = new Type_cours(0, "TP");
         Seance seance1 = new Seance(0, new MaDate(4, 6, 2020), new Time(8, 30, 0), new Time(10, 0, 0), 0, cours1, type_cours1);
         seances.add(seance1);
@@ -77,42 +98,92 @@ public class EDTTest extends JFrame {
         //TEST
         //seances = findSeances(userprint, sem);
 
+        //On créé notre JFrame et Notre Jpanel
         this.setTitle("EDT");
-        this.setSize(1000, 1000);
+        this.setSize(1300, 900);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
-        this.setLayout(new GridLayout(7, 7));
-
         container.setBackground(Color.white);
         container.setLayout(new BorderLayout());
-        container.setSize(400, 600);
+        container.setSize(1300, 900);
 
-        //on rentre dans notre combo tous les étudiants
-        combo1.setPreferredSize(new Dimension(100, 20));
-        for (int i = 0; i < etudiants.size(); i++) {
-            combo1.addItem(etudiants.get(i).getPrenom() + " " + etudiants.get(i).getNom());
-        }
-        combo1.addItemListener(new ItemState());
-        //on rentre dans notre combo tous les enseignants
-        combo2.setPreferredSize(new Dimension(100, 20));
-        for (int i = 0; i < enseignants.size(); i++) {
-            combo2.addItem(enseignants.get(i).getPrenom() + " " + enseignants.get(i).getNom());
-        }
-        combo2.addItemListener(new ItemState());
+        //Si l'utilisateur connecté est un ref ped (2) ou un admin (1)
+        if (droit == 1 || droit == 2) {
 
-        JPanel top = new JPanel();
-        top.add(label1);
-        top.add(combo1);
-        top.add(label2);
-        top.add(combo2);
+            this.combo1.setPreferredSize(new Dimension(100, 20));
+
+            System.out.println("nb etudiants dans la liste: " + this.etudiants.size());
+            System.out.println("nb enseignants dans la liste: " + this.enseignants.size());
+
+            for (int i = 0; i < this.etudiants.size(); i++) {
+                this.combo1.addItem(this.etudiants.get(i).getPrenom() + " " + this.etudiants.get(i).getNom());
+            }
+            this.combo1.addActionListener(this);
+            //on rentre dans notre combo tous les enseignants
+            this.combo2.setPreferredSize(new Dimension(100, 20));
+            for (int i = 0; i < enseignants.size(); i++) {
+                this.combo2.addItem(enseignants.get(i).getPrenom() + " " + enseignants.get(i).getNom());
+            }
+            this.combo2.addActionListener(this);
+
+            JPanel top = new JPanel();
+            top.add(this.label1);
+            top.add(this.combo1);
+            top.add(this.label2);
+            top.add(this.combo2);
+
+            top.setBorder(BorderFactory.createTitledBorder("TOP"));
+            container.add(top, BorderLayout.NORTH);
+        }
+
+        //affichages des semaines
+        JPanel middle = new JPanel();
+        middle.setPreferredSize(new Dimension(1300, 130));
+        middle.setBackground(Color.red);
+        int nbSemaines = cal.getWeeksInWeekYear();
+
+        System.out.println(nbSemaines);
+        JButton[] tabButton = new JButton[nbSemaines];
+        for (int i = 0; i < tabButton.length; i++) {
+            tabButton[i] = null;
+        }
+        for (int i = 0; i < nbSemaines; i++) {
+            tabButton[i] = new JButton("" + (i + 1));
+            tabButton[i].setName("" + i);
+            tabButton[i].addActionListener(this);
+            middle.add(tabButton[i]);
+        }
 
         //affichage de l'emploi du temps
-        JPanel bot = new JPanel();
-        //bot.setSize(300, 400);
-        bot.setSize(new java.awt.Dimension(400, 500));
+        JPanel bot = new JPanel(new GridBagLayout());
         bot.setBackground(Color.yellow);
-        
+        gbc.insets = new Insets(5, 2, 5, 2);
+
+        //Connaitre chaque jour de la semaine
+        for (int i = 0; i < 7; i++) {
+            String Date = this.getDateofDay(i);
+            JButton b = new JButton(Date);
+            gbc.gridx = i + 1;
+            gbc.gridy = 0;
+            gbc.fill = GridBagConstraints.BOTH;
+            bot.add(b, gbc);
+
+            String Creneau = this.getCreneau(i);
+            JButton b2 = new JButton(Creneau);
+            gbc.gridx = 0;
+            gbc.gridy = i + 1;
+            gbc.fill = GridBagConstraints.BOTH;
+            bot.add(b2, gbc);
+        }
+
+        int[][] tabEDT = new int[7][7];
+        for (int i = 0; i < tabEDT.length; i++) {
+            for (int j = 0; j < tabEDT[i].length; j++) {
+                tabEDT[i][j] = 0;
+            }
+        }
+
         for (int i = 0; i < seances.size(); i++) {
             String cours = seances.get(i).getCours().getNom();
             MaDate date = seances.get(i).getDate();
@@ -130,38 +201,249 @@ public class EDTTest extends JFrame {
             }
 
             JButton b = new JButton(cours);
-            
-            gbc.gridx = x;
-            gbc.gridy = y;
-            System.out.println("Mon x et mon y :" + x + y);
+            //b.setPreferredSize(new Dimension(250, 100));
+
+            gbc.gridx = x + 1;
+            gbc.gridy = y + 1;
+
+            gbc.fill = GridBagConstraints.BOTH;
+
+            tabEDT[x][y] = 1;
             bot.add(b, gbc);
             //boutons.add(b);
             //grid bag avec mon x et mon y
         }
+        for (int i = 0; i < tabEDT.length; i++) {
+            for (int j = 0; j < tabEDT[i].length; j++) {
+                if (tabEDT[i][j] == 0) {
+                    JButton b = new JButton("                 ");
+                    //b.setPreferredSize(new Dimension(250, 100));
+                    gbc.gridx = i + 1;
+                    gbc.gridy = j + 1;
+                    gbc.fill = GridBagConstraints.BOTH;
+                    bot.add(b, gbc);
+                }
+            }
+        }
 
-        container.add(top,  BorderLayout.NORTH);
-        container.add(bot,  BorderLayout.SOUTH);
+        middle.setBorder(BorderFactory.createTitledBorder("MIDDLE"));
+        bot.setBorder(BorderFactory.createTitledBorder("BOT"));
+
+        BoxLayout layout1 = new BoxLayout(container, BoxLayout.Y_AXIS);
+        container.setLayout(layout1);
+
+        container.add(middle);
+        container.add(bot);
 
         this.setContentPane(container);
         this.setVisible(true);
     }
 
-    class ItemState implements ItemListener {
-
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            Calendar cal = Calendar.getInstance();
-            int sem = cal.get(Calendar.WEEK_OF_YEAR);
-            EDTTest edt = new EDTTest(userco, (Utilisateur) e.getItem(), sem);
+    public String getNameMonth(int mois) {
+        String nomMois = null;
+        switch (mois) {
+            case 0:
+                nomMois = "Janvier";
+                break;
+            case 1:
+                nomMois = "Février";
+                break;
+            case 2:
+                nomMois = "Mars";
+                break;
+            case 3:
+                nomMois = "Avril";
+                break;
+            case 4:
+                nomMois = "Mai";
+                break;
+            case 5:
+                nomMois = "Juin";
+                break;
+            case 6:
+                nomMois = "Juillet";
+                break;
+            case 7:
+                nomMois = "Aout";
+                break;
+            case 8:
+                nomMois = "Septembre";
+                break;
+            case 9:
+                nomMois = "Octobre";
+                break;
+            case 10:
+                nomMois = "Novembre";
+                break;
+            case 11:
+                nomMois = "Décembre";
+                break;
         }
+        return nomMois;
+    }
+
+    public String getDateofDay(int jour) {
+        int date;
+        int mois;
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.WEEK_OF_YEAR, this.sem);
+        String EntireFrenchDate = null;
+        switch (jour) {
+            case 0:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Lundi " + date + " " + this.getNameMonth(mois);
+                break;
+            case 1:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Mardi " + date + " " + this.getNameMonth(mois);
+                break;
+            case 2:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Mercredi " + date + " " + this.getNameMonth(mois);
+                break;
+            case 3:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Jeudi " + date + " " + this.getNameMonth(mois);
+                break;
+            case 4:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Vendredi " + date + " " + this.getNameMonth(mois);
+                break;
+            case 5:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Samedi " + date + " " + this.getNameMonth(mois);
+                break;
+            case 6:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+                date = cal.getTime().getDate();
+                mois = cal.getTime().getMonth();
+                EntireFrenchDate = "Dimanche " + date + " " + this.getNameMonth(mois);
+                break;
+
+        }
+        return EntireFrenchDate;
+    }
+
+    public String getCreneau(int i) {
+        String Creneau = null;
+        switch (i) {
+            case 0:
+                Creneau = "8h30 - 10h00";
+                break;
+            case 1:
+                Creneau = "10h15 - 11h45";
+                break;
+            case 2:
+                Creneau = "12h00 - 13h30";
+                break;
+            case 3:
+                Creneau = "13h45 - 15h15";
+                break;
+            case 4:
+                Creneau = "15h30 - 17h00";
+                break;
+            case 5:
+                Creneau = "17h15 - 18h45";
+                break;
+            case 6:
+                Creneau = "19h00 - 20h30";
+                break;
+        }
+        return Creneau;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        Object src = e.getSource();
+        int droit = this.userco.getDroit();
+        if (droit == 1 || droit == 2) {
+            if (src == this.combo1 || src == this.combo2) {
+                JComboBox combo = (JComboBox) src;
+                Object selected = combo.getSelectedItem();
+                System.out.println(selected);
+                String command = e.getActionCommand();
+                if ("comboBoxChanged".equals(command)) {
+                    System.out.println(selected);
+                }
+            } else {
+                JButton bouton = (JButton) src;
+                String name = bouton.getName();
+                int semaine = 1;
+                for (int i = 0; i < 54; i++) {
+                    String test = "" + (i + 1);
+                    if (name.equals(test)) {
+                        System.out.println(i);
+                        semaine = i;
+                    }
+                }
+                //EDTTest edt = new EDTTest(this.userco, this.userprint, sem);
+                this.setSem(semaine);
+                System.out.println("Changement de semaine " + semaine);
+            }
+        } else {
+            JButton bouton = (JButton) src;
+            String name = bouton.getName();
+            int semaine = 1;
+            for (int i = 0; i < 54; i++) {
+                String test = "" + (i + 1);
+                if (name.equals(test)) {
+                    System.out.println(i);
+                    semaine = i;
+                }
+            }
+            //EDTTest edt = new EDTTest(this.userco, this.userprint, sem);
+            this.setSem(semaine);
+            System.out.println("Changement de semaine " + semaine);
+        }
+        this.afficherEDT();
+
+    }
+
+    public void setSem(int sem) {
+        this.sem = sem;
+    }
+
+    public void setUserCo(Utilisateur userco) {
+        this.userco = userco;
+    }
+
+    public void setUserPrint(Utilisateur userprint) {
+        this.userprint = userprint;
+    }
+
+    public int getSem() {
+        return (this.sem);
+    }
+
+    public Utilisateur getUserCo() {
+        return (this.userco);
+    }
+
+    public Utilisateur getUserPrint() {
+        return (this.userprint);
     }
 
     public static void main(String[] args) {
         //TEST
-        Utilisateur userco = new Utilisateur(5, "kevin.koy@edu.ece.fr", "12345", "Koy", "Kevin", 0);
+        Utilisateur userco = new Utilisateur(5, "kevin.koy@edu.ece.fr", "12345", "Koy", "Kevin", 2);
         Calendar cal = Calendar.getInstance();
         int sem = cal.get(Calendar.WEEK_OF_YEAR);
         EDTTest edt = new EDTTest(userco, userco, sem);
+        edt.afficherEDT();
+
         //TEST
     }
 
