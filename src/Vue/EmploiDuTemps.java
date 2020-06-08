@@ -6,6 +6,7 @@
 package Vue;
 
 import Modele.*;
+import Controleur.*;
 import java.util.*;
 import javax.swing.*;
 import DataAcessObject.*;
@@ -16,7 +17,7 @@ import DataAcessObject.*;
  */
 public class EmploiDuTemps extends Header {
 
-    private ArrayList<Seance_enseignants> seanceEnseignants;
+    private ArrayList<Seance> seance;
     private ArrayList <Seance_salles> seanceSalles;
     private Calendar calendrier = Calendar.getInstance();
     /**
@@ -39,66 +40,48 @@ public class EmploiDuTemps extends Header {
     //créé les affichage pour chaque cours
     public void cree_cours()
     {        
-        ArrayList<Seance_enseignants> tabSE = new ArrayList();
-
-        for(int i=0;i<100;i++)
+        Recherche_informations r = new Recherche_informations();
+        
+        seance = r.getAll_Seance(user, Integer.parseInt(this.SemaineSelection.getValue().toString()));
+        
+                
+        
+        for(int i = 0; i < seance.size()-1; ++i)
         {
-            Seance_enseignantsDAO objetdao = new Seance_enseignantsDAO(ConnectMySQL.getInstance());
-            Seance_enseignants find = objetdao.find(i);
-            if(Integer.parseInt(this.SemaineSelection.getValue().toString()) == find.getSeance().getSemaine())
+            for(int j = i+1; j < seance.size(); ++j)
             {
-                tabSE.add(find);
-            }
-        }
-        seanceEnseignants = tabSE;
-        
-        ArrayList<Seance_salles> tabSS = new ArrayList();
-
-        for(int compteur=0;compteur<seanceEnseignants.size();compteur++)
-        {
-            Seance_sallesDAO objetdao = new Seance_sallesDAO(ConnectMySQL.getInstance());
-            Seance_salles find = objetdao.find(seanceEnseignants.get(compteur).getSeance().getId());
-            tabSS.add(find);
-        }
-        seanceSalles = tabSS;
-        
-        
-        for(int i = 0; i < seanceEnseignants.size()-1; ++i)
-        {
-            for(int j = i+1; j < seanceEnseignants.size(); ++j)
-            {
-                Date comparer = seanceEnseignants.get(i).getSeance().getDate();
-                Date comparateur = seanceEnseignants.get(j).getSeance().getDate();
+                Date comparer = seance.get(i).getDate();
+                Date comparateur = seance.get(j).getDate();
                 
                 if(0 < comparer.compareTo(comparateur))
                 {
-                    Seance_enseignants sauve = seanceEnseignants.get(i);
-                    seanceEnseignants.remove(i);
-                    seanceEnseignants.add(i, seanceEnseignants.get(j));
-                    seanceEnseignants.remove(j);
-                    seanceEnseignants.add(j, sauve);
+                    Seance sauve = seance.get(i);
+                    seance.remove(i);
+                    seance.add(i, seance.get(j));
+                    seance.remove(j);
+                    seance.add(j, sauve);
                 } 
-                else if(seanceEnseignants.get(i).getSeance().getHeure_debut().getHours() > seanceEnseignants.get(i).getSeance().getHeure_debut().getHours())
+                else if(seance.get(i).getHeure_debut().getHours() > seance.get(i).getHeure_debut().getHours())
                 {
-                    Seance_enseignants sauve = seanceEnseignants.get(i);
-                    seanceEnseignants.remove(i);
-                    seanceEnseignants.add(i, seanceEnseignants.get(j));
-                    seanceEnseignants.remove(j);
-                    seanceEnseignants.add(j, sauve);
+                    Seance sauve = seance.get(i);
+                    seance.remove(i);
+                    seance.add(i, seance.get(j));
+                    seance.remove(j);
+                    seance.add(j, sauve);
                 }
             }
         }
         
-        for(int compteur = 0; compteur < seanceEnseignants.size(); ++compteur)
+        for(int compteur = 0; compteur < seance.size(); ++compteur)
         {
             int jour = -1;
             DefaultListModel cours = new DefaultListModel();
             
-            jour = seanceEnseignants.get(compteur).getSeance().getDate().getDay();
+            jour = seance.get(compteur).getDate().getDay();
             
-            seanceEnseignants.get(compteur).toString();
+            seance.get(compteur).toString();
                     
-            cours.addElement("=> " +  seanceEnseignants.get(compteur).getSeance().getHeure_debut() + " - " +  seanceEnseignants.get(compteur).getSeance().getHeure_fin() + " cour:" +  seanceEnseignants.get(compteur).getSeance().getCours() + " enseignants: " + seanceEnseignants.get(compteur).getEnseignant().getNom() + " salle: " + seanceSalles.get(compteur).getSalle());
+            cours.addElement("=> " +  seance.get(compteur).getHeure_debut() + " - " + seance.get(compteur).getHeure_fin() + " cour:" +  seance.get(compteur).getCours());
             
             switch(jour)
             {

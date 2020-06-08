@@ -40,12 +40,14 @@ public class Tester {
         /*ResultaRecherche page = new ResultaRecherche();
         
         page.setVisible(true);*/
-        Utilisateur utilisateur = new Utilisateur();
+        Login page = new Login();
+        
+        /*Utilisateur utilisateur = new Utilisateur();
         
         utilisateur.setDroit(1);
         
         EmploiDuTemps emp = new EmploiDuTemps(utilisateur);
-        emp.setVisible(true);
+        emp.setVisible(true);*/
         
     }
 }

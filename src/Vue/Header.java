@@ -160,6 +160,7 @@ public class Header extends javax.swing.JFrame {
 
     private void ajout_seanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajout_seanceActionPerformed
         // TODO add your handling code here:
+        System.out.println("plop");
         ajoutCours newPage = new ajoutCours(user);
         newPage.setVisible(true);
         this.setVisible(false);

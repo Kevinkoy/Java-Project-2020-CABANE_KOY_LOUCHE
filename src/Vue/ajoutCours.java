@@ -25,7 +25,7 @@ public class ajoutCours extends Header {
         super(user);
         initComponents();
         
-        checkBoxs.add(jCheckBoxTD1);
+        /*checkBoxs.add(jCheckBoxTD1);
         checkBoxs.add(jCheckBoxTD2);
         checkBoxs.add(jCheckBoxTD3);
         checkBoxs.add(jCheckBoxTD4);
@@ -36,7 +36,7 @@ public class ajoutCours extends Header {
         checkBoxs.add(jCheckBoxTD9);
         checkBoxs.add(jCheckBoxTD10);
         checkBoxs.add(jCheckBoxTD11);
-        checkBoxs.add(jCheckBoxTD12);
+        checkBoxs.add(jCheckBoxTD12);*/
     }
 
     /**
@@ -87,7 +87,7 @@ public class ajoutCours extends Header {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("matière:");
 
-        jComboBoxMatier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxMatier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pooJava", "droit du travaille" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("date:");
@@ -493,9 +493,10 @@ public class ajoutCours extends Header {
         
         Groupe groupe = new Groupe();
         groupe.setPromotion(promo);
+        groupe.setNom("TD" + 4);
         //groupe.setNom(jTextFieldTD.getText().toString());
         
-        for(int compteur = 0; compteur < 12; ++compteur)
+        /*for(int compteur = 0; compteur < 12; ++compteur)
         {
             if(true == this.checkBoxs.get(compteur).isSelected())
             {
@@ -511,7 +512,17 @@ public class ajoutCours extends Header {
                     System.out.println("erreur ajoutSeance_groupe TD" + compteur);
                 }
             }
-        }   
+        }*/ 
+        
+        Seance_groupes seance_groupe = new Seance_groupes(newSeance, groupe);
+                
+        Seance_groupesDAO ajoutSeance_groupe = new Seance_groupesDAO(ConnectMySQL.getInstance());
+        boolCreation = ajoutSeance_groupe.create(seance_groupe);
+
+        if(false == boolCreation)
+        {
+            System.out.println("erreur ajoutSeance_groupe TD");
+        }
         
     }//GEN-LAST:event_jButtonAjourtActionPerformed
 
