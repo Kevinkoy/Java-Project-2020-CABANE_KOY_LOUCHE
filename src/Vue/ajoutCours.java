@@ -77,7 +77,7 @@ public class ajoutCours extends Header {
         jLabel17 = new javax.swing.JLabel();
         jTextFieldPrenomProf = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxHeur = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,7 +207,7 @@ public class ajoutCours extends Header {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8h30-10h", "10h15-11h45", "12h-13h30", "13h45-15h15", "15h30-17h", "17h15-18h45", "19h-20h30" }));
+        jComboBoxHeur.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8h30-10h", "10h15-11h45", "12h-13h30", "13h45-15h15", "15h30-17h", "17h15-18h45", "19h-20h30" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,7 +277,7 @@ public class ajoutCours extends Header {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBoxHeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(154, 154, 154)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -321,7 +321,7 @@ public class ajoutCours extends Header {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jComboBoxHeur, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -400,37 +400,67 @@ public class ajoutCours extends Header {
         newCours.setNom(this.jComboBoxMatier.getSelectedItem().toString());
 
         
-        int jour = Integer.parseInt(jTextFieldJour.getText().toString());
-        int mois = Integer.parseInt(jTextFieldMois.getText().toString());
-        int annee = Integer.parseInt(jTextFieldAnnee.getText().toString());
+        Date DateCours = new Date(jDateChooser1.getDate().getYear(), jDateChooser1.getDate().getMonth(), jDateChooser1.getDate().getDate()) ;
         
-        Date DateCours = Date.valueOf(annee +"-" +mois + "-" + jour);
-        
-        
-        int heur = Integer.parseInt(jTextFieldHeurDebut.getText().toString());        
-        int min = Integer.parseInt(jTextFieldMinsDebut.getText().toString());
-        
-        Time heurDebut = new Time(heur, min, 0);
-        
+        Time heurDebut = new Time(8, 30, 0);
+        switch(jComboBoxHeur.getSelectedItem().toString())
+        {
+            case "10h15-11h45":
+            {
+                heurDebut.setHours(10);
+                heurDebut.setMinutes(15);
+                break;
+            }
+            case "12h-13h30":
+            {
+                heurDebut.setHours(12);
+                heurDebut.setMinutes(0);
+                break;
+            }
+            case "13h45-15h15":
+            {
+                heurDebut.setHours(13);
+                heurDebut.setMinutes(45);
+                break;
+            }
+            case "15h30-17h":
+            {
+                heurDebut.setHours(15);
+                heurDebut.setMinutes(30);
+                break;
+            }
+            case "16h15-18h45":
+            {
+                heurDebut.setHours(16);
+                heurDebut.setMinutes(15);
+                break;
+            }
+            case "19h-20h30":
+            {
+                heurDebut.setHours(19);
+                heurDebut.setMinutes(0);
+                break;
+            }           
+        }
+        Time heurFin = new Time(heurDebut.getHours()+1, heurDebut.getMinutes()+30, 0);
                 
-        heur = Integer.parseInt(jTextFieldHeurFin.getText().toString());
-        min = Integer.parseInt(jTextFieldMinsFin.getText().toString());
-        
-        Time heurFin = new Time(heur, min, 0);
-        
-        
         Calendar cal = Calendar.getInstance();
          
-        cal.set(annee, mois, jour);
+        cal.set(DateCours.getYear(), DateCours.getMonth(), DateCours.getDate());
         
         int semaine = cal.get(Calendar.WEEK_OF_YEAR) - 4;
         Seance newSeance = new Seance();
+        
+        Type_cours typeCours = new Type_cours();
+        //modifieer typeCours avec les info de jComboBoxTypeCours
+        
         
         newSeance.setCours(newCours);
         newSeance.setDate(DateCours);
         newSeance.setHeure_debut(heurDebut);
         newSeance.setHeure_fin(heurFin);
         newSeance.setSemaine(semaine);
+        newSeance.setType_cours(typeCours);
         
         SeanceDAO ajoutSeance = new SeanceDAO(ConnectMySQL.getInstance());
         boolean boolCreation = ajoutSeance.create(newSeance);
@@ -542,7 +572,7 @@ public class ajoutCours extends Header {
     private javax.swing.JCheckBox jCheckBoxTD7;
     private javax.swing.JCheckBox jCheckBoxTD8;
     private javax.swing.JCheckBox jCheckBoxTD9;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxHeur;
     private javax.swing.JComboBox<String> jComboBoxMatier;
     private javax.swing.JComboBox<String> jComboBoxTypeCours;
     private com.toedter.calendar.JDateChooser jDateChooser1;
