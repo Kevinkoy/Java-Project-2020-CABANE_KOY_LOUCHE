@@ -368,6 +368,7 @@ public class EDTTest extends JFrame implements ActionListener {
                 //je crée une instance de emploidutemps
                 this.setVisible(false);
                 EmploiDuTemps edtLigne = new EmploiDuTemps(this.userco);
+                edtLigne.setVisible(true);
                 
             } else {
                 for (int i = 0; i < this.tabButton.length; i++) {

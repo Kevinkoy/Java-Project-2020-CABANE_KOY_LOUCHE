@@ -617,9 +617,10 @@ public class EmploiDuTemps extends Header {
         // TODO add your handling code here:
         if("cours en tableau" == jComboBox_presentation.getSelectedItem().toString())
         {
-            EDTTest newPage = new EDTTest(user);
-            newPage.setVisible(true);
             this.setVisible(false);
+            EDTTest newPage = new EDTTest(user);
+            newPage.afficherEDT();
+            
         }
     }//GEN-LAST:event_jComboBox_presentationActionPerformed
 
