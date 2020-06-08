@@ -9,7 +9,7 @@ public class Tester {
 
     public static void main(String[] args) {
         
-        Utilisateur user =new Utilisateur(0, "alice@edu.ece.fr", "12345", "Alliana", "LeSang", 1);
+        Utilisateur user =new Utilisateur(1, "alice@edu.ece.fr", "12345", "Alliana", "LeSang", 1);
         EmploiDuTemps edtLigne = new EmploiDuTemps(user);
         edtLigne.setVisible(true);
         // LOGGIN
