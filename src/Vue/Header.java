@@ -15,7 +15,7 @@ import Modele.MaDate;
 import java.sql.Time;
 public class Header extends javax.swing.JFrame {
     
-    protected Utilisateur user;
+    protected Utilisateur user; 
     /**
      * Creates new form Header
      */
