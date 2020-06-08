@@ -82,6 +82,8 @@ public class Login extends JFrame implements ActionListener {
                 if (userco!=null) //si non null
                 {
                     EDTTest edt = new EDTTest(userco);
+                    this.setVisible(false);
+                    edt.afficherEDT();
                 } else {
                     JOptionPane.showMessageDialog(null, "L'email et/ou le mot de passe que vous avez saisi sont erronés", "Mauvais match", JOptionPane.INFORMATION_MESSAGE);
                 }
