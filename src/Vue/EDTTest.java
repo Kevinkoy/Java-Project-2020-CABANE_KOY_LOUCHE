@@ -38,11 +38,13 @@ public class EDTTest extends JFrame implements ActionListener {
     private GridBagConstraints gbc;
     private ArrayList<Enseignant> enseignants;
     private ArrayList<Etudiant> etudiants;
+    private Recherche_informations infos;
 
     public EDTTest(Utilisateur userco) {
 
         Calendar cal = Calendar.getInstance();
-
+        
+        this.infos = new Recherche_informations();
         this.gbc = new GridBagConstraints();
         this.userco = userco;
         this.userprint = userco;
@@ -59,27 +61,9 @@ public class EDTTest extends JFrame implements ActionListener {
 
         this.combo1 = new JComboBox();
         this.container = new JPanel();
-        this.etudiants = new ArrayList<Etudiant>();
-        this.enseignants = new ArrayList<Enseignant>();
-        //on ajoute a notre panel nos combos de tous les étudiants et tous les enseignants
-
-        //TEST
-        Groupe groupe1 = new Groupe();
-        Etudiant etud1 = new Etudiant(3, "alice.cabane@edu.ece.fr", "12345", "Cabane", "Alice", 1, groupe1);
-        this.etudiants.add(etud1);
-        Etudiant etud2 = new Etudiant(1, "leonard.najman@edu.ece.fr", "12345", "Najman", "Leonard", 1, groupe1);
-        this.etudiants.add(etud2);
-        Etudiant etud3 = new Etudiant(2, "solene.haccoun@edu.ece.fr", "12345", "Haccoun", "Solene", 1, groupe1);
-        this.etudiants.add(etud3);
-        //TEST
-        //this.etudiants = findEtudiants();
-
-        //TEST
-        Cours cours1 = new Cours(0, "POO Java");
-        Enseignant prof1 = new Enseignant(4, "jean-pierre.segado@edu.ece.fr", "12345", "Segado", "Jean-Pierre", cours1);
-        this.enseignants.add(prof1);
-        //TEST
-        //this.enseignants = findEnseignants();
+        this.etudiants = infos.getAll_Etudiant();
+        this.enseignants = infos.getAll_Enseignant();
+       
     }
 
     public void afficherEDT() {
@@ -92,7 +76,7 @@ public class EDTTest extends JFrame implements ActionListener {
         this.container.removeAll();
 
         //On récupère toutes les séances de l'utilisateur à afficher
-        ArrayList<Seance> seances = new ArrayList<Seance>();
+        ArrayList<Seance> seances = this.infos.getAll_Seance(userprint, sem);
         seances.clear();
         
         //A AJOUTER seances = findSeances(userprint, sem);
@@ -382,8 +366,9 @@ public class EDTTest extends JFrame implements ActionListener {
             String name = b.getName();
             if (name.equals("ligne")) {
                 //je crée une instance de emploidutemps
-                EmploiDuTemps edtLigne = new EmploiDuTemps(this.userco);
                 this.setVisible(false);
+                EmploiDuTemps edtLigne = new EmploiDuTemps(this.userco);
+                
             } else {
                 for (int i = 0; i < this.tabButton.length; i++) {
                     String test = "" + (i + 1);
@@ -403,58 +388,19 @@ public class EDTTest extends JFrame implements ActionListener {
                     if (selected.toString().equals(this.etudiants.get(i).getPrenom() + " " + this.etudiants.get(i).getNom())) {
                         System.out.println("j'ai trouvé un match etudiant : " + selected);
                         Etudiant userSelected = this.etudiants.get(i);
+                        this.setUserPrint(userSelected);
                     }
                 }
                 for (int i = 0; i < this.enseignants.size(); i++) {
                     if (selected.toString().equals(this.enseignants.get(i).getPrenom() + " " + this.enseignants.get(i).getNom())) {
                         Enseignant userSelected = this.enseignants.get(i);
                         System.out.println("j'ai trouvé un match enseignant : " + selected);
+                        this.setUserPrint(userSelected);
                     }
                 }
             }
         }
-        /*if (droit == 1 || droit == 2) {
-            if (src == this.combo1 || src == this.combo2) {
-                JComboBox combo = (JComboBox) src;
-                Object selected = combo.getSelectedItem();
-                String command = e.getActionCommand();
-                if ("comboBoxChanged".equals(command)) {
-                    System.out.println(selected);
-                    this.afficherEDT();
-                }
-            } 
-            else{
-                JButton bouton = (JButton) src;
-                String name = bouton.getName();
-                int semaine = 1;
-                for (int i = 0; i < 54; i++) {
-                    String test = "" + (i + 1);
-                    if (name.equals(test)) {
-                        semaine = i+1;
-                    }
-                }
-                //EDTTest edt = new EDTTest(this.userco, this.userprint, sem);
-                this.setSem(semaine);
-                System.out.println("Changement de semaine " + this.getSem());
-                this.afficherEDT();
-            }
-        } else {
-            JButton bouton = (JButton) src;
-            String name = bouton.getName();
-            int semaine = 1;
-            for (int i = 0; i < 54; i++) {
-                String test = "" + (i + 1);
-                if (name.equals(test)) {
-                    System.out.println(i);
-                    semaine = i+1;
-                }
-            }
-            //EDTTest edt = new EDTTest(this.userco, this.userprint, sem);
-            this.setSem(semaine);
-            System.out.println("Changement de semaine " + semaine);
-            this.afficherEDT();
-        }*/
-        //this.afficherEDT();
+        
     }
 
     public void setSem(int sem) {
@@ -481,13 +427,6 @@ public class EDTTest extends JFrame implements ActionListener {
         return (this.userprint);
     }
 
-    public static void main(String[] args) {
-        //TEST
-        Utilisateur userco = new Utilisateur(5, "kevin.koy@edu.ece.fr", "12345", "Koy", "Kevin", 2);
-        EDTTest edt = new EDTTest(userco);
-        edt.afficherEDT();
-
-        //TEST
-    }
+    
 
 }
